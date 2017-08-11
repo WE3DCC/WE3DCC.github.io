@@ -7,6 +7,14 @@
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
   </head>
   <body>
-    <script src="https://patches.vizor.io/3dcc/vizor-embed-city-test" ></script>
+    a-scene {
+  height: 300px;
+  width: 600px;
+}
+  <div id="myEmbeddedScene">
+    <a-scene embedded>
+     <script src="https://patches.vizor.io/3dcc/vizor-embed-city-test" ></script>
+    </a-scene>
+  </div> 
   </body>
 </html>
