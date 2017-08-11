@@ -21,6 +21,7 @@
     "vr"
   ],
   "dependencies": {
+    "aframe-href-component": "^0.5.1",
     "altspace": "^2.6.1",
     "embed-js": "^4.2.3"
   }
