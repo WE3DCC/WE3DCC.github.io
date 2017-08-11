@@ -7,6 +7,7 @@ AFRAME.registerComponent('cliccomp', {
       this.setAttribute('material', 'color', COLORS[randomIndex]);
       require('aframe');
       require('aframe-href-component');
+      require('aframe-event-set-component');
       console.log('I was clicked at: ', evt.detail.intersection.point);
     });
   }
