@@ -10,7 +10,10 @@
 <script src="https://unpkg.com/aframe-layout-component@4.x.x/dist/aframe-layout-component.min.js" data-angle="layout"></script>
 </head>
 <body> 
-
+AFRAME.registerComponent('href', {
+  schema: {
+    default: ''
+  },
 <a-scene>
 
 <a-camera>
@@ -37,10 +40,9 @@
             geometry="primitive: sphere; radius: 1.5"
             color="#7BC8A4"
           position="0 5 -5"
-          
-></a-entity>
+          href="https://3dccanimation.myportfolio.com/3D-Art"></a-entity>
 
-<a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+<a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" href="https://3dccanimation.myportfolio.com/3D-Art"></a-box>
 <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
 <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
 <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
