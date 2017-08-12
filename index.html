@@ -12,16 +12,18 @@
   </head>
   <body>
     <a-scene>
-      <a-camera>
-        <a-cursor id="cursor">
+      <a-entity position="0 1.8 4">
+      <a-camera> 
+        <a-cursor id="cursor"> 
         <a-animation begin="click" easing="ease-in" attribute="scale"
                    fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
         <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
-                   from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
-         </a-cursor>
+                   from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation> 
+        </a-cursor> 
       </a-camera>
+      </a-entity>
 
-      <a-box addhref cliccomp id="orange-cube" position="0 3.5 -2" rotation="30 30 0"
+      <a-box index id="orange-cube" position="0 3.5 -2" rotation="30 30 0"
         width="2" depth="2" height="2" color="#F16745"
         href="https://github.com/gasolin/aframe-href-component"></a-box>
         
