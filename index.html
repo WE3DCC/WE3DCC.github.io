@@ -3,6 +3,11 @@
     <meta charset='utf-8'>
     <title>A-Frame Hyper Link Component - Basic</title>
     <script src="../build.js"></script>
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/gasolin/aframe-href-component/master/dist/aframe-href-component.min.js"></script>
+    <script src="/scripts/clickcomp.js"></script>  
+    <script src="/scripts/addhref.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@4.x.x/dist/aframe-layout-component.min.js" data-angle="layout"></script>
   </head>
   <body>
     <a-scene>
@@ -15,7 +20,9 @@
       <a-box id="orange-cube" position="0 3.5 -2" rotation="30 30 0"
         width="2" depth="2" height="2" color="#F16745"
         href="https://github.com/gasolin/aframe-href-component"></a-box>
-
+        
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+      <a-sky color="#ECECEC"></a-sky>
       <!-- <a-box id="blue-cube" position="-3.5 3.5 -2" rotation="30 30 0"
           width="2" depth="2" height="2" color="blue"
           href="#orange-cube"></a-box> -->
