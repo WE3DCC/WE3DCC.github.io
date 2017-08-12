@@ -1,4 +1,4 @@
 AFRAME.registerComponent('href', {
-  schema: {
+  schema: 
     default: ''
   },

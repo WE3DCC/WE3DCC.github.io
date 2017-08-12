@@ -3,7 +3,6 @@
   <head>
     <meta charset='utf-8'>
     <title>A-Frame Hyper Link Component - Basic</title>
-    <script src="/scripts/index.js"></script>
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
     <script src="https://rawgit.com/gasolin/aframe-href-component/master/dist/aframe-href-component.min.js"></script>
     <script src="/scripts/clickcomp.js"></script>  
@@ -23,7 +22,8 @@
       </a-camera>
       </a-entity>
 
-      <a-box index id="orange-cube" position="0 3.5 -2" rotation="30 30 0"
+      <a-entity>
+        <a-box index id="orange-cube" position="0 3.5 -2" rotation="30 30 0"
         width="2" depth="2" height="2" color="#F16745"
         href="https://github.com/gasolin/aframe-href-component"></a-box>
         
