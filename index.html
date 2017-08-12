@@ -20,18 +20,9 @@
                    from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation> 
         </a-cursor> 
       </a-camera>
-      </a-entity>
 
-      <a-entity>
-        <a-box index id="orange-cube" position="0 3.5 -2" rotation="30 30 0"
-        width="2" depth="2" height="2" color="#F16745"
-        href="https://github.com/gasolin/aframe-href-component"></a-box>
-        
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
-      <!-- <a-box id="blue-cube" position="-3.5 3.5 -2" rotation="30 30 0"
-          width="2" depth="2" height="2" color="blue"
-          href="#orange-cube"></a-box> -->
+      <a-entity obj-model="obj: url(/scenes/nimbus01obj.obj); mtl: url(/scenes/nimbus01obj.mtl)"></a-entity>
+
     </a-scene>
   </body>
 </html>
