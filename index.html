@@ -5,9 +5,28 @@
     <title>We3DCC: Live Vicariously</title>
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/AltspaceVR/AltspaceSDK/v2.6.1/dist/altspace.min.js"></script>
+    <script>
+
+      // an example custom component, that will change the color when clicked
+      AFRAME.registerComponent('color-cycle', {
+          schema: {},
+          init: function(){
+              var self = this;
+              self.el.object3D.addEventListener('cursorup', function(){
+                  var rgb = [
+                      Math.floor(Math.random()*256),
+                      Math.floor(Math.random()*256),
+                      Math.floor(Math.random()*256)
+                  ];
+                  self.el.setAttribute('color', 'rgb('+rgb.join(',')+')');
+              });
+          }
+      });
+
+</script>
 </head>
 <body>
-  <a-scene altspace="fullspace:true">
+  <a-scene altspace='fullspace:true;'>
      <a-entity position="0 1.8 0">
      <a-camera> 
        <a-cursor id="cursor"> 
