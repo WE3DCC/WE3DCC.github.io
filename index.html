@@ -22,7 +22,7 @@
         <a-entity position="0 0 -10" obj-model="obj: url(/scenes/homepage01/homepagetemporary.obj); mtl: url(/scenes/homepage01/homepagetemporary.mtl)"
           scale="0.5 0.5 0.5"></a-entity> -->
 
-       <a-assets>
+          <a-assets>
               <a-asset-item id="childbodyobj" src="models/body.obj"></a-asset-item>
               <a-asset-item id="childbodymtl" src="models/body.mtl"></a-asset-item>
             </a-assets>
@@ -31,7 +31,7 @@
         <a-entity>
           <!--<a-box color="#6173F4" width="4" height="10" depth="2"
           position="0 2 30" rotation="0 0 45" scale="2 0.5 3"></a-box> -->
-          <a-obj-model position="0 2 30" src="#childbodyobj" mtl="#childbodymtl"></a-obj-model>
+          <a-obj-model position="0 2 30" scale="1 1 1" src="#childbodyobj" mtl="#childbodymtl"></a-obj-model>
           <a-animation attribute="rotation"
                       dur="10000"
                       fill="forwards"
