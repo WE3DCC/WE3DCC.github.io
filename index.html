@@ -3,7 +3,7 @@
   <head>
     <meta charset='utf-8'>
     <title>We3DCC: Live Vicariously</title>
-    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
     <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
 </head>
 <body>
@@ -22,15 +22,21 @@
     <a-entity position="0 0 -10" obj-model="obj: url(/scenes/homepage01/homepagetemporary.obj); mtl: url(/scenes/homepage01/homepagetemporary.mtl)"
       scale="0.5 0.5 0.5"></a-entity> -->
 
-      <a-assets>
+     <!-- <a-assets>
           <a-asset-item id="childbodyobj" src="models/bodyobj"></a-asset-item>
           <a-asset-item id="childbodymtl" src="models/body.mtl"></a-asset-item>
         </a-assets>
-        <!-- Using the asset management system. -->
-        <a-obj-model position="0,10,0"src="#childbodyobj" mtl="#chiildbodymtl"></a-obj-model>
-      
+        // Using the asset management system.
+        <a-obj-model position="0,10,0" src="#childbodyobj" mtl="#chiildbodymtl"></a-obj-model> -->
 
-      <a-sky color="808"></a-sky> 
+        <a-box color="#6173F4" width="4" height="10" depth="2"
+        position="-10 2 -5" rotation="0 0 45" scale="2 0.5 3"></a-box>
+
+          <!-- add a view camera (2d only) -->
+    <a-entity position='0 0 2'>
+        <a-camera></a-camera>
+    </a-entity>
+
     </a-scene>
   </body>
 </html>
