@@ -13,10 +13,10 @@
 		<a-scene altspace="vertical-align: bottom" fullspace: "true">
 			<a-assets>
 				<!-- Preproduction -->
-				<img id="logo" src="gameassets/images/WE3DCC_Branding_Logo01.png">
-				<img id="GoldenGateBridge" src="gameassets/images/GoldenGateBridge.jpg">
-				<a-asset-item id="hempplant" src="gameassets/models/hemp.obj"></a-asset-item>
-				<a-asset-item id="hemptexture" src="gamesassets/images/hemptarga.tga"></a-asset-item>
+				<img id="logo" src="images/WE3DCC_Branding_Logo01.png">
+				<img id="GoldenGateBridge" src="images/GoldenGateBridge.jpg">
+				<a-asset-item id="hempplant" src="models/hemp.obj"></a-asset-item>
+				<a-asset-item id="hemptexture" src="images/hemptarga.tga"></a-asset-item>
 				<script id="plane" type="text/html">
 					<a-entity class="link"
 					  geometry="primitive: plane; height: 1; width: 1"
@@ -40,7 +40,7 @@
 					</a-cursor></a-camera>
 				<!--					-->
 			<!-- Action -->
-			<a-entity template="src: #plane"></a-entity>
+			<a-entity template="src: #plane" position="3 0 100"></a-entity>
 			<a-entity obj-model="#hempplant" material="#hemptexture" position="0 0 100"></a-entity>
 			<!--					-->
 		</a-scene>
