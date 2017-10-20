@@ -14,9 +14,10 @@
     </a-assets>
 
     <!-- add the moon to the scene -->
-    <a-sphere position='0 2 -5' rotation="0 -60 0" src='#moon'>
+    <a-sphere position='0 2 -5' rotation="0 -60 0" src='#moon' altspace-cursor-collider>
         <!-- add an animation to make it rotate -->
-        <a-animation attribute="position" begin="2000" from="0 2 -5" to="3 4 5" dur="5000" direction="alternate" easing="ease-in" repeat="indefinite"/>
+        <a-animation attribute="position" begin="2000" from="0 2 -5" to="3 4 5" dur="5000" direction="alternate" easing="ease-in" repeat="2" end="click"></a-animation>
+        <a-animation attribute="rotation" begin="click" to="30 40 50" dur="2000" easing="linear" repeat="5"></a-animation>
     </a-sphere>
 
     <!-- add the backdrop of stars 
