@@ -4,7 +4,7 @@
 <script src="https://cdn.rawgit.com/AltspaceVR/AltspaceSDK/v2.0.2/dist/altspace.min.js"></script>
 
 <!-- set up the scene -->
-<a-scene altspace='vertical-align: bottom; fullspace: true'>
+<a-scene altspace='vertical-align: bottom'>
 
     <!-- preload all our textures -->
     <a-assets>
@@ -16,7 +16,7 @@
     <!-- add the moon to the scene -->
     <a-sphere position='0 2 -5' src='#moon'>
         <!-- add an animation to make it rotate -->
-        <a-animation begin:"2000" attribute="rotation" to='0 360 0' easing='linear' dur='20000' repeat='indefinite'/>
+        <a-animation attribute="rotation" begin="2000" fill="forwards" to='0 360 0' easing='linear' dur='20000' repeat='indefinite'/>
     </a-sphere>
 
     <!-- add the backdrop of stars 
