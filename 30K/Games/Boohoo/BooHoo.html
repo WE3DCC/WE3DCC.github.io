@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>AframeAltspaceVRTest</title>
-		<script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+		<script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
 		<script src="https://cdn.rawgit.com/AltspaceVR/aframe-altspace-component/v1.0.0/dist/aframe-altspace-component.min.js"></script>
 		<script src="https://unpkg.com/aframe-template-component@3.x.x/dist/aframe-template-component.min.js"></script>
 		<script src="https://unpkg.com/aframe-layout-component@3.x.x/dist/aframe-layout-component.min.js"></script>
@@ -10,7 +10,7 @@
 	</head>
 	<body>
 		<!-- Registering Components -->
-		<a-scene altspace="vertical-align: bottom"; fullspace="true">
+		<a-scene altspace="vertical-align: bottom" fullspace="true">
 			<a-assets>
 				<!-- Preproduction -->
 				<img id="logo" src="gameassets/images/WE3DCC_Branding_Logo01.png">
@@ -20,7 +20,7 @@
 				<script id="plane" type="text/html">
 					<a-entity class="link"
 					  geometry="primitive: plane; height: 1; width: 1"
-					  material="shader: flat src: ${imagepic}"
+					  material="shader: flat src: #logo"
 					  event-set__1="_event: mousedown; scale: 1 1 1"
 					  event-set__2="_event: mouseup; scale: 1.2 1.2 1"
 					  event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
@@ -28,7 +28,7 @@
 				</assets>
 			<!-- Lights -->
 			<!-- Environment -->
-			<a-sky id="image-360" radius="10" src="#GoldenGateBridge"></a-sky>
+			<a-sky src="#GoldenGateBridge"></a-sky>
 			<!--					-->
 			<!-- Camera + Cursor. -->
 			<a-camera>
@@ -40,8 +40,8 @@
 					</a-cursor></a-camera>
 				<!--					-->
 			<!-- Action -->
-			<a-entity template="src: #plane" data-imagepic="#logo"></a-entity>
-			<a-entity obj-model="obj: #hempplant; mtl: #hemptexture"></a-entity>
+			<a-entity template="src: #plane"></a-entity>
+			<a-entity obj-model="#hempplant" material="#hemptexture" position="0 0 100"></a-entity>
 			<!--					-->
 		</a-scene>
 	</body>
