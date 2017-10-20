@@ -47,7 +47,7 @@
 					  <a-mixin id="yellow" material="color: yellow"></a-mixin>
 					  <a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
 					</a-assets>
-					
+					<!-- old camera
 					<a-entity position="0 2.2 4">
 					  <a-entity camera look-controls wasd-controls>
 						<a-entity position="0 0 -3"
@@ -61,8 +61,10 @@
 							   fill="forwards" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
 						</a-entity>
 					  </a-entity>
+					</a-entity> -->
+					<a-entity position="0 0 2">
+						<a-camera></a-camera>
 					</a-entity>
-					
 					<a-entity position="-3.5 1 0">
 					  <a-entity mixin="cube red">
 						<a-animation begin="click" attribute="position" from="0 0 0"
