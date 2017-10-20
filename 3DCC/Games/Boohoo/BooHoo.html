@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>AframeAltspaceVRTest</title>
-		<script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+		<script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
 		<script src="https://cdn.rawgit.com/AltspaceVR/AltspaceSDK/v2.0.2/dist/altspace.min.js"></script>
 	<!-- Registering Components -->
 	<!-- Possible Instantiator component schematic
@@ -21,7 +21,54 @@
 		-->
 	</head>
 	<body>
-		<!-- BROKEN CODE
+			<a-scene altspace="verticalAlign: bottom fullspace: true">
+					<a-assets timeout="5000">
+					  <a-mixin id="cube" geometry="primitive: box"></a-mixin>
+					  <a-mixin id="cube-hovered" material="color: magenta"></a-mixin>
+					  <a-mixin id="cube-selected" material="color: cyan"></a-mixin>
+					  <a-mixin id="red" material="color: red"></a-mixin>
+					  <a-mixin id="green" material="color: green"></a-mixin>
+					  <a-mixin id="blue" material="color: blue"></a-mixin>
+					  <a-mixin id="yellow" material="color: yellow"></a-mixin>
+					  <a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
+					</a-assets>
+
+					<a-plane color="#183743" height="100" width="100" rotation="-90 0 0"></a-plane>
+					<!-- Camera -->
+					<a-entity position='0 0 2'>
+						<a-camera></a-camera>
+					</a-entity>
+					<a-entity cursor="fuse: true; fuseTimeout: 500"
+					position="0 0 -1"
+					geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+					material="color: black; shader: flat">
+				  </a-entity>
+					<!-- Cubes -->
+					<a-entity position="-3.5 1 0" altspace-cursor-collider>
+					  <a-entity
+					  		mixin="cube red">
+							<a-animation begin="click" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
+					  </a-entity>
+					</a-entity>
+				  
+					<a-entity position="0 1 0" altspace-cursor-collider>
+					  <a-entity mixin="cube green">
+						<a-animation begin="click" attribute="rotation" to="0 360 0"
+									 easing="linear" dur="2000" fill="backwards"></a-animation>
+					  </a-entity>
+					</a-entity>
+				  
+					<a-entity position="3.5 1 0" rotation="0 45 0" altspace-cursor-collider>
+					  <a-entity mixin="cube blue">
+						<a-animation begin="click" fill="forwards" repeat="1"
+									 direction="alternate" attribute="position" from="0 0 0"
+									 to="15 0 0" dur="2000"></a-animation>
+					  </a-entity>
+					</a-entity>
+				  
+					<a-entity position="0 3 0" altspace-cursor-collider class="clickable" mixin="cube yellow"
+							  rotation="0 45 0" scale=".5 .5 .5"></a-entity>
+			<!-- BROKEN CODE
 		<a-scene altspace="vertical-align: bottom" fullspace: "true">
 			<a-assets timeout="50000">
 				<!-- Preproduction 
@@ -50,17 +97,6 @@
 			<a-entity template="src: #plane" position="3 0 100"></a-entity>
 			<a-entity obj-model="#hempplant" material="#hemptexture" position="0 0 100"></a-entity>
 			<!--	WORKING CODE (TESTING)		-->
-			<a-scene altspace="verticalAlign: bottom fullspace: true">
-					<a-assets timeout="5000">
-					  <a-mixin id="cube" geometry="primitive: box"></a-mixin>
-					  <a-mixin id="cube-hovered" material="color: magenta"></a-mixin>
-					  <a-mixin id="cube-selected" material="color: cyan"></a-mixin>
-					  <a-mixin id="red" material="color: red"></a-mixin>
-					  <a-mixin id="green" material="color: green"></a-mixin>
-					  <a-mixin id="blue" material="color: blue"></a-mixin>
-					  <a-mixin id="yellow" material="color: yellow"></a-mixin>
-					  <a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
-					</a-assets>
 					<!-- old camera
 					<a-entity position="0 2.2 4">
 					  <a-entity camera look-controls wasd-controls>
@@ -76,35 +112,6 @@
 						</a-entity>
 					  </a-entity>
 					</a-entity> -->
-					<!-- Camera -->
-					<a-entity position='0 0 2'>
-						<a-camera></a-camera>
-					</a-entity>
-					<!-- Cubes -->
-					<a-entity position="-3.5 1 0" altspace-cursor-collider>
-					  <a-entity
-					  		mixin="cube red">
-							<a-animation begin="click" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
-					  </a-entity>
-					</a-entity>
-				  
-					<a-entity position="0 1 0" altspace-cursor-collider>
-					  <a-entity mixin="cube green">
-						<a-animation begin="click" attribute="rotation" to="0 360 0"
-									 easing="linear" dur="2000" fill="backwards"></a-animation>
-					  </a-entity>
-					</a-entity>
-				  
-					<a-entity position="3.5 1 0" rotation="0 45 0" altspace-cursor-collider>
-					  <a-entity mixin="cube blue">
-						<a-animation begin="click" fill="forwards" repeat="1"
-									 direction="alternate" attribute="position" from="0 0 0"
-									 to="15 0 0" dur="2000"></a-animation>
-					  </a-entity>
-					</a-entity>
-				  
-					<a-entity position="0 3 0" altspace-cursor-collider class="clickable" mixin="cube yellow"
-							  rotation="0 45 0" scale=".5 .5 .5"></a-entity>
 			</a-scene>
 	</body>
 </html>
