@@ -4,10 +4,10 @@
 <script src="https://cdn.rawgit.com/AltspaceVR/AltspaceSDK/v2.0.2/dist/altspace.min.js"></script>
 
 <!-- set up the scene -->
-<a-scene inspector altspace='verticalAlign: bottom fullspace: true'>
+<a-scene inspector altspace='fullspace: true'>
 
     <!-- preload all our textures -->
-    <a-assets>
+    <a-assets timeout="5000">
         <!-- getting rid of possibly too big file -->
         <img id='background' src='GoldenGateBridge.jpg'>
         <img id='moon' src='WE3DCC_Branding_Logo01.png'/>
