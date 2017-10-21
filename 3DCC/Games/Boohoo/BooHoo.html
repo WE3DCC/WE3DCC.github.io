@@ -66,36 +66,35 @@
 
 
 				
-				<!-- Cubes 
-					for
-					testing -->
+				<!-- ASSETSS  -->
 					<a-sky src="#SilencedBday"></a-sky>
 					<a-sky src="#Minisky01"></a-sky>
-				<a-entity visible="false" position="-3.5 1 0">
-					<a-entity
-						mixin="cube red">
-						<a-animation begin="click" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
+					<a-plane class="noClick" color="#345562" height="100" width="100" rotation="-90 0 0"></a-plane>
+					<!-- Cubes -->
+					<a-entity class="clickable" position="-3.5 1 0" altspace-cursor-collider>
+					  <a-entity 
+					  		mixin="cube red">
+							<a-animation begin="click" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
+					  </a-entity>
 					</a-entity>
-				</a-entity>
-				
-				<a-entity position="0 1 0" altspace-cursor-collider>
-					<a-entity sync sync-transform 
-								mixin="cube green">
-								<a-animation begin="click" attribute="rotation" to="0 360 0"
-								easing="linear" dur="2000" fill="backwards"></a-animation>
+				  
+					<a-entity position="0 1 0" altspace-cursor-collider>
+					  <a-entity class="clickable" mixin="cube green">
+						<a-animation begin="click" attribute="rotation" to="0 360 0"
+									 easing="linear" dur="2000" fill="backwards"></a-animation>
+					  </a-entity>
 					</a-entity>
-				</a-entity>
-				
-				<a-entity position="3.5 1 0" rotation="0 45 0" altspace-cursor-collider>
-					<a-entity mixin="cube blue">
-					<a-animation begin="click" fill="forwards" repeat="1"
-									direction="alternate" attribute="position" from="0 0 0"
-									to="15 0 0" dur="2000"></a-animation>
+				  
+					<a-entity position="3.5 1 0" rotation="0 45 0" altspace-cursor-collider>
+					  <a-entity mixin="cube blue">
+						<a-animation begin="click" fill="forwards" repeat="1"
+									 direction="alternate" attribute="position" from="0 0 0"
+									 to="15 0 0" dur="2000"></a-animation>
+					  </a-entity>
 					</a-entity>
-				</a-entity>
-				
-				<a-entity position="0 3 0" altspace-cursor-collider class="clickable" mixin="cube yellow"
-							rotation="0 45 0" scale=".5 .5 .5"></a-entity>
+				  
+					<a-entity position="0 3 0" altspace-cursor-collider class="clickable" mixin="cube yellow"
+							  rotation="0 45 0" scale=".5 .5 .5"></a-entity>
 			<!-- BROKEN CODE
 		<a-scene altspace="vertical-align: bottom" fullspace: "true">
 			<a-assets timeout="50000">
