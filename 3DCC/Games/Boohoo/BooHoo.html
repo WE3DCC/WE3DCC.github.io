@@ -8,7 +8,7 @@
 	
 	</head>
 	<body>
-		<a-scene altspace="verticalAlign: bottom fullspace: true">
+		<a-scene inspector altspace="verticalAlign: bottom fullspace: true">
 				<a-assets timeout="5000">
 					<a-mixin id="cube" geometry="primitive: box"></a-mixin>
 					<a-mixin id="cube-hovered" material="color: magenta"></a-mixin>
@@ -64,9 +64,8 @@
 				<!-- Cubes 
 					for
 					testing -->
-				<a-entity position="-3.5 1 0">
+				<a-entity visible="false" position="-3.5 1 0">
 					<a-entity
-						visible="false"
 						mixin="cube red">
 						<a-animation begin="click" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
 					</a-entity>
