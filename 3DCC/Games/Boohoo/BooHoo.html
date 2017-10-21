@@ -4,11 +4,12 @@
 		<title>AframeAltspaceVRTest</title>
 		<script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
 		<script src="https://cdn.rawgit.com/AltspaceVR/AltspaceSDK/v2.0.2/dist/altspace.min.js"></script>
+		<script src="//patches.vizor.io/scripts/embed.js"></script>
 	<!-- Registering Components -->
 	
 	</head>
 	<body>
-		<a-scene inspector altspace="verticalAlign: bottom fullspace: true">
+		<a-scene inspector altspace="verticalAlign: bottom fullspace: true" sync0system="app: BooHoo!; author:3DCC" >
 				<a-assets timeout="5000">
 					<a-mixin id="cube" geometry="primitive: box"></a-mixin>
 					<a-mixin id="cube-hovered" material="color: magenta"></a-mixin>
@@ -18,19 +19,23 @@
 					<a-mixin id="blue" material="color: blue"></a-mixin>
 					<a-mixin id="yellow" material="color: yellow"></a-mixin>
 					<a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
+					<a-img id="Minisky01" src="https://patches.vizor.io/3dcc/silenced-hippie-360bday-card-v">
+					<a-img id="SilencedBday" data-vizorurl="//patches.vizor.io/embed/3dcc/silenced-hippie-360bday-card-v">
+					<a-img id="Miniskyembed" src="SilencedBday">
 				</a-assets>
 				<!-- The Mobile 0D Camera with reticle-->
 				<a-entity position="0 2.2 4">
 						<a-entity camera look-controls wasd-controls>
-						  <a-entity position="0 0 -3"
+						  <a-entity raycaster="objects: .clickable" cursor="maxDistance: 30; fuse: true; fuseTimeout: 1600" position="0 0 -3"
 									geometry="primitive: ring; radiusOuter: 0.30;
 											  radiusInner: 0.20;"
-									material="color: cyan; shader: flat"
-									cursor="maxDistance: 30; fuse: true">
-							<a-animation begin="click" easing="ease-in" attribute="scale"
-								 fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
-							<a-animation begin="fusing" easing="ease-in" attribute="scale"
-								 fill="forwards" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
+									material="color: cyan; shader: flat">
+						  <a-animation begin="mouseenter" easing="linear" attribute="scale"
+								 fill="forwards" from="4 4 4" to="0.1 0.1 0.1" dur="1500" end="mouseleave"></a-animation>
+				<a-animation begin="mouseleave" dur="50" easing="ease-out-bounce" attribute="scale"
+								 fill="forwards" from="1 1 1" to="1 1 1" ></a-animation> 
+				<a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="scale"
+								 fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" </a-animation>
 						  </a-entity>
 						</a-entity>
 					  </a-entity>
@@ -64,6 +69,8 @@
 				<!-- Cubes 
 					for
 					testing -->
+					<a-sky src="#SilencedBday"></a-sky>
+					<a-sky src="#Minisky01"></a-sky>
 				<a-entity visible="false" position="-3.5 1 0">
 					<a-entity
 						mixin="cube red">
@@ -72,9 +79,10 @@
 				</a-entity>
 				
 				<a-entity position="0 1 0" altspace-cursor-collider>
-					<a-entity mixin="cube green">
-					<a-animation begin="click" attribute="rotation" to="0 360 0"
-									easing="linear" dur="2000" fill="backwards"></a-animation>
+					<a-entity sync sync-transform 
+								mixin="cube green">
+								<a-animation begin="click" attribute="rotation" to="0 360 0"
+								easing="linear" dur="2000" fill="backwards"></a-animation>
 					</a-entity>
 				</a-entity>
 				
