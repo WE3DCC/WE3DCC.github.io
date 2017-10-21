@@ -13,16 +13,11 @@
         <img id='moon' src='WE3DCC_Branding_Logo01.png'/>
         <a-asset-item id="Clubobj" src="ClubScene.obj"></a-asset-item>
         <a-asset-item id="Clubmtl" src="ClubScene.mtl"></a-asset-item>
-        <a-asset-item id="KodaHappyJumping" src="ANM@ANM_Happy-jump01.dae"></a-asset-item>
-        <a-asset-item id="Kodatexture" src="TX_PolarBearV01.tga"></a-asset-item>
     </a-assets>
 
     <!-- adding assets-->
     <a-sky src:"background"></a-sky>
     <a-entity obj-model="obj: #Clubobj; mtl: #Clubmtl" position="0 -10 0"></a-entity>
-    <a-entity position="0 -2 -5" material="#Kodatexture">
-        <a-collada-model src="#KodaHappyJumping"></a-collada-model>
-    </a-entity>
     
     <a-sphere position='0 2 -5' rotation="0 -60 0" src='#moon'>
         <!-- add an animation to make it rotate -->
