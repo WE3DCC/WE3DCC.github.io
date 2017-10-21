@@ -25,7 +25,7 @@
 				</a-assets>
 				<!-- The Mobile 0D Camera with reticle-->
 				<a-entity position="0 2.2 4">
-						<a-entity camera look-controls>
+						<a-entity camera altspace-tracked-controls>
 						  <a-entity raycaster="objects: .clickable" cursor="maxDistance: 30; fuse: true; fuseTimeout: 1600" position="0 0 -3"
 									geometry="primitive: ring; radiusOuter: 0.30;
 											  radiusInner: 0.20;"
@@ -67,8 +67,8 @@
 
 				
 				<!-- ASSETSS  -->
-					<a-sky src="#SilencedBday"></a-sky>
-					<a-sky src="#Minisky01"></a-sky>
+					<a-sky src="#SilencedBday" position="10 2 -10" radius="50"></a-sky>
+					<a-sky src="#Minisky01" position="5 2 -10" radius="50"></a-sky>
 					<a-plane class="noClick" color="#345562" height="100" width="100" rotation="-90 0 0"></a-plane>
 					<!-- Cubes -->
 					<a-entity class="clickable" position="-3.5 1 0" altspace-cursor-collider>
