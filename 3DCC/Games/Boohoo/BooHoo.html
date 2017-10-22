@@ -34,6 +34,19 @@
 					<a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
 					<a-img id="Minisky01" src="https://patches.vizor.io/3dcc/silenced-hippie-360bday-card-v">
 				</a-assets>
+			<!--> <a-plane color="#183743" height="100" width="100" rotation="-90 0 0"></a-plane> -->
+				<!-- Camera 2 
+				<a-entity position='0 0 2'>
+					<a-camera wasd-controls></a-camera>
+				</a-entity>
+				<a-entity cursor="fuse: true; fuseTimeout: 500"
+						position="0 0 -1"
+						geometry="primitive: ring; radiusInner: 0.5; radiusOuter: 1.0"
+						material="color: black; shader: flat">
+				</a-entity> -->
+				<!-- <a-sky src="#SilencedBday" position="10 2 -10" radius="50"></a-sky>
+				<a-sky src="#Minisky01" position="5 2 -10" radius="50"></a-sky> -->
+				<!-- 								-->
 				<!-- The Mobile 0D Camera with reticle-->
 				<a-entity position="0 2.2 4">
 						<a-entity camera look-controls>
@@ -50,37 +63,43 @@
 						  </a-entity>
 						</a-entity>
 					  </a-entity>
-
-				<!--> <a-plane color="#183743" height="100" width="100" rotation="-90 0 0"></a-plane> -->
-				<!-- Camera 2 
-				<a-entity position='0 0 2'>
-					<a-camera wasd-controls></a-camera>
-				</a-entity>
-				<a-entity cursor="fuse: true; fuseTimeout: 500"
-						position="0 0 -1"
-						geometry="primitive: ring; radiusInner: 0.5; radiusOuter: 1.0"
-						material="color: black; shader: flat">
-				</a-entity> -->
-				<!-- <a-sky src="#SilencedBday" position="10 2 -10" radius="50"></a-sky>
-				<a-sky src="#Minisky01" position="5 2 -10" radius="50"></a-sky> -->
+				<!-- 								-->
+				<!-- 								-->
+				<!-- 								-->
+				<!-- 								
 				<a-entity 
 						isEnclosure="true"
 						n-layout-broswer="isEnclosure: true; url: google.com"
 						position="0 5 0">
 					</a-entity>
 				<n-layout-broswer position="0 -5 0"></n-layout-broswer>
-				<a-plane class="noClick" color="#345562" height="100" width="100" rotation="-90 0 0"></a-plane>
-				<!-- Cubes -->
+				<a-plane class="noClick" color="#345562" height="100" width="100" rotation="-90 0 0"></a-plane> -->
+				<!-- 								-->
+				<!-- 								-->
+				<!-- Test Boo Hoo Adding -->
+				<a-entity randomposition altspace-cursor-collider sync sync-transform>
+						<a-entity 
+							class="clickable"
+							mixin="Boohoo BehindBush 5seconds">
+							<a-animation begin="click" attribute="rotation" to="0 360 0"
+										easing="linear" dur="2000" fill="backwards"></a-animation>
+						</a-entity>
+
+				<!-- 								-->
+				<!-- 								-->
+				<!-- Characters-->
 				<a-entity class="clickable" position="-3.5 1 0" altspace-cursor-collider>
 					<a-entity 
 						mixin="cube red">
-						<a-animation begin="#clientjoined" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
+						<a-animation begin="clientjoined" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
 					</a-entity>
 				</a-entity>
 				
 				<a-entity position="0 1 0" altspace-cursor-collider sync sync-transform>
-					<a-entity class="clickable" mixin="cube green">
-					<a-animation begin="click" attribute="rotation" to="0 360 0"
+					<a-entity 
+						class="clickable"
+						mixin="cube green">
+						<a-animation begin="click" attribute="rotation" to="0 360 0"
 									easing="linear" dur="2000" fill="backwards"></a-animation>
 					</a-entity>
 				</a-entity>
