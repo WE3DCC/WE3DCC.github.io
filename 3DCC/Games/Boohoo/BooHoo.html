@@ -120,6 +120,8 @@ remove: function(){
 					<a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
 					<a-img id="Minisky01" src="https://patches.vizor.io/3dcc/silenced-hippie-360bday-card-v">
 					<a-mixin id="yellowcubeposition" position="0 2 4"></a-mixin>
+					<a-entity id:"yellowcube" altspace-cursor-collider class="clickable" mixin="cube yellow"
+					position="1 1 1" rotation="0 45 0" scale=".5 .5 .5"></a-entity>
 				</a-assets>
 			<!-- <a-plane color="#183743" height="100" width="100" rotation="-90 0 0"></a-plane> -->
 				<!-- Camera 2 
@@ -166,7 +168,7 @@ remove: function(){
 				<!-- Test Boo Hoo Adding -->
 				<a-entity
 					class="clickable"
-					instantiator="mixin: yellowcube on:click removeLast:true"></a-entity>
+					instantiator="mixin: yellowcube; on:click; removeLast:true"></a-entity>
 
 				<!-- 								-->
 				<!-- 								-->
@@ -203,8 +205,7 @@ remove: function(){
 					</a-entity>
 				</a-entity>
 				
-				<a-entity id:"yellowcube" altspace-cursor-collider class="clickable" mixin="cube yellow"
-							position="1 1 1" rotation="0 45 0" scale=".5 .5 .5"></a-entity>
+				
 			<!-- BROKEN CODE
 		<a-scene altspace="vertical-align: bottom" fullspace: "true">
 			<a-assets timeout="50000">
