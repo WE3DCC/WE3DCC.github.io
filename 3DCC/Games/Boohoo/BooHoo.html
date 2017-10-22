@@ -166,7 +166,7 @@ remove: function(){
 				<!-- Test Boo Hoo Adding -->
 				<a-entity
 					class="clickable"
-					instantiator="mixin: cube, yellow, yellowcubeposition on:clientjoined removeLast:true"></a-entity>
+					instantiator="mixin: cube, yellow, yellowcubeposition on:click removeLast:true"></a-entity>
 
 				<!-- 								-->
 				<!-- 								-->
@@ -174,7 +174,7 @@ remove: function(){
 				<a-entity class="clickable" position="-3.5 1 0" altspace-cursor-collider>
 					<a-entity 
 						mixin="cube red">
-						<a-animation begin="clientjoined" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
+						<a-animation begin="connected" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
 					</a-entity>
 				</a-entity>
 				
