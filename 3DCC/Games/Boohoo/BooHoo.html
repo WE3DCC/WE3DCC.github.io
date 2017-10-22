@@ -135,7 +135,7 @@ remove: function(){
 				<!-- 								-->
 				<!-- The Mobile 0D Camera with reticle-->
 				<a-entity position="0 2.2 4">
-						<a-entity camera wasd-controls altspace-tracked-controls>
+						<a-entity camera look-controls altspace-tracked-controls>
 						  <a-entity raycaster="objects: .clickable" cursor="maxDistance: 30; fuse: true; fuseTimeout: 1600" position="0 0 -3"
 									geometry="primitive: ring; radiusOuter: 0.30;
 											  radiusInner: 0.20;"
@@ -164,9 +164,8 @@ remove: function(){
 				<!-- 								-->
 				<!-- Test Boo Hoo Adding -->
 				<a-entity
-					mixin= "#cube #yellow #yellowposition #clickanimation"
 					class="clickable"
-					instantiator="cube, yellow, yellowcubeposition"></a-entity>
+					instantiator="mixin: cube, yellow, yellowcubeposition on:clientjoined removeLast:true"></a-entity>
 
 				<!-- 								-->
 				<!-- 								-->
