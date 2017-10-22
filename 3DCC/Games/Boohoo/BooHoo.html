@@ -9,7 +9,7 @@
 	
 	</head>
 	<body>
-		<a-scene inspector altspace="fullspace: true" sync-system="app: BooHoo!; author:3DCC">
+		<a-scene inspector altspace="fullspace: true" sync-system="app: BooHoo!; author:3DCC; refUrl: https://we3dcc.github.io/3DCC/Games/Boohoo/BooHoo.html">
 				<a-assets timeout="5000">
 					<a-mixin id="cube" geometry="primitive: box"></a-mixin>
 					<a-mixin id="cube-hovered" material="color: magenta"></a-mixin>
@@ -78,7 +78,7 @@
 				<a-entity class="clickable" position="-3.5 1 0" altspace-cursor-collider>
 					<a-entity 
 						mixin="cube red">
-						<a-animation begin="click" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
+						<a-animation begin="#clientjoined" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
 					</a-entity>
 				</a-entity>
 				
