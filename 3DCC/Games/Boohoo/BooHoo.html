@@ -172,9 +172,9 @@ remove: function(){
 				<!-- 								-->
 				<!-- Characters-->
 				<a-entity class="clickable" position="-3.5 1 0" altspace-cursor-collider>
-					<a-entity 
-						mixin="cube red">
-						<a-animation begin="connected" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
+					<a-entity firebase-broadcast
+					position="0 1.8 5">
+						<a-animation begin="clicked" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
 					</a-entity>
 				</a-entity>
 				
