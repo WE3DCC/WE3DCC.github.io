@@ -107,7 +107,7 @@ remove: function(){
 	
 </head>
 	<body>
-		<a-scene inspector altspace="fullspace: true" sync-system="app: BooHoo; author:3DCC">
+		<a-scene altspace="fullspace: true" sync-system="app: BooHoo; author:3DCC">
 				
 			<a-assets timeout="5000">
 					<a-mixin id="cube" geometry="primitive: box"></a-mixin>
@@ -169,7 +169,12 @@ remove: function(){
 				<!-- Test Boo Hoo Adding -->
 				<a-entity
 					class="clickable"
+					position="2 2 2"
 					instantiate(yellowcube; on:clientjoined)></a-entity>
+
+				<a-entity 
+					class=clickable position="3 3 3">
+				</a-entity>
 
 				<!-- 								-->
 				<!-- 								-->
