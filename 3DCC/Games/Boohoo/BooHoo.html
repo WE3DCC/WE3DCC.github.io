@@ -107,7 +107,7 @@ remove: function(){
 	
 </head>
 	<body>
-		<a-scene inspector altspace="fullspace: true" sync sync-system="app: BooHoo; author:3DCC; refUrl: https://we3dcc-boohoo.firebaseio.com">
+		<a-scene inspector altspace="fullspace: true" sync-system="app: BooHoo; author:3DCC">
 				
 			<a-assets timeout="5000">
 					<a-mixin id="cube" geometry="primitive: box"></a-mixin>
@@ -152,6 +152,7 @@ remove: function(){
 						  </a-entity>
 						</a-entity>
 					  </a-entity>
+
 				<!-- 								-->
 				<!-- 								-->
 				<!-- 								-->
@@ -168,12 +169,12 @@ remove: function(){
 				<!-- Test Boo Hoo Adding -->
 				<a-entity
 					class="clickable"
-					instantiator="mixin: yellowcube; on:clientjoined;"></a-entity>
+					instantiate(yellowcube; on:clientjoined)></a-entity>
 
 				<!-- 								-->
 				<!-- 								-->
 				<!-- Characters-->
-				<a-entity class="clickable" position="-3.5 1 0" altspace-cursor-collider>
+				<a-entity class="clickable" position="-3.5 1 0" altspace-cursor-collider sync sync-transform>
 					<a-entity firebase-broadcast: "ownOn: connected"
 					position="0 1.8 5"
 					mixin="cube cube-selected">
