@@ -166,14 +166,15 @@ remove: function(){
 				<!-- Test Boo Hoo Adding -->
 				<a-entity
 					class="clickable"
-					instantiator="mixin: cube, yellow, yellowcubeposition on:click removeLast:true"></a-entity>
+					instantiator="mixin: yellowcube on:click removeLast:true"></a-entity>
 
 				<!-- 								-->
 				<!-- 								-->
 				<!-- Characters-->
 				<a-entity class="clickable" position="-3.5 1 0" altspace-cursor-collider>
-					<a-entity firebase-broadcast
-					position="0 1.8 5">
+					<a-entity firebase-broadcast: "ownOn: connected"
+					position="0 1.8 5"
+					mixin="cube cube-selected">
 						<a-animation begin="clicked" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
 					</a-entity>
 				</a-entity>
@@ -202,8 +203,8 @@ remove: function(){
 					</a-entity>
 				</a-entity>
 				
-				<a-entity position="0 3 0" altspace-cursor-collider class="clickable" mixin="cube yellow"
-							rotation="0 45 0" scale=".5 .5 .5"></a-entity>
+				<a-entity id:"yellowcube" altspace-cursor-collider class="clickable" mixin="cube yellow"
+							position="1 1 1" rotation="0 45 0" scale=".5 .5 .5"></a-entity>
 			<!-- BROKEN CODE
 		<a-scene altspace="vertical-align: bottom" fullspace: "true">
 			<a-assets timeout="50000">
