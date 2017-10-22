@@ -19,7 +19,7 @@
     <a-sky src:"background"></a-sky>
     <a-entity obj-model="obj: #Clubobj; mtl: #Clubmtl" position="0 -10 0"></a-entity>
     
-    <a-sphere position='0 2 -5' rotation="0 -60 0" src='#moon'>
+    <a-sphere position='0 2 -5' rotation="0 -60 0" src='#moon' altspace-cursor-collider>
         <!-- add an animation to make it rotate -->
         <a-animation attribute="position" begin="2000" from="0 2 -5" to="3 4 5" dur="5000" direction="alternate" easing="ease-in" repeat="2" end="click"></a-animation>
         <a-animation attribute="rotation" begin="click" to="0 360 0" dur="2000" easing="linear" repeat="5"></a-animation>
@@ -29,8 +29,7 @@
     <a-sky src='#background' radius='2500'></a-sky> -->
 
     <!-- add a view camera (2d only) -->
-    <a-entity position='0 0 2' look-controls>
-        <a-camera></a-camera>
+    <a-entity position='0 0 2' camera look-controls>
     </a-entity>
 
 </a-scene>
