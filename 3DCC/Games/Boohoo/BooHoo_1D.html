@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>AframeAltspaceVRTest</title>
+		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-database.js"></script>
+		<script>
+		  // Initialize Firebase
+		  var config = {
+			apiKey: "AIzaSyBnzy_MkZdifcV5wsUB0t53r0-RrqknD3o",
+			authDomain: "we3dcc-boohoo.firebaseapp.com",
+			databaseURL: "https://we3dcc-boohoo.firebaseio.com",
+			projectId: "we3dcc-boohoo",
+			storageBucket: "we3dcc-boohoo.appspot.com",
+			messagingSenderId: "870083594243"
+		  };
+		  firebase.initializeApp(config);
+		  var database = firebase.database();
+		</script>
+		<script src="//patches.vizor.io/scripts/embed.js"></script>
+		<script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+		<script src="https://rawgit.com/ngokevin/aframe-firebase-component/master/dist/aframe-firebase-component.min.js"></script>
+	<!-- Registering Components
+	// Creating a boo character that appears, moves, then disappears
+	AFRAME.registerComponent('randomposition', {
+	  schema: { 
+			type: {'vec3' },
+	  }
+	  var min = -20;
+	  var max = 20;
+	  var ymin = 0;
+	  var xspot = { type: 'int'};
+	  var yspot = { type: 'int' };
+	  var zspot = { type: 'int' };
+	  
+	  init: function() {
+			
+			}
+  
+	  update: function () {
+		entity.addEventListener('componentremoved', function (evt) {
+		  if (evt.detail.name === 'obj') {
+			xspot = Math.floor(Math.random() * (max-min) + min);
+			yspot = Math.floor(Math.random() * (max-ymin) + ymin);
+			zspot = Math.floor(Math.random() * (max-min) + min);
+			AFRAME.utils.coordinates.parse("xspot yspot zspot");
+		  }
+		});
+		this.el.setAttribute("position", {x:xspot, y:yspot, z:zspot})
+	  }
+	});
+
+	AFRAME.registerComponent('BooHoo', {
+	  schema: {
+		boohooType: {type:"obj"}
+		randomposition: {type: "vec3"}
+		animationType: {default: anim[0]}
+	  }
+
+
+	init: function getRandomHidingSpot () {
+			var randomIndex = ;
+			var ArraySpots=[];
+			var hidingSpot: }
+			for (var i = 0; i < 10; i++ ) {
+				;
+			}
+			return SpaceNumber;
+		  }
+	
+	update: function() {
+
+			// entity.setAttribute('modeltype', {
+			 // type: 'sphere', // sphere, cube, or triangle
+			 // animation: "", //raise up, peak left and right, spin 
+			  
+			});
+  })
+
+	AFRAME.registerComponent('random-space', {
+		dependencies: ['random-space'],
+		init: function () {
+		  // Set material component's color property to a random color.
+		  this.el.setAttribute('material', 'color', getRandomColor());
+		}
+		var lastIndex = -1;
+		var SpawnSpaceLocations = ['red', 'green', 'blue'];
+		this.el.addEventListener('click', function (evt) {
+		lastIndex = (lastIndex + 1) % SpawnSpaceLocations.length;
+		this.setAttribute('position', );
+		});
+	  });
+update:  
+createBooHoo: function (data) {
+  // create boo
+  //if user clicks boo, boo spins, team gets point
+  //boo deletes after 7 seconds
+  return new ComplexObject(data);
+}
+remove: function(){
+  this.el.removeObject3D("BooHooVersion")apiKey: abc;
+                     authDomain: mysite.firebaseapp.com;
+                     databaseURL: https://mysite.firebaseio.com;
+                     storageBucket: mysite.appspot.com
+} -->
+	
+</head>
+	<body>
+		<a-scene altspace inspector>
+			<a-assets timeout="5000">
+					<a-mixin id="cube" geometry="primitive: box"></a-mixin>
+					<a-mixin id="cube-hovered" material="color: magenta"></a-mixin>
+					<a-mixin id="cube-selected" material="color: cyan"></a-mixin>
+					<a-mixin id="red" material="color: red"></a-mixin>
+					<a-mixin id="green" material="color: green"></a-mixin>
+					<a-mixin id="blue" material="color: blue"></a-mixin>
+					<a-mixin id="yellow" material="color: yellow"></a-mixin>
+					<a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
+					<a-img id="Minisky01" src="https://patches.vizor.io/3dcc/silenced-hippie-360bday-card-v">
+					<a-mixin id="yellowcubeposition" position="0 2 4"></a-mixin>
+				</a-assets>
+				<!-- The Mobile 0D Camera with reticle-->
+				<a-entity position="0 2.2 4">
+						<a-entity camera look-controls wasd-controls>
+						  <a-entity raycaster="objects: .clickable" cursor="maxDistance: 30; fuse: true; fuseTimeout: 1600" position="0 0 -3"
+									geometry="primitive: ring; radiusOuter: 0.30;
+											  radiusInner: 0.20;"
+									material="color: cyan; shader: flat">
+						  <a-animation begin="mouseenter" easing="linear" attribute="scale"
+								 fill="forwards" from="4 4 4" to="0.1 0.1 0.1" dur="1500" end="mouseleave"></a-animation>
+				<a-animation begin="mouseleave" dur="50" easing="ease-out-bounce" attribute="scale"
+								 fill="forwards" from="1 1 1" to="1 1 1" ></a-animation> 
+				<a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="scale"
+								 fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" </a-animation>
+						  </a-entity>
+						</a-entity>
+					  </a-entity>
+				<!-- 								-->
+				<!-- 								-->
+				<!-- 								-->
+				<!-- 								
+				<a-entity 
+						isEnclosure="true"
+						n-layout-broswer="isEnclosure: true; url: google.com"
+						position="0 5 0">
+					</a-entity>
+				<n-layout-broswer position="0 -5 0"></n-layout-broswer>
+				<a-plane class="noClick" color="#345562" height="100" width="100" rotation="-90 0 0"></a-plane> -->
+				<!-- 								-->
+				<!-- 								-->
+				<!-- Test Boo Hoo Adding -->
+				<a-entity
+					class="clickable"
+					instantiator="mixin: yellowcube on:click removeLast:true"></a-entity>
+
+				<!-- 								-->
+				<!-- 								-->
+				<!-- Characters-->
+				<a-entity class="clickable" position="-3.5 1 0" altspace-cursor-collider>
+					<a-entity firebase-broadcast: "ownOn: connected"
+					position="0 1.8 5"
+					mixin="cube cube-selected">
+						<a-animation begin="clicked" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
+					</a-entity>
+				</a-entity>
+				
+				<a-entity position="0 1 0" altspace-cursor-collider sync sync-transform>
+					<a-entity 
+						class="clickable"
+						mixin="cube green">
+						<a-animation begin="click" attribute="rotation" to="0 360 0"
+									easing="linear" dur="2000" fill="backwards"></a-animation>
+					</a-entity>
+				</a-entity>
+
+				<a-entity position="0 3 0" altspace-cursor-collider="enabled: false">
+						<a-entity class="clickable" mixin="cube blue">
+						<a-animation begin="click" attribute="rotation" to="0 360 0"
+										easing="linear" dur="2000" fill="backwards"></a-animation>
+						</a-entity>
+					</a-entity>
+				
+				<a-entity position="3.5 1 0" rotation="0 45 0" altspace-cursor-collider>
+					<a-entity material="#SilencedBday">
+					<a-animation begin="click" fill="forwards" repeat="1"
+									direction="alternate" attribute="position" from="0 0 0"
+									to="15 0 0" dur="2000"></a-animation>
+					</a-entity>
+				</a-entity>
+				
+				<a-entity id:"yellowcube" altspace-cursor-collider class="clickable" mixin="cube yellow"
+							position="1 1 1" rotation="0 45 0" scale=".5 .5 .5"></a-entity>
+			<!-- BROKEN CODE
+		<a-scene altspace="vertical-align: bottom" fullspace: "true">
+			<a-assets timeout="50000">
+		 Preproduction 
+				<img id="logo" src="images/WE3DCC_Branding_Logo01.png">
+			model testing
+				<img id="GoldenGateBridge" src="images/GoldenGateBridge.jpg">
+				<a-asset-item id="hempplant" src="models/hemp.obj"></a-asset-item>
+				<a-asset-item id="hemptexture" src="images/hemptarga.tga"></a-asset-item>
+				</assets>
+		Camera + Cursor. 
+			<a-camera>
+					<a-cursor id="cursor"
+							geometry="primitive: ring; radiusOuter: 0.30; radiusInner: 0.20;"
+				  			material="color: cyan; shader: flat"
+				  			cursor="maxDistance: 30; fuse: true">
+					<a-animation begin="click" easing="ease-in" attribute="scale"
+									fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+					<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+									from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
+					</a-cursor></a-camera>
+									-->
+			<!-- Action 
+			<a-entity template="src: #plane" position="3 0 100"></a-entity>
+			<a-entity obj-model="#hempplant" material="#hemptexture" position="0 0 100"></a-entity> -->
+			</a-scene>
+	</body>
+</html>
