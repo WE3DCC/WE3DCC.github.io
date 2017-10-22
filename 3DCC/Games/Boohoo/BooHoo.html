@@ -163,11 +163,10 @@ remove: function(){
 				<!-- 								-->
 				<!-- 								-->
 				<!-- Test Boo Hoo Adding -->
-				<a-entity class="clickable" instantiate("cube, yellow, yellowcubeposition"); altspace-cursor-collider sync sync-transform>
-						<a-entity>
-							<a-animation begin="click" attribute="rotation" to="0 360 0"
-										easing="linear" dur="2000" fill="backwards"></a-animation>
-						</a-entity>
+				<a-entity
+					mixin= "#cube #yellow #yellowposition #clickanimation"
+					class="clickable"
+					instantiator="cube, yellow, yellowcubeposition">
 
 				<!-- 								-->
 				<!-- 								-->
@@ -188,7 +187,7 @@ remove: function(){
 					</a-entity>
 				</a-entity>
 
-				<a-entity position="0 3 0" altspace-cursor-collider>
+				<a-entity position="0 3 0" altspace-cursor-collider="enabled: false">
 						<a-entity class="clickable" mixin="cube blue">
 						<a-animation begin="click" attribute="rotation" to="0 360 0"
 										easing="linear" dur="2000" fill="backwards"></a-animation>
