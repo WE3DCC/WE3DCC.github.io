@@ -1,25 +1,33 @@
 // Creating a boo character that appears, moves, then disappears
       AFRAME.registerComponent('randomposition', {
-        schema: { type: 'vec3' },
-        init: function() {
-          var min = -20;
-          var max = 20;
-          var ymin = 0;
-          var xspot = Math.floor(Math.random() * (max-min) + min);
-          var yspot = Math.floor(Math.random() * (max-ymin) + ymin);
-          var zspot = Math.floor(Math.random() * (max-min) + min);
+        schema: { 
+              type: {'vec3' },
         }
+        var min = -20;
+        var max = 20;
+        var ymin = 0;
+        var xspot = { type: 'int'};
+        var yspot = { type: 'int' };
+        var zspot = { type: 'int' };
+        
+        init: function() {
+              
+              }
+    
         update: function () {
           entity.addEventListener('componentremoved', function (evt) {
             if (evt.detail.name === 'obj') {
-              this.el.setAttribute(");
+              xspot = Math.floor(Math.random() * (max-min) + min);
+              yspot = Math.floor(Math.random() * (max-ymin) + ymin);
+              zspot = Math.floor(Math.random() * (max-min) + min);
+              AFRAME.utils.coordinates.parse("xspot yspot zspot");
             }
           });
           this.el.setAttribute("position", {x:xspot, y:yspot, z:zspot})
         }
       });
 
-      AFRAME.registerComponent('BooHooEntity', {
+      AFRAME.registerComponent('BooHoo', {
         schema: {
           boohooType: {type:"obj"}
           randomposition: {type: "vec3"}
