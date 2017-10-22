@@ -168,7 +168,7 @@ remove: function(){
 				<!-- Test Boo Hoo Adding -->
 				<a-entity
 					class="clickable"
-					instantiator="mixin: yellowcube; on:click; removeLast:true"></a-entity>
+					instantiator="mixin: yellowcube; on:clientjoined;"></a-entity>
 
 				<!-- 								-->
 				<!-- 								-->
@@ -194,8 +194,6 @@ remove: function(){
 						<a-entity class="clickable" mixin="cube blue">
 								<a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="visibility"
 								fill="forwards" to:"false" ></a-animation>
-								<a-animation begin="click" attribute="rotation" to="0 360 0"
-								easing="linear" dur="2000" fill="backwards"></a-animation>
 						</a-entity>
 				</a-entity>
 				
