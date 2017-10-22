@@ -2,6 +2,19 @@
 <html>
 	<head>
 		<title>AframeAltspaceVRTest</title>
+		<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+		<script>
+		  // Initialize Firebase
+		  var config = {
+			apiKey: "AIzaSyBnzy_MkZdifcV5wsUB0t53r0-RrqknD3o",
+			authDomain: "we3dcc-boohoo.firebaseapp.com",
+			databaseURL: "https://we3dcc-boohoo.firebaseio.com",
+			projectId: "we3dcc-boohoo",
+			storageBucket: "we3dcc-boohoo.appspot.com",
+			messagingSenderId: "870083594243"
+		  };
+		  firebase.initializeApp(config);
+		</script>
 		<script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
 		<script src="https://cdn.rawgit.com/AltspaceVR/AltspaceSDK/v2.0.2/dist/altspace.min.js"></script>
 		<script src="//patches.vizor.io/scripts/embed.js"></script>
@@ -48,23 +61,6 @@
 						geometry="primitive: ring; radiusInner: 0.5; radiusOuter: 1.0"
 						material="color: black; shader: flat">
 				</a-entity> -->
-
-				<!-- Boo Instatiation Controller Enttity
-				<a-entity>
-					- random spaces
-						- inside
-						- behind
-						- on top of
-					- boo object animates after instantiation
-					- boo object animates downward
-					- boo sounds playing on events
-					- 
-				</a-entity>
-																-->
-
-
-				
-				<!-- ASSETSS  -->
 				<!-- <a-sky src="#SilencedBday" position="10 2 -10" radius="50"></a-sky>
 				<a-sky src="#Minisky01" position="5 2 -10" radius="50"></a-sky> -->
 				<a-entity 
