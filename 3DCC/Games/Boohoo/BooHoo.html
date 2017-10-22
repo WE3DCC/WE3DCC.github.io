@@ -18,7 +18,8 @@
 		  var database = firebase.database();
 		</script>
 		<script src="//patches.vizor.io/scripts/embed.js"></script>
-		<script src="https://aframe.io/releases/0.2.0/aframe.min.js"></script>
+		<script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+		<script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>	
 		<script src="https://rawgit.com/ngokevin/aframe-firebase-component/master/dist/aframe-firebase-component.min.js"></script>
 	<!-- Registering Components
 	// Creating a boo character that appears, moves, then disappears
@@ -135,7 +136,7 @@ remove: function(){
 				<!-- 								-->
 				<!-- The Mobile 0D Camera with reticle-->
 				<a-entity position="0 2.2 4">
-						<a-entity camera look-controls altspace-tracked-controls>
+						<a-entity camera look-controls wasd-controls>
 						  <a-entity raycaster="objects: .clickable" cursor="maxDistance: 30; fuse: true; fuseTimeout: 1600" position="0 0 -3"
 									geometry="primitive: ring; radiusOuter: 0.30;
 											  radiusInner: 0.20;"
@@ -145,7 +146,7 @@ remove: function(){
 				<a-animation begin="mouseleave" dur="50" easing="ease-out-bounce" attribute="scale"
 								 fill="forwards" from="1 1 1" to="1 1 1" ></a-animation> 
 				<a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="scale"
-								 fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" ></a-animation>
+								 fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" </a-animation>
 						  </a-entity>
 						</a-entity>
 					  </a-entity>
