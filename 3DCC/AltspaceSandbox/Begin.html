@@ -13,10 +13,13 @@
         <img id='moon' src='WE3DCC_Branding_Logo01.png'/>
         <a-asset-item id="Clubobj" src="ClubScene.obj"></a-asset-item>
         <a-asset-item id="Clubmtl" src="ClubScene.mtl"></a-asset-item>
+        <a-asset-item id="hempobj" src="hemp.obj"></a-asset-item>
+        <a-asset-item id="hemptga" src="hemptarga.tga"></a-asset-item>
     </a-assets>
 
     <!-- adding assets-->
     <a-entity obj-model="obj: #Clubobj; mtl: #Clubmtl" position="0 -10 0" scale="0.5 0.5 0.5"></a-entity>
+    <a-entity obj-model="obj: #hempobj; mtl: #hemptga" position="0 2 5" scale="0.5 0.5 0.5"></a-entity>
     
     <a-sphere position='0 2 -5' rotation="0 -60 0" src='#moon' altspace-cursor-collider>
         <!-- add an animation to make it rotate -->
