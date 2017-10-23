@@ -70,7 +70,8 @@
                     n-skeleton-parent="part: hand; side: right"
                     sync sync-n-skeleton-parent>
                 </a-mixin>
-
+                <a-animation id="spinanimation" begin="click" attribute="rotation" to="0 360 0"
+                easing="linear" dur="2000" fill="backwards"></a-animation>
                 <!-- hall -->
             <a-asset-item id="hall-obj" src="hall.obj"></a-asset-item>
             <img id="hall-texture" src="hall.jpg">
@@ -84,22 +85,14 @@
             </a-assets>
            <!-- <a-obj-model id="PortfolioHALLS" obj="hall-obj" mtl="hall.jpg" n-mesh-collider="type: environment"
             sync sync-transform></a-obj-model> -->
-            <a-entity   
-                    position="0 -2 100"
-                    scale="1 1 1"
-                    mixin="PortfolioHALLS"
-                    n-mesh-collider="type: environment"
-                    sync sync-transform>
-            </a-entity>
-            <a-box
+            <a-entity
+                    mixin:"cube"
+                    mixin:"green"
+                    mixin="spinanimation"
+                    instantiator="on:click; mixin: cube green spinanimation"   
                     position="4 2 0"
                     n-box-collider="type: environment"
-                    color-cycle=""
-                    synce
-                    sync-transform>
-                    <a-animation begin="click" attribute="rotation" to="0 360 0"
-                                easing="linear" dur="2000" fill="backwards"></a-animation>
-                                    
+                    sync sync-transform>
         </a-box>
             <a-entity one-per-user="mixin: left-box"></a-entity>
             <a-entity one-per-user="mixin: body-ball"></a-entity>
