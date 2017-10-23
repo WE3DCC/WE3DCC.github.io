@@ -3,8 +3,16 @@
             <title>Native Parent</title>
             <script src="//aframe.io/releases/0.3.0/aframe.js"></script>
             <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
+            <!-- Registering obj component -->
+            <a-script AFRAME.registerComponent('hall model', {
+                update: function () {
+                  this.el.setObject3D('', new THREE.OrthogonalCamera());
+                }
+              });
+            <!--                            -->
         </head>
         <body>
+            
         <a-scene altspace="fullspace: true" sync-system="author: altspacevr; app: native-parents">
             <a-assets>
                 <a-asset-item id="hemptree" src="hemp.obj"></a-asset-item>
@@ -66,10 +74,8 @@
                     n-skeleton-parent="part: hand; side: right"
                     sync sync-n-skeleton-parent>
                 </a-mixin>
-            </a-assets>
 
-            
-            <!-- hall -->
+                <!-- hall -->
             <a-asset-item id="hall-obj" src="hall.obj"></a-asset-item>
             <img id="hall-texture" src="hall.jpg">
             <!--<img id="hall_normal-texture" src="textures/hall_normal.jpg">-->
@@ -77,13 +83,22 @@
            <a-asset-item id="floor-obj" src="floor.obj"></a-asset-item>
            <img id="floor-texture" src="floor.jpg">
            <img id="floor_normal-texture" src="textures/floor_normal.jpg">
+
+           <a-obj-model id="PortfolioHALLS" obj="hall-obj" mtl="hall.jpg"></a-entity>
+            </a-assets>
+            <a-entity   
+                    position="0 1 0"
+                    mixin="PortfolioHALLS"
+                    n-mesh-collider="type: environment"
+                    sync sync-transform>
+            </a-entity>
             <a-entity   
                         position="0 1 0"
                         mixin="green cube"
                         n-box-collider="type: environment"
                         sync sync-transform>
-						<a-animation begin="click" attribute="rotation" to="0 360 0"
-                                    easing="linear" dur="2000" fill="backwards" </a-animation>
+						<a-animation sync sync-transform begin="click" attribute="rotation" to="0 360 0"
+                                    easing="linear" dur="2000" fill="backwards"></a-animation>
                                     
                 </a-entity>
             <a-entity n-box-collider="size: 3 12 3; type: object" n-skeleton-parent="part:spine"></a-entity>
