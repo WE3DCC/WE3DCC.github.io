@@ -5,8 +5,10 @@
             <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
         </head>
         <body>
-        <a-scene debug altspace="fullspace: true" sync-system="author: altspacevr; app: native-parents">
+        <a-scene altspace="fullspace: true" sync-system="author: altspacevr; app: native-parents">
             <a-assets>
+                <a-entity n-mesh-collider="type: object" material="color: green" position: "4 2 0">
+                <a-obj-model src="hemp.obj" ></a-obj-model></a-entity>
                 <a-mixin id="left-box"
                     geometry="primitive: box"
                     material="color: red"
