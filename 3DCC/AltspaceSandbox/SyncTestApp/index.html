@@ -90,10 +90,10 @@
                     n-mesh-collider="type: environment"
                     sync sync-transform>
             </a-entity>
-            <a-entity instantiator="mixin: #green #cube; on:"
+            <a-entity instantiator="mixin: #green #cube; on:clientleft"
                     position="4 2 0"
                     n-box-collider="type: environment"
-                    color-cycle="" sync>
+                    color-cycle="" sync-geometry>
                     <a-animation begin="click" attribute="rotation" to="0 360 0"
                                 easing="linear" dur="2000" fill="backwards"></a-animation>
                                     
