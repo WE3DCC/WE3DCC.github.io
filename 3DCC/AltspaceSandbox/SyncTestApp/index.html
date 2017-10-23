@@ -67,12 +67,23 @@
                     sync sync-n-skeleton-parent>
                 </a-mixin>
             </a-assets>
-            <a-entity
+
+            
+            <!-- hall -->
+            <a-asset-item id="hall-obj" src="hall.obj"></a-asset-item>
+            <img id="hall-texture" src="hall.jpg">
+            <!--<img id="hall_normal-texture" src="textures/hall_normal.jpg">-->
+           <!-- floor -->
+           <a-asset-item id="floor-obj" src="floor.obj"></a-asset-item>
+           <img id="floor-texture" src="floor.jpg">
+           <img id="floor_normal-texture" src="textures/floor_normal.jpg">
+            <a-entity   
                         position="0 1 0"
                         mixin="green cube"
-                        n-box-collider="type: environment">
+                        n-box-collider="type: environment"
+                        sync sync-transform>
 						<a-animation begin="click" attribute="rotation" to="0 360 0"
-                                    easing="linear" dur="2000" fill="backwards" sync sync-transform></a-animation>
+                                    easing="linear" dur="2000" fill="backwards" </a-animation>
                                     
                 </a-entity>
             <a-entity n-box-collider="size: 3 12 3; type: object" n-skeleton-parent="part:spine"></a-entity>
