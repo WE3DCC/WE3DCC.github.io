@@ -66,12 +66,12 @@
                 </a-mixin>
             </a-assets>
             <a-entity n-box-collider="type: object" position="0 1 0" altspace-cursor-collider sync sync-transform>
-					<a-entity 
+					<a-box 
 						class="clickable"
-						mixin="cube green">
+						mixin="green">
 						<a-animation begin="click" attribute="rotation" to="0 360 0"
 									easing="linear" dur="2000" fill="backwards"></a-animation>
-					</a-entity>
+					</a-box>
 				</a-entity>
             <a-entity one-per-user="mixin: left-box"></a-entity>
             <a-entity one-per-user="mixin: body-ball"></a-entity>
