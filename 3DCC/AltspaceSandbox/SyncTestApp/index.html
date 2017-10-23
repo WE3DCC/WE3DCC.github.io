@@ -4,24 +4,7 @@
             <script src="//aframe.io/releases/0.3.0/aframe.js"></script>
             <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
             <!-- Registering obj component -->
-            <script>
-                    
-                // an example custom component, that will change the color when clicked
-                AFRAME.registerComponent('color-cycle', {
-                    schema: {},
-                    init: function(){
-                        var self = this;
-                        self.el.addEventListener('click', function(){
-                            var rgb = [
-                                Math.floor(Math.random()*256),
-                                Math.floor(Math.random()*256),
-                                Math.floor(Math.random()*256)
-                            ];
-                            self.el.setAttribute('color', 'rgb('+rgb.join(',')+')');
-                        });
-                    }
-                });
-            </script>
+        
             <!--                            -->
         </head>
         <body>
@@ -97,7 +80,7 @@
            <img id="floor-texture" src="floor.jpg">
            <img id="floor_normal-texture" src="textures/floor_normal.jpg">
 
-           <a-obj-model id="PortfolioHALLS" obj="hall-obj" mtl="hall.jpg"></a-obj-model>
+           <a-obj-model id="PortfolioHALLS" src="obj= hall-obj" mtl="hall.jpg" n-mesh-collider="type: environment" sync sync-transform></a-obj-model>
             </a-assets>
            <!-- <a-obj-model id="PortfolioHALLS" obj="hall-obj" mtl="hall.jpg" n-mesh-collider="type: environment"
             sync sync-transform></a-obj-model> -->

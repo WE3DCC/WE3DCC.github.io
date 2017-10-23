@@ -21,6 +21,45 @@
 		<script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
 		<script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>	
 		<script src="https://rawgit.com/ngokevin/aframe-firebase-component/master/dist/aframe-firebase-component.min.js"></script>
+		<script>	AFRAME.registerComponent('BooHoo', {
+				schema: {
+				boohooType: {type:"geometry"}
+				randomposition: {type: "vec3"}
+				}
+		
+			AFRAME.registerComponent("SpotPicker"){
+				schema:{
+					var random Position
+					var visibility Changer 
+					var remove from document and re add to docuemnt
+				}
+			}
+			init: function getRandomPosition () {
+					var self = this;
+					for (var i = 0; i < 10; i++ ) {
+						;
+					}
+					return SpaceNumber;
+					}        
+                        self.el.addEventListener('click', function(){
+                            var rgb = [
+                                Math.floor(Math.random()*256),
+                                Math.floor(Math.random()*256),
+                                Math.floor(Math.random()*256)
+                            ];
+                            self.el.setAttribute('color', 'rgb('+rgb.join(',')+')');
+                        });
+                    }
+                });
+			
+			update: function() {
+		
+					// entity.setAttribute('modeltype', {
+					 // type: 'sphere', // sphere, cube, or triangle
+					 // animation: "", //raise up, peak left and right, spin 
+						
+					});
+			})</script>
 	<!-- Registering Components
 		 <script>
           (function () {
@@ -87,32 +126,7 @@
 	  }
 	});
 
-	AFRAME.registerComponent('BooHoo', {
-	  schema: {
-		boohooType: {type:"obj"}
-		randomposition: {type: "vec3"}
-		animationType: {default: anim[0]}
-	  }
 
-
-	init: function getRandomHidingSpot () {
-			var randomIndex = ;
-			var ArraySpots=[];
-			var hidingSpot: }
-			for (var i = 0; i < 10; i++ ) {
-				;
-			}
-			return SpaceNumber;
-		  }
-	
-	update: function() {
-
-			// entity.setAttribute('modeltype', {
-			 // type: 'sphere', // sphere, cube, or triangle
-			 // animation: "", //raise up, peak left and right, spin 
-			  
-			});
-  })
 
 	AFRAME.registerComponent('random-space', {
 		dependencies: ['random-space'],
