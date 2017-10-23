@@ -32,6 +32,7 @@
                 </a-mixin>
         
                 <a-mixin id="spinal-tap"
+                    n-mesh-collider=""
                     n-sound="res: ui/error; volume: 0.5; loop: true; autoplay: true;"
                     n-skeleton-parent="part: spine;"
                     sync sync-n-skeleton-parent>
@@ -68,10 +69,13 @@
             </a-assets>
             <a-entity
                         position="0 1 0"
-						mixin="green cube">
+                        mixin="green cube"
+                        n-box-collider="">
 						<a-animation begin="click" attribute="rotation" to="0 360 0"
-									easing="linear" dur="2000" fill="backwards" sync sync-transform></a-animation>
-				</a-entity>
+                                    easing="linear" dur="2000" fill="backwards" sync sync-transform></a-animation>
+                                    
+                </a-entity>
+            <a-entity n-box-collider="size: 3 12 3; type: object" n-skeleton-parent="part:spine"></a-entity>
             <a-entity one-per-user="mixin: left-box"></a-entity>
             <a-entity one-per-user="mixin: body-ball"></a-entity>
         
