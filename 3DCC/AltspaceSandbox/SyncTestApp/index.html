@@ -4,16 +4,29 @@
             <script src="//aframe.io/releases/0.3.0/aframe.js"></script>
             <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
             <!-- Registering obj component -->
-            <a-script AFRAME.registerComponent('hall model', {
-                update: function () {
-                  this.el.setObject3D('', new THREE.OrthogonalCamera());
-                }
-              });
+            <script>
+                    
+                // an example custom component, that will change the color when clicked
+                AFRAME.registerComponent('color-cycle', {
+                    schema: {},
+                    init: function(){
+                        var self = this;
+                        self.el.addEventListener('click', function(){
+                            var rgb = [
+                                Math.floor(Math.random()*256),
+                                Math.floor(Math.random()*256),
+                                Math.floor(Math.random()*256)
+                            ];
+                            self.el.setAttribute('color', 'rgb('+rgb.join(',')+')');
+                        });
+                    }
+                });
+            </script>
             <!--                            -->
         </head>
         <body>
             
-        <a-scene altspace="fullspace: true" sync-system="author: altspacevr; app: native-parents">
+        <a-scene altspace="fullspace: true" sync-system="author: 3dcc; app: BooHoo">
             <a-assets>
                 <a-asset-item id="hemptree" src="hemp.obj"></a-asset-item>
                 <a-asset-item id="hempleaves" src="hemptarga copy.tga"></a-asset-item>
@@ -84,7 +97,7 @@
            <img id="floor-texture" src="floor.jpg">
            <img id="floor_normal-texture" src="textures/floor_normal.jpg">
 
-           <a-obj-model id="PortfolioHALLS" obj="hall-obj" mtl="hall.jpg"></a-entity>
+           <a-obj-model id="PortfolioHALLS" obj="hall-obj" mtl="hall.jpg"></a-obj-model>
             </a-assets>
             <a-entity   
                     position="0 -2 100"
@@ -96,12 +109,12 @@
                         position="0 1 0"
                         mixin="green cube"
                         n-box-collider="type: environment"
+                        color-cycle=""
                         sync sync-transform>
-						<a-animation sync sync-transform begin="click" attribute="rotation" to="0 360 0"
+						<a-animation begin="click" attribute="rotation" to="0 360 0"
                                     easing="linear" dur="2000" fill="backwards"></a-animation>
                                     
                 </a-entity>
-            <a-entity n-box-collider="size: 3 12 3; type: object" n-skeleton-parent="part:spine"></a-entity>
             <a-entity one-per-user="mixin: left-box"></a-entity>
             <a-entity one-per-user="mixin: body-ball"></a-entity>
         
