@@ -161,15 +161,7 @@ createBooHoo: function (data) {
 }
 remove: function(){
   this.el.removeObject3D("BooHooVersion")
-} -->      <!-- hall -->
-<a-asset-item id="hall-obj" src="hall.obj"></a-asset-item>
-<img id="hall-texture" src="hall.jpg">
-<!--<img id="hall_normal-texture" src="textures/hall_normal.jpg">-->
-<!-- floor -->
-<a-asset-item id="floor-obj" src="floor.obj"></a-asset-item>
-<img id="floor-texture" src="floor.jpg">
-<img id="floor_normal-texture" src="textures/floor_normal.jpg">
-	
+} -->      
 </head>
 	<body>
 		<a-scene 
@@ -192,6 +184,15 @@ remove: function(){
 					<a-mixin id="yellowcubeposition" position="0 2 4"></a-mixin>
 					<a-entity id:"yellowcube" altspace-cursor-collider class="clickable" mixin="cube yellow"
 					position="1 1 1" rotation="0 45 0" scale=".5 .5 .5"></a-entity>
+					<!-- hall -->
+					<a-asset-item id="hall-obj" src="hall.obj"></a-asset-item>
+					<img id="hall-texture" src="hall.jpg">
+					<!--<img id="hall_normal-texture" src="textures/hall_normal.jpg">-->
+					<!-- floor -->
+					<a-asset-item id="floor-obj" src="floor.obj"></a-asset-item>
+					<img id="floor-texture" src="floor.jpg">
+					<img id="floor_normal-texture" src="textures/floor_normal.jpg">
+	
 				</a-assets>
 			<!-- <a-plane color="#183743" height="100" width="100" rotation="-90 0 0"></a-plane> -->
 				<!-- Camera 2 
@@ -223,7 +224,7 @@ remove: function(){
 						</a-entity>
 					  </a-entity>
 
-				<a-obj-model src="obj: #hall-obj; mtl: #hall.jpg" n-mesh-collider="type: environment" sync sync-transform></a-obj-model>
+				<a-obj-model src="obj: #hall-obj; mtl: #hall-texture.jpg" scale: "1 1 1"n-mesh-collider="type: environment" sync sync-transform></a-obj-model>
 				<!-- 								-->
 				<!-- 								-->
 				<!-- 								-->

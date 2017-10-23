@@ -90,16 +90,15 @@
                     n-mesh-collider="type: environment"
                     sync sync-transform>
             </a-entity>
-            <a-entity   
-                        position="0 1 0"
-                        mixin="green cube"
-                        n-box-collider="type: environment"
-                        color-cycle=""
-                        sync sync-transform>
-						<a-animation begin="click" attribute="rotation" to="0 360 0"
-                                    easing="linear" dur="2000" fill="backwards"></a-animation>
+            <script instantiate(
+                    position="4 2 0"
+                    mixin="green cube"
+                    n-box-collider="type: environment"
+                    color-cycle="">
+                    <a-animation begin="click" attribute="rotation" to="0 360 0"
+                                easing="linear" dur="2000" fill="backwards"></a-animation>
                                     
-                </a-entity>
+            </script>
             <a-entity one-per-user="mixin: left-box"></a-entity>
             <a-entity one-per-user="mixin: body-ball"></a-entity>
         
