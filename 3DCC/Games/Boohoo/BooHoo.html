@@ -99,16 +99,18 @@ createBooHoo: function (data) {
   return new ComplexObject(data);
 }
 remove: function(){
-  this.el.removeObject3D("BooHooVersion")apiKey: abc;
-                     authDomain: mysite.firebaseapp.com;
-                     databaseURL: https://mysite.firebaseio.com;
-                     storageBucket: mysite.appspot.com
+  this.el.removeObject3D("BooHooVersion")
 } -->
 	
 </head>
 	<body>
-		<a-scene altspace="fullspace: true" sync-system="app: BooHoo; author:3DCC">
-				
+		<a-scene 
+			altspace="fullspace: true"
+			sync-system="app: BooHoo; author:3DCC"
+			firebase="apiKey: abc;
+						authDomain: mysite.firebaseapp.com;
+						databaseURL: https://mysite.firebaseio.com;
+						storageBucket: mysite.appspot.com">
 			<a-assets timeout="5000">
 					<a-mixin id="cube" geometry="primitive: box"></a-mixin>
 					<a-mixin id="cube-hovered" material="color: magenta"></a-mixin>
@@ -179,10 +181,11 @@ remove: function(){
 				<!-- 								-->
 				<!-- 								-->
 				<!-- Characters-->
-				<a-entity class="clickable" position="-3.5 1 0" altspace-cursor-collider sync sync-transform>
-					<a-entity firebase-broadcast: "ownOn: connected"
+				<a-entity class="clickable" altspace-cursor-collider sync sync-transform>
+					<a-entity
 					position="0 1.8 5"
-					mixin="cube cube-selected">
+					mixin="cube cube-selected"
+					firebase-broadcast="components: mixin, position, rotation">
 						<a-animation begin="clicked" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
 					</a-entity>
 				</a-entity>
