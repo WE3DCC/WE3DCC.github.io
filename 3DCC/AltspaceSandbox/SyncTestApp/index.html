@@ -7,8 +7,8 @@
         <body>
         <a-scene altspace="fullspace: true" sync-system="author: altspacevr; app: native-parents">
             <a-assets>
-                <a-entity n-mesh-collider="type: object" material="color: green" position: "4 2 0">
-                <a-obj-model src="hemp.obj" ></a-obj-model></a-entity>
+                <a-asset-item id="hemptree" src="hemp.obj"></a-asset-item>
+                <a-asset-item id="hempleaves" src="hemptarga copy.tga"></a-asset-item>
                 <a-mixin id="left-box"
                     geometry="primitive: box"
                     material="color: red"
@@ -61,6 +61,8 @@
                     sync sync-n-skeleton-parent>
                 </a-mixin>
             </a-assets>
+            <a-entity n-mesh-collider="type: object" material="color: green" position: "4 2 0">
+                    <a-obj-model src="#hemptree" mtl:"#hempleaves" ></a-obj-model></a-entity>
             <a-entity one-per-user="mixin: left-box"></a-entity>
         
             <a-entity one-per-user="mixin: body-ball"></a-entity>
