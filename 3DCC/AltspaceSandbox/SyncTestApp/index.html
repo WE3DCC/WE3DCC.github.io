@@ -66,8 +66,8 @@
                     sync sync-n-skeleton-parent>
                 </a-mixin>
             </a-assets>
-            <a-entity n-box-collider="type: object" position="0 1 0"
-						mixin="green cube">
+            <a-entity position="0 1 0"
+						mixin="green cube" sync sync-transform>
 						<a-animation begin="click" attribute="rotation" to="0 360 0"
 									easing="linear" dur="2000" fill="backwards"></a-animation>
 				</a-entity>
