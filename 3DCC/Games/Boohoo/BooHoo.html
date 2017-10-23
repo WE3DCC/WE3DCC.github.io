@@ -22,6 +22,42 @@
 		<script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>	
 		<script src="https://rawgit.com/ngokevin/aframe-firebase-component/master/dist/aframe-firebase-component.min.js"></script>
 	<!-- Registering Components
+		 <script>
+          (function () {
+            var blueCube = document.querySelector('#blueCube');
+            var redSphere = document.querySelector('#redSphere');
+            var greenCylinder = document.querySelector('#greenCylinder');
+            document.addEventListener('click', function (e) {
+              switch (e.target) {
+                case blueCube: {
+                  redSphere.setAttribute('visible', true);
+                  break;
+                }
+                case redSphere: {
+                  redSphere.setAttribute('visible', false);
+                  break;
+                }
+                case greenCylinder: {
+                  var oldVisible = greenCylinder.getComputedAttribute('visible');
+                  // See issue: https://github.com/aframevr/aframe/issues/579
+                  if (oldVisible === null) { oldVisible = true; }
+                  greenCylinder.setAttribute('visible', !oldVisible);
+                  break;
+                }
+                case pinkTorus: {
+                  // Yes, this is gross. See https://github.com/aframevr/aframe/issues/531
+                  var oldMaterial = pinkTorus.getComputedAttribute('material');
+                  var oldOpacity = oldMaterial.opacity;
+                  var newOpacity = oldOpacity === 1 ? 0 : 1;
+                  var newMaterial = oldMaterial;
+                  newMaterial.opacity = newOpacity;
+                  pinkTorus.setAttribute('material', newMaterial);
+                  break;
+                }
+              }
+            });
+          })();
+        </script>
 	// Creating a boo character that appears, moves, then disappears
 	AFRAME.registerComponent('randomposition', {
 	  schema: { 
