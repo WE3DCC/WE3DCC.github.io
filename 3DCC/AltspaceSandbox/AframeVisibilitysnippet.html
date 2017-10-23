@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+        <meta charset="utf-8" />
+        <title>Visibility</title>
+        <meta name="description" content="Visibility - A-Frame" />
+        <script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="../../../dist/aframe.js"></script>
+        <script src="../../../dist/aframe-altspace-component.js"></script>
+      <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+    .en-markup-crop-options {
+        top: 18px !important;
+        left: 50% !important;
+        margin-left: -100px !important;
+        width: 200px !important;
+        border: 2px rgba(255,255,255,.38) solid !important;
+        border-radius: 4px !important;
+    }
+    
+    .en-markup-crop-options div div:first-of-type {
+        margin-left: 0px !important;
+    }
+    </style><script src="https://aframe.io/releases/0.3.0/aframe-inspector.min.js"></script></head>
+      <body class="a-body aframe-inspector-opened">
+        <a-scene stats="" altspace="" scale="0.2 0.2 0.2" class="fullscreen" canvas="" inspector="" keyboard-shortcuts="" vr-mode-ui="">
+          <a-assets>
+            <a-mixin id="cube" geometry="primitive: box"></a-mixin>
+            <a-mixin id="cube-hovered" material="color: pink"></a-mixin>
+            <a-mixin id="cube-selected" material="color: cyan"></a-mixin>
+            <a-mixin id="red" material="color: red"></a-mixin>
+            <a-mixin id="green" material="color: green"></a-mixin>
+            <a-mixin id="blue" material="color: blue"></a-mixin>
+            <a-mixin id="yellow" material="color: yellow"></a-mixin>
+            <a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
+          </a-assets>
+    
+          <a-entity position="0 0 4" rotation="" scale="" visible="">
+            <a-camera camera="" position="" rotation="" look-controls="" wasd-controls="" scale="" visible="">
+              <a-cursor material="" raycaster="" cursor="" geometry="" position="" rotation="" scale="" visible=""></a-cursor>
+            </a-camera>
+          </a-entity>
+    
+          <a-entity id="shapes" position="0 0 -2" rotation="" scale="" visible="">
+            <a-entity id="blueCube" material="color: blue" geometry="primitive: box" rotation="25 25 0" position="" scale="" visible=""></a-entity>
+    
+            <a-entity id="redSphere" material="color: red" geometry="primitive: sphere;" visible="false" position="" rotation="" scale=""></a-entity>
+    
+            <a-entity id="greenCylinder" position="-3.5 0 0" rotation="25 25 0" material="color: green" geometry="primitive: cylinder;" scale="" visible=""></a-entity>
+    
+            <a-entity id="pinkTorus" position="3.5 0 0" rotation="25 -25 0" material="color: hotpink" geometry="primitive: torus;" scale="" visible=""></a-entity>
+          </a-entity>
+        <canvas class="a-canvas a-grab-cursor" data-aframe-canvas="true" width="2088" height="2880" style="width: 1044px; height: 1440px;"></canvas><a-entity camera="" position="" rotation="" scale="" visible=""></a-entity></a-scene>
+    
+        <script>
+          (function () {
+            var blueCube = document.querySelector('#blueCube');
+            var redSphere = document.querySelector('#redSphere');
+            var greenCylinder = document.querySelector('#greenCylinder');
+            document.addEventListener('click', function (e) {
+              switch (e.target) {
+                case blueCube: {
+                  redSphere.setAttribute('visible', true);
+                  break;
+                }
+                case redSphere: {
+                  redSphere.setAttribute('visible', false);
+                  break;
+                }
+                case greenCylinder: {
+                  var oldVisible = greenCylinder.getComputedAttribute('visible');
+                  // See issue: https://github.com/aframevr/aframe/issues/579
+                  if (oldVisible === null) { oldVisible = true; }
+                  greenCylinder.setAttribute('visible', !oldVisible);
+                  break;
+                }
+                case pinkTorus: {
+                  // Yes, this is gross. See https://github.com/aframevr/aframe/issues/531
+                  var oldMaterial = pinkTorus.getComputedAttribute('material');
+                  var oldOpacity = oldMaterial.opacity;
+                  var newOpacity = oldOpacity === 1 ? 0 : 1;
+                  var newMaterial = oldMaterial;
+                  newMaterial.opacity = newOpacity;
+                  pinkTorus.setAttribute('material', newMaterial);
+                  break;
+                }
+              }
+            });
+          })();
+        </script>
+      
+    
+    </body></html>
