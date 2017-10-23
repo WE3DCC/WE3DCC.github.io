@@ -139,7 +139,7 @@ remove: function(){
 				<a-sky src="#Minisky01" position="5 2 -10" radius="50"></a-sky> -->
 				<!-- 								-->
 				<!-- The Mobile 0D Camera with reticle-->
-				<a-entity position="0 2.2 4">
+				<a-entity position="0 2.2 4" sync>
 						<a-entity camera>
 						  <a-entity raycaster="objects: .clickable" cursor="maxDistance: 30; fuse: true; fuseTimeout: 1600" position="0 0 -3"
 									geometry="primitive: ring; radiusOuter: 0.30;
@@ -202,7 +202,7 @@ remove: function(){
 				<a-entity position="0 3 0" altspace-cursor-collider>
 						<a-entity class="clickable" mixin="cube blue">
 								<a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="visibility"
-								fill="forwards" to:"false" ></a-animation>
+								to:"false" ></a-animation>
 						</a-entity>
 				</a-entity>
 				
