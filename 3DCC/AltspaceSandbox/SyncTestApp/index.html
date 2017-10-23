@@ -9,6 +9,10 @@
             <a-assets>
                 <a-asset-item id="hemptree" src="hemp.obj"></a-asset-item>
                 <a-asset-item id="hempleaves" src="hemptarga copy.tga"></a-asset-item>
+                <a-mixin id="red" material="color: red"></a-mixin>
+                <a-mixin id="green" material="color: green"></a-mixin>
+                <a-mixin id="blue" material="color: blue"></a-mixin>
+                <a-mixin id="yellow" material="color: yellow"></a-mixin>
                 <a-mixin id="left-box"
                     geometry="primitive: box"
                     material="color: red"
@@ -61,6 +65,14 @@
                     sync sync-n-skeleton-parent>
                 </a-mixin>
             </a-assets>
+            <a-entity n-box-collider="type: object" position="0 1 0" altspace-cursor-collider sync sync-transform>
+					<a-entity 
+						class="clickable"
+						mixin="cube green">
+						<a-animation begin="click" attribute="rotation" to="0 360 0"
+									easing="linear" dur="2000" fill="backwards"></a-animation>
+					</a-entity>
+				</a-entity>
             <a-entity one-per-user="mixin: left-box"></a-entity>
             <a-box position:"4 2 0" scale="3 3 3"n-box-collider></a-box>
             <a-entity one-per-user="mixin: body-ball"></a-entity>
