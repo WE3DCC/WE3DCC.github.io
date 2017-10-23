@@ -185,8 +185,8 @@ remove: function(){
 					<a-entity id:"yellowcube" altspace-cursor-collider class="clickable" mixin="cube yellow"
 					position="1 1 1" rotation="0 45 0" scale=".5 .5 .5"></a-entity>
 					<!-- hall -->
-					<a-asset-item id="hall-obj" src="hall.obj"></a-asset-item>
-					<img id="hall-texture" src="hall.jpg">
+					<a-asset-item id="hallfrommaya" src="hallfrommaya.obj"></a-asset-item>
+					<img id="hallfrommaya" src="hallfrommaya.mtl">
 					<!--<img id="hall_normal-texture" src="textures/hall_normal.jpg">-->
 					<!-- floor -->
 					<a-asset-item id="floor-obj" src="floor.obj"></a-asset-item>
@@ -224,7 +224,7 @@ remove: function(){
 						</a-entity>
 					  </a-entity>
 
-				<a-obj-model src="obj: #hall-obj; mtl: #hall-texture.jpg" scale: "1 1 1"n-mesh-collider="type: environment" sync sync-transform></a-obj-model>
+				<a-obj-model src="obj: #hallfrommaya.obj; mtl: #hallfrommaya.mtl" scale: "1 1 1"n-mesh-collider="type: environment" sync sync-transform></a-obj-model>
 				<!-- 								-->
 				<!-- 								-->
 				<!-- 								-->
