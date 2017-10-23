@@ -9,6 +9,7 @@
             <a-assets>
                 <a-asset-item id="hemptree" src="hemp.obj"></a-asset-item>
                 <a-asset-item id="hempleaves" src="hemptarga copy.tga"></a-asset-item>
+                <a-mixin id="cube" geometry="primitive: box"></a-mixin>
                 <a-mixin id="red" material="color: red"></a-mixin>
                 <a-mixin id="green" material="color: green"></a-mixin>
                 <a-mixin id="blue" material="color: blue"></a-mixin>
@@ -66,7 +67,7 @@
                 </a-mixin>
             </a-assets>
             <a-entity n-box-collider="type: object" position="0 1 0"
-						mixin="green">
+						mixin="green cube">
 						<a-animation begin="click" attribute="rotation" to="0 360 0"
 									easing="linear" dur="2000" fill="backwards"></a-animation>
 				</a-entity>
