@@ -5,14 +5,14 @@
             <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
         </head>
         <body>
-        <a-scene debug altspace="fullspace: true" sync-system="author: altspacevr; app: native-parents">
+        <a-scene altspace="fullspace: true" sync-system="author: 3dcc; app: boohootheghost">
             <a-assets timeout="5000">
                 	<a-asset-item id="boohooObj" src="/BooHootheGhost.obj"></a-asset-item>
                     <img id="boohooMtl" src="BooHootheGhost.mtl">
                     
                     <a-mixin id="voxel-axe"
 					geometry='primitive: box; width: .9; depth: .1; height: .03' material='shader: flat; color: #606060'
-					collapse-model position='.5 0 0' scale="1 1 1"
+					position='.5 0 0' scale="1 1 1"
                     animation="property: rotation; from: 0 0 0; to: 360 0 0; dir: reverse; startEvents: spin"></a-mixin>
                     
 				<a-mixin id="parent-to-left-hand"
