@@ -1,0 +1,92 @@
+  <!-- Series of nested boards that unfold one by one. -->
+        <a-mixin id="board" geometry="depth: .05; height: 1; width: 6" material="shader: flat" pivot="0 0.5 0" position="0 -1 0"></a-mixin>
+        <a-mixin id="unhinge" attribute="rotation" to="0 0 0" dur="1000" fill="both"></a-mixin>
+        <img id="shadow" src="../../assets/img/radial-shadow-2.png" />
+      </a-assets>
+
+    
+      <a-entity position="0 0 -8" scale="1 1 1" rotation="" visible="">
+        <!-- Animate rotation and position of group for extra visual flair. -->
+        <a-animation attribute="position" to="0 5 -8" dur="2000"></a-animation>
+        <a-animation attribute="rotation" from="0 60 0" to="0 30 0" dur="2500"></a-animation>
+
+        <!-- Pivot and position are used to set the "hinge" of each board to it's top edge. -->
+        <a-box mixin="board" color="#F16745" material="" geometry="" position="" rotation="" scale="" visible="" pivot="">
+          <a-animation mixin="unhinge" from="-20 0 0" delay="1000"></a-animation>
+
+          <a-box mixin="board" color="#FFC65D" material="" geometry="" position="" rotation="" scale="" visible="" pivot="">
+            <a-animation mixin="unhinge" from="-175 0 0" delay="250"></a-animation>
+
+            <a-box mixin="board" color="#7BC8A4" material="" geometry="" position="" rotation="" scale="" visible="" pivot="">
+              <a-animation mixin="unhinge" from="-180 0 0" delay="500"></a-animation>
+
+              <a-box mixin="board" color="#4CC3D9" material="" geometry="" position="" rotation="" scale="" visible="" pivot="">
+                <a-animation mixin="unhinge" from="-180 0 0" delay="750"></a-animation>
+
+                <a-box mixin="board" color="#93648D" material="" geometry="" position="" rotation="" scale="" visible="" pivot="">
+                  <a-animation mixin="unhinge" from="-180 0 0" delay="1000"></a-animation>
+                </a-box>
+              </a-box>
+            </a-box>
+          </a-box>
+        </a-box>
+      </a-entity>
+<!--  -->
+
+<!-- Visibility 
+var greenCylinder = document.querySelector('#greenCylinder');
+document.addEventListener('click', function (e) {
+  switch (e.target) {
+    case blueCube: {
+      redSphere.setAttribute('visible', true);
+      break;
+    }
+    case redSphere: {
+      redSphere.setAttribute('visible', false);
+      break;
+    }
+    case greenCylinder: {
+      var oldVisible = greenCylinder.getComputedAttribute('visible');
+      // See issue: https://github.com/aframevr/aframe/issues/579
+      if (oldVisible === null) { oldVisible = true; }
+      greenCylinder.setAttribute('visible', !oldVisible);
+      break;
+    -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+</style><script src="https://aframe.io/releases/0.3.0/aframe-inspector.min.js"></script></head>
+  <body class="a-body aframe-inspector-opened">
+    <a-scene fog="type: linear; color: #AAB; far: 150; near: 0" stats="" altspace="" scale="0.01 0.01 0.01" class="fullscreen" canvas="" inspector="" keyboard-shortcuts="" vr-mode-ui="">
+      <a-assets>
+        <a-mixin id="move" attribute="position" direction="alternate" dur="4096" fill="forwards" easing="linear" repeat="indefinite"></a-mixin>
+        <a-mixin id="box" geometry="primitive: torusKnot; p: 3; q: 11; radiusTubular: .5;&#10;                                    radius: 10" material="color: #2F3C4F"></a-mixin>
+        <a-mixin id="spin" attribute="rotation" dur="4096" to="-360 0 0" easing="linear" repeat="indefinite"></a-mixin>
+        <img id="louvre" src="louvre.jpg" />
+      </a-assets>
+
+      <!-- Skysphere. -->
+      <a-entity geometry="primitive: sphere; radius: 120" material="shader: flat; src: #louvre" position="0 1.8 0" scale="1 1 -1" rotation="0 90 0" visible=""></a-entity>
+
+      <a-entity mixin="box" position="-30 0 0" rotation="" scale="" visible="" geometry="" material="">
+        <a-animation mixin="move" to="-100 0 0"></a-animation>
+        <a-animation mixin="spin"></a-animation>
+      </a-entity>
+
+      <a-entity mixin="box" position="30 0 0" rotation="" scale="" visible="" geometry="" material="">
+        <a-animation mixin="move" to="100 0 0"></a-animation>
+        <a-animation mixin="spin"></a-animation>
+      </a-entity>
+
+      <a-entity mixin="box" position="0 0 -30" rotation="" scale="" visible="" geometry="" material="">
+        <a-animation mixin="move" to="0 0 -100"></a-animation>
+        <a-animation mixin="spin"></a-animation>
+      </a-entity>
+
+      <a-entity mixin="box" position="0 0 30" rotation="" scale="" visible="" geometry="" material="">
+        <a-animation mixin="move" to="0 0 100"></a-animation>
+        <a-animation mixin="spin"></a-animation>
+      </a-entity>
+<!--  -->
+<!--  -->
+<!--  --><!--  -->

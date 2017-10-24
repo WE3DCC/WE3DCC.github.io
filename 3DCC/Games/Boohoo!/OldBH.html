@@ -1,26 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>AframeAltspaceVRTest</title>
-		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-app.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-database.js"></script>
-		<script>
-		  // Initialize Firebase
-		  var config = {
-			apiKey: "AIzaSyBnzy_MkZdifcV5wsUB0t53r0-RrqknD3o",
-			authDomain: "we3dcc-boohoo.firebaseapp.com",
-			databaseURL: "https://we3dcc-boohoo.firebaseio.com",
-			projectId: "we3dcc-boohoo",
-			storageBucket: "we3dcc-boohoo.appspot.com",
-			messagingSenderId: "870083594243"
-		  };
-		  firebase.initializeApp(config);
-		  var database = firebase.database();
-		</script>
-		<script src="//patches.vizor.io/scripts/embed.js"></script>
 		<script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
 		<script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>	
-		<script src="https://rawgit.com/ngokevin/aframe-firebase-component/master/dist/aframe-firebase-component.min.js"></script>
 	<!--	<script>	AFRAME.registerComponent('BooHoo', {
 				schema: {
 				boohooType: {type:"geometry"}
@@ -166,11 +148,7 @@ remove: function(){
 	<body>
 		<a-scene 
 			altspace="fullspace: true"
-			sync-system="app: BooHoo; author:3DCC; refUrl: https://we3dcc-boohoo.firebaseio.com"
-			firebase="apiKey: abc;
-						authDomain: mysite.firebaseapp.com;
-						databaseURL: https://mysite.firebaseio.com;
-						storageBucket: mysite.appspot.com">
+			sync-system="app: BooHoo; author:3DCC">
 			<a-assets timeout="5000">
 					<a-mixin id="cube" geometry="primitive: box"></a-mixin>
 					<a-mixin id="cube-hovered" material="color: magenta"></a-mixin>
@@ -223,9 +201,6 @@ remove: function(){
 						  </a-entity>
 						</a-entity>
 					  </a-entity>
-
-				<a-obj-model src="obj: #hallfrommaya.obj; mtl: #hallfrommaya.mtl" scale: "1 1 1"n-mesh-collider="type: environment" sync sync-transform></a-obj-model>
-				<!-- 								-->
 				<!-- 								-->
 				<!-- 								-->
 				<!-- 								
