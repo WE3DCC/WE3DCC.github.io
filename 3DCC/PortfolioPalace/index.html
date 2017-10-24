@@ -6,7 +6,7 @@
 		<title>Scene Sync Example</title>
 		<script src="//aframe.io/releases/0.3.0/aframe.js"></script>
 		<script src="https://unpkg.com/aframe-animation-component@^3.2.0/dist/aframe-animation-component.min.js"></script>
-		<script src="../../../dist/altspace.js"></script>
+		<script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
 		<script>
 			// n-skeleton-parent only works with root meshes at the moment. Since most model loaders use a root
 			// container object, we need to collapse the model so that n-skeleton-parent can access the mesh directly.
@@ -22,7 +22,7 @@
 		</script>
 	</head>
 	<body>
-		<a-scene debug altspace="fullspace: true" sync-system="author: 3DCC; app: PortfolioPalace">
+		<a-scene altspace="fullspace: true" sync-system="author: 3DCC; app: PortfolioPalace">
 			<a-assets>
 				<a-asset-item id="helmet-obj" src="models/helmet.obj"></a-asset-item>
 				<a-asset-item id="helmet-mtl" src="models/helmet.mtl"></a-asset-item>
