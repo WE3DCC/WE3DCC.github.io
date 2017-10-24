@@ -21,6 +21,9 @@
 	<body>
 		<a-scene altspace="fullspace: true" sync-system="author: 3dcc; app: portfoliopalace">
 			<a-assets>
+                <!--                        -->  
+                <!-- Aromory warfare assets -->
+                <!--                        --> 
 				<a-asset-item id="helmet-obj" src="models/helmet.obj"></a-asset-item>
 				<a-asset-item id="helmet-mtl" src="models/helmet.mtl"></a-asset-item>
 				<a-asset-item id="voxel-helmet-obj" src="models/vhelmet.obj"></a-asset-item>
@@ -63,9 +66,48 @@
 					position="0 0 0"
 					rotation="0 0 0"
 					n-skeleton-parent="part: hand; side: left;"
-					sync sync-n-skeleton-parent></a-mixin>
-			</a-assets>
+                    sync sync-n-skeleton-parent></a-mixin>
+                <!--                        -->  
+                <!--Geometry Gallery Assets -->
+                <!--                        --> 
+                    <!-- Geometry mixins. -->
+                    <a-mixin id="box" geometry="primitive: box; depth: .125; height: .125;&#10;                           width: .125"></a-mixin>
+                    <a-mixin id="circle" geometry="primitive: circle; radius: .2;&#10;                           segments: 100; thetaStart: 0; thetaLength: 360">
+                    </a-mixin>
+                    <a-mixin id="cylinder" geometry="primitive: cylinder; radius: 0.2; height: .5;&#10;                           segmentsRadial: 50; segmentsHeight: 50:&#10;                           openEnded: true; thetaStart: 0; thetaLength: 360">
+                    </a-mixin>
+                    <a-mixin id="ring" geometry="primitive: ring; radiusInner: .3; radiusOuter: .5;&#10;                            segmentsTheta: 50"></a-mixin>
+                    <a-mixin id="sphere" geometry="primitive: sphere; radius: .1"></a-mixin>
+                    <a-mixin id="torus" geometry="primitive: torus; arc: 720; radius: .3; radiusTubular: .05;&#10;                            segmentsTubular: 10;"></a-mixin>
+                    <a-mixin id="torus-knot" geometry="primitive: torusKnot; p: 3; q: 7; radius: .25;&#10;                            segmentsRadial: 10; radiusTubular: .07; segmentsTubular: 32">
+                    </a-mixin>
 
+                    <!-- Layout mixins. -->
+                    <a-mixin id="column" geometry="primitive: box; depth: .75; height: 1.2; width: .75" material="color: #FFF" position="0 .6 0"></a-mixin>
+                    <a-mixin id="column-bottom" geometry="primitive: box; depth: 1;&#10;                                              height: .1; width: 1;" material="color: #FFF" position="0 .1 0">
+                    </a-mixin>
+                    <a-mixin id="column-light" light="type: point; intensity: 0.5;&#10;                                          distance: 5;" position="0 1.5 0">
+                    </a-mixin>
+                    <a-mixin id="object-on-column" position="0 1.2 0"></a-mixin>
+
+                    <!-- Animation mixins. -->
+                    <a-mixin id="yoyo" direction="alternate" fill="forwards" repeat="indefinite"></a-mixin>
+                    <a-mixin id="spin" attribute="rotation" to="0 360 0" repeat="indefinite" easing="linear" dur="10000"></a-mixin>
+                    <a-mixin id="spin-x" mixin="spin" attribute="rotation" to="360 0 0" repeat="indefinite" easing="linear" dur="10000"></a-mixin>
+
+                    <a-mixin id="color" material="color: #FFFFC3"></a-mixin>
+                    <a-mixin id="doubleside" material="side: double"></a-mixin>
+
+                    <img id="carpet" src="carpet.jpg" />
+                    <img id="floor" src="marble.jpg" />
+			</a-assets>
+            <!--                        -->  
+            <!--                        --> 
+            <!--                        -->   
+            <!-- Armory Entities -->
+            <!--                        --> 
+            <!--                        --> 
+            <!--                        -->   
 			<!--
 			   Demonstrates an object that is attached to the skeleton and is synced across clients.
 			   Each user will see an axe attached to their left hand and all users will see each other
@@ -110,7 +152,127 @@
 			</a-entity>
 
 			<a-box 
-				wire="on: click; emit: spin; targets: [mixin*=voxel-axe].mine, [mixin*=voxel-armor].mine"></a-box>
+                wire="on: click; emit: spin; targets: [mixin*=voxel-axe].mine, [mixin*=voxel-armor].mine"></a-box>
+                
+            <!--                        -->  
+            <!--                        --> 
+            <!--                        -->   
+            <!-- Geometry Gallery Space Asset 1 -->
+            <!--                        --> 
+            <!--                        --> 
+            <!--                        -->   
+            <a-entity position="0 0 0">
+                <!-- Lights. -->
+                <a-entity light="type: ambient; color: #444" position="" rotation="" scale="" visible=""></a-entity>
+                <a-entity light="type: directional; color: #EEE" position="0 1 1" rotation="" scale="" visible="">
+                </a-entity>
+
+                <!-- Skysphere. -->
+                <a-entity geometry="primitive: sphere; radius: 80" material="color: #112; shader: flat" scale="1 1 -1" position="" rotation="" visible="">
+                </a-entity>
+
+                <!-- Floor. -->
+                <a-entity geometry="primitive: cylinder; height: .2; radius: 12;" material="color: #BABABA;                          metalness: .2; repeat: 50 20; roughness: .1" position="0 0 0" rotation="" scale="" visible=""></a-entity>
+
+                <!-- Carpet. -->
+                <a-entity geometry="primitive: box; depth: 20; height: 0.025; width: 2" material="color: #440000; metalness: 0;                         repeat: 3 40; roughness: 1" position="0 .2 0" rotation="" scale="" visible="">
+                </a-entity>
+
+                <!-- Boxes. -->
+                <a-entity position="-2.5 0 1" rotation="" scale="" visible="">
+                    <a-entity mixin="column" position="" rotation="" scale="" visible="" geometry="" material="">
+                    <a-entity mixin="column-light" position="" rotation="" scale="" visible="" light=""></a-entity>
+                    <a-entity mixin="object-on-column color box" position="" rotation="" scale="" visible="" material="" geometry="">
+                        <a-animation mixin="spin" to="360 360 0"></a-animation>
+                    </a-entity>
+                    <a-entity mixin="object-on-column color box" position=".18 1.2 .1" rotation="" scale="" visible="" material="" geometry="">
+                        <a-animation mixin="spin" to="360 360 0"></a-animation>
+                    </a-entity>
+                    <a-entity mixin="object-on-column color box" position="-.18 1.2 -.2" rotation="" scale="" visible="" material="" geometry="">
+                        <a-animation mixin="spin" to="360 360 0"></a-animation>
+                    </a-entity>
+                    </a-entity>
+                    <a-entity mixin="column-bottom" position="" rotation="" scale="" visible="" geometry="" material=""></a-entity>
+                </a-entity>
+
+                <!-- Circles. -->
+                <a-entity position="-2.5 0 -2" rotation="" scale="" visible="">
+                    <a-entity mixin="column" position="" rotation="" scale="" visible="" geometry="" material="">
+                    <a-entity mixin="column-light" position="" rotation="" scale="" visible="" light=""></a-entity>
+                    <a-entity mixin="object-on-column color doubleside circle" position="" rotation="" scale="" visible="" material="" geometry="">
+                        <a-animation mixin="spin"></a-animation>
+                    </a-entity>
+                    <a-entity mixin="object-on-column color doubleside circle" position="" rotation="" scale="" visible="" material="" geometry="">
+                        <a-animation mixin="spin-x"></a-animation>
+                    </a-entity>
+                    </a-entity>
+                    <a-entity mixin="column-bottom" position="" rotation="" scale="" visible="" geometry="" material=""></a-entity>
+                </a-entity>
+
+                <!-- Cylinders. -->
+                <a-entity position="-2.5 0 -5" rotation="" scale="" visible="">
+                    <a-entity mixin="column" position="" rotation="" scale="" visible="" geometry="" material="">
+                    <a-entity mixin="column-light" position="" rotation="" scale="" visible="" light=""></a-entity>
+                    <a-entity mixin="object-on-column color cylinder" position="" rotation="" scale="" visible="" material="" geometry="">
+                        <a-animation mixin="spin-x"></a-animation>
+                    </a-entity>
+                    </a-entity>
+                    <a-entity mixin="column-bottom" position="" rotation="" scale="" visible="" geometry="" material=""></a-entity>
+                </a-entity>
+
+                <!-- Rings. -->
+                <a-entity position="2.5 0 1" rotation="" scale="" visible="">
+                    <a-entity mixin="column" position="" rotation="" scale="" visible="" geometry="" material="">
+                    <a-entity mixin="column-light" position="" rotation="" scale="" visible="" light=""></a-entity>
+                    <a-entity mixin="object-on-column color doubleside ring" position="" rotation="" scale="" visible="" material="" geometry="">
+                        <a-animation mixin="spin" dur="6000"></a-animation>
+                    </a-entity>
+                    <a-entity mixin="object-on-column color doubleside ring" position="" rotation="" scale="" visible="" material="" geometry="">
+                        <a-animation mixin="spin" to="360 0 0" dur="6000"></a-animation>
+                    </a-entity>
+                    </a-entity>
+                    <a-entity mixin="column-bottom" position="" rotation="" scale="" visible="" geometry="" material=""></a-entity>
+                </a-entity>
+
+                <!-- Spheres. -->
+                <a-entity position="2.5 0 -2" rotation="" scale="" visible="">
+                    <a-entity mixin="column" position="" rotation="" scale="" visible="" geometry="" material="">
+                    <a-entity mixin="column-light" position="" rotation="" scale="" visible="" light=""></a-entity>
+                    <a-entity mixin="object-on-column color sphere" position="-.2 1.2 0" rotation="" scale="" visible="" material="" geometry="">
+                        <a-animation mixin="yoyo" attribute="position" from="-.2 1 0" to="-.2 1.8 0"></a-animation>
+                    </a-entity>
+                    <a-entity mixin="object-on-column color sphere" position="" rotation="" scale="" visible="" material="" geometry="">
+                        <a-animation mixin="yoyo" attribute="position" from="0 1.8 0" to="0 1 0"></a-animation>
+                    </a-entity>
+                    <a-entity mixin="object-on-column color sphere" position=".2 1 0" rotation="" scale="" visible="" material="" geometry="">
+                        <a-animation mixin="yoyo" attribute="position" from=".2 1 0" to=".2 1.8 0"></a-animation>
+                    </a-entity>
+                    </a-entity>
+                    <a-entity mixin="column-bottom" position="" rotation="" scale="" visible="" geometry="" material=""></a-entity>
+                </a-entity>
+
+                <!-- Torus. -->
+                <a-entity position="2.5 0 -5" rotation="" scale="" visible="">
+                    <a-entity mixin="column" position="" rotation="" scale="" visible="" geometry="" material="">
+                    <a-entity mixin="column-light" position="" rotation="" scale="" visible="" light=""></a-entity>
+                    <a-entity mixin="object-on-column color torus" position="" rotation="" scale="" visible="" material="" geometry="">
+                        <a-animation mixin="spin"></a-animation>
+                    </a-entity>
+                    </a-entity>
+                    <a-entity mixin="column-bottom" position="" rotation="" scale="" visible="" geometry="" material=""></a-entity>
+                </a-entity>
+
+                <!-- Torus Knot. -->
+                <a-entity position="2.5 0 -8" rotation="" scale="" visible="">
+                    <a-entity mixin="column" position="" rotation="" scale="" visible="" geometry="" material="">
+                    <a-entity mixin="column-light" position="" rotation="" scale="" visible="" light=""></a-entity>
+                    <a-entity mixin="object-on-column color torus-knot" position="" rotation="" scale="" visible="" material="" geometry="">
+                        <a-animation mixin="spin"></a-animation>
+                    </a-entity>
+                    </a-entity>
+                    <a-entity mixin="column-bottom" position="" rotation="" scale="" visible="" geometry="" material=""></a-entity>
+                </a-entity>
+            </a-entity>    
 		</a-scene>
 	</body>
 </html>
