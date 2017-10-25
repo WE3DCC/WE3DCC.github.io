@@ -38,7 +38,7 @@
                 obj-model="obj: #boohooObj; mtl: #boohooMtl"
                 scale="0.52 0.52 0.52"
                 animation="to: #BooMoveSpot; direction: alternate fill: forwards; repeat: indefinite"
-                sync sync-transform sync-color></a-mixin>
+                sync="ownOn: connected" sync-transform sync-color></a-mixin>
                     
 				<a-mixin id="parent-to-head"
 					position="0 0.05 0.03"
@@ -109,8 +109,8 @@
         <a-entity
             id="boohoo-instantiator"
             mixin="boohoo"
-            mixin="BooMoveSpot"
-            instantiator="on: connected; mixin: boohoo floating; removeLast: true"
+            randomposition
+            instantiator="on: connected; mixin: boohoo; removeLast: true"
             altspace-cursor-collider>
         </a-entity>
 
