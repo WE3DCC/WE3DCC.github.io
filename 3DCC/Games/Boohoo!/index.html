@@ -29,22 +29,21 @@
                     geometry="primitive: cone; height: 5; color: #EAE112; radius-top: 0.5; radius-bottom: 3"
                     material="color: #54EA12; shader: flat; opacity"></a-entity>
                 <a-mixin
-
+                id="BoomoveSpot"
+                randomposition
                 ></a-mixin>
                 <!-- -->
                     
                 <a-mixin id="boohoo"
                 obj-model="obj: #boohooObj; mtl: #boohooMtl"
                 scale="0.52 0.52 0.52"
+                animation="to: #BooMoveSpot; direction: alternate fill: forwards; repeat: indefinite"
                 sync sync-transform sync-color></a-mixin>
                     
 				<a-mixin id="parent-to-head"
 					position="0 0.05 0.03"
 					n-skeleton-parent="part: head; side: right"
                     sync sync-n-skeleton-parent></a-mixin>
-
-                <a-mixin id="floating"  direction="alternate" fill="forwards"
-                    repeat="indefinite"></a-mixin>
 
                 <a-mixin id="left-box"
                     geometry="primitive: box"
@@ -110,8 +109,7 @@
         <a-entity
             id="boohoo-instantiator"
             mixin="boohoo"
-            mixin="floating"
-            random-position
+            mixin="BooMoveSpot"
             instantiator="on: connected; mixin: boohoo floating; removeLast: true"
             altspace-cursor-collider>
         </a-entity>
