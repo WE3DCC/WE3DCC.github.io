@@ -20,14 +20,7 @@
 					rotation="0 0 0"
 					n-skeleton-parent="part: hand; side: left;"
                     sync sync-n-skeleton-parent></a-mixin>
-                <!-- NEED: Flashlight Raycaster model -->
-                <!-- Cursor -->
-                <a-entity
-                    cursor="fuse: true; fuseTimeout: 500"
-                    position="0 0 -1"
-                    rotation="45 0 90"
-                    geometry="primitive: cone; height: 5; color: #EAE112; radius-top: 0.5; radius-bottom: 3"
-                    material="color: #54EA12; shader: flat; opacity"></a-entity>
+                
                 <a-mixin
                 id="BoomoveSpot"
                 randomposition
@@ -99,14 +92,26 @@
                 </a-mixin>
             </a-assets>
             <!-- End Assets -->
+            <!-- NEED: Flashlight Raycaster model -->
+                <!-- Cursor -->
+            <a-entity
+                cursor="fuse: true; fuseTimeout: 500"
+                raycaster="far: 30; interval:1000; objects: .clickable"
+                position="0 0 -1"
+                rotation="45 0 90"
+                geometry="primitive: cone; height: 5; color: #EAE112; radius-top: 0.5; radius-bottom: 3"
+                material="color: #54EA12; shader: flat; opacity"></a-entity>
 			<a-entity
             id="initial-synced-box"
             one-per-user="mixin: voxel-axe parent-to-left-hand">
         </a-entity>
-
+        <a-entity
+        cursor
+        ></a-entity>
         <!-- BooHoo Instantiator -->
         <a-entity
             id="boohoo-instantiator"
+            class="clickable"
             mixin="boohoo"
             instantiator="on: connected; mixin: boohoo; removeLast: true"
             altspace-cursor-collider>
