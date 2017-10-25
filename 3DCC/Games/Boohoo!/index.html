@@ -15,14 +15,19 @@
 					geometry='primitive: box; width: .9; depth: .1; height: .03' material='shader: flat; color: #606060'
 					position='.5 0 0' scale="1 1 1"
                     animation="property: rotation; from: 0 0 0; to: 360 0 0; dir: reverse; startEvents: spin"></a-mixin>
-                    
+                
 				<a-mixin id="parent-to-left-hand"
 					rotation="0 0 0"
 					n-skeleton-parent="part: hand; side: left;"
                     sync sync-n-skeleton-parent></a-mixin>
-
-                <!-- mixin to placein last position component into asset management system -->
-
+                <!-- NEED: Flashlight Raycaster model -->
+                <!-- Cursor -->
+                <a-entity
+                    cursor="fuse: true; fuseTimeout: 500"
+                    position="0 0 -1"
+                    rotation="45 0 90"
+                    geometry="primitive: cone; height: 5; color: #EAE112; radius-top: 0.5; radius-bottom: 3"
+                    material="color: #54EA12; shader: flat; opacity"></a-entity>
                 <a-mixin
 
                 ></a-mixin>
@@ -37,7 +42,7 @@
 					n-skeleton-parent="part: head; side: right"
                     sync sync-n-skeleton-parent></a-mixin>
 
-                <a-mixin id="floating" direction="alternate" fill="forwards"
+                <a-mixin id="floating"  direction="alternate" fill="forwards"
                     repeat="indefinite"></a-mixin>
 
                 <a-mixin id="left-box"
@@ -108,7 +113,8 @@
             random-position
             instantiator="on: connected; mixin: boohoo floating; removeLast: true"
             altspace-cursor-collider
-            n-capsule-collider>
+            n-mesh-collider
+            sync sync-transform>
         </a-entity>
 
             <a-entity one-per-user="mixin: left-box"></a-entity>
