@@ -38,7 +38,7 @@
                 obj-model="obj: #boohooObj; mtl: #boohooMtl"
                 scale="0.52 0.52 0.52"
                 animation="to: #BooMoveSpot; direction: alternate fill: forwards; repeat: indefinite"
-                sync="ownOn: connected" sync-transform sync-color></a-mixin>
+                sync sync-transform sync-color></a-mixin>
                     
 				<a-mixin id="parent-to-head"
 					position="0 0.05 0.03"
@@ -99,7 +99,6 @@
                 </a-mixin>
             </a-assets>
             <!-- End Assets -->
-            <a-entity n-layout-browser="isEnclosure: true" position="3 0 3"></a-entity>
 			<a-entity
             id="initial-synced-box"
             one-per-user="mixin: voxel-axe parent-to-left-hand">
@@ -109,7 +108,6 @@
         <a-entity
             id="boohoo-instantiator"
             mixin="boohoo"
-            randomposition
             instantiator="on: connected; mixin: boohoo; removeLast: true"
             altspace-cursor-collider>
         </a-entity>
