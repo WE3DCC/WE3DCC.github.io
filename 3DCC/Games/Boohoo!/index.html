@@ -35,7 +35,8 @@
                     
                 <a-mixin id="boohoo"
                 obj-model="obj: #boohooObj; mtl: #boohooMtl"
-                scale="0.52 0.52 0.52"></a-mixin>
+                scale="0.52 0.52 0.52"
+                sync sync-transform sync-color></a-mixin>
                     
 				<a-mixin id="parent-to-head"
 					position="0 0.05 0.03"
@@ -112,9 +113,7 @@
             mixin="floating"
             random-position
             instantiator="on: connected; mixin: boohoo floating; removeLast: true"
-            altspace-cursor-collider
-            n-mesh-collider
-            sync sync-transform>
+            altspace-cursor-collider>
         </a-entity>
 
             <a-entity one-per-user="mixin: left-box"></a-entity>
