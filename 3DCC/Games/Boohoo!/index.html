@@ -34,9 +34,10 @@
                     
                 <a-mixin id="boohoo"
                 obj-model="obj: #boohooObj; mtl: #boohooMtl"
+                altspace-cursor-collider
                 scale="0.52 0.52 0.52"
                 roation="0 45 0"
-                animation="attribute: rotation; to: 45 2 0; ease: cubic; direction: alternate fill: forwards; repeat: indefinite"
+                animation="attribute: rotation; to: 45 2 0; ease: cubic; direction: alternate fill: forwards; repeat: indefinite begin: mouseenter"
                 ></a-mixin>
                     
 				<a-mixin id="parent-to-head"
@@ -119,9 +120,8 @@
             mixin="boohoo"
             randoompositon
             cursor-listener
-            instantiator="on: connected; mixin: boohoo; removeLast: true"
-            altspace-cursor-collider>
-        </a-entity>
+            instantiator="on: connected; mixin: boohoo; removeLast: true"></a-entity>
+            
         <a-entity n-object="boohoo"
         randomposition></a-entity>
 
