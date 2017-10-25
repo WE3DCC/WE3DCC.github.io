@@ -3,7 +3,17 @@
             <script src="//aframe.io/releases/0.3.0/aframe.js"></script>
             <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
             <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-            <script> AFRAME.registerComponent()</script>
+            <script> AFRAME.registerComponent('cursor-listener', {
+                    init: function () {
+                      var COLORS = ['red', 'green', 'blue'];
+                      this.el.addEventListener('click', function () {
+                        var randomIndex = Math.floor(Math.random() * COLORS.length);
+                        this.setAttribute('material', 'color', COLORS[randomIndex]);
+                        console.log('I was clicked!');
+                      });
+                    }
+                  });
+            </script>
         </head>
         <body>
         <a-scene altspace="fullspace: true" sync-system="author: 3dcc; app: boohootheghost">
@@ -113,6 +123,8 @@
             id="boohoo-instantiator"
             class="clickable"
             mixin="boohoo"
+            randoompositon
+            cursor-listener
             instantiator="on: connected; mixin: boohoo; removeLast: true"
             altspace-cursor-collider>
         </a-entity>
