@@ -2,6 +2,8 @@
         <head>
             <script src="//aframe.io/releases/0.3.0/aframe.js"></script>
             <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
+            <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+            <script> AFRAME.registerComponent()</script>
         </head>
         <body>
         <a-scene altspace="fullspace: true" sync-system="author: 3dcc; app: boohootheghost">
@@ -18,14 +20,25 @@
 					rotation="0 0 0"
 					n-skeleton-parent="part: hand; side: left;"
                     sync sync-n-skeleton-parent></a-mixin>
+
+                <!-- mixin to placein last position component into asset management system -->
+
+                <a-mixin
+
+                ></a-mixin>
+                <!-- -->
                     
-                    <a-mixin id="boohoo"
-					obj-model="obj: #boohooObj; mtl: #boohooMtl"
-					scale="0.52 0.52 0.52"></a-mixin>
+                <a-mixin id="boohoo"
+                obj-model="obj: #boohooObj; mtl: #boohooMtl"
+                scale="0.52 0.52 0.52"></a-mixin>
+                    
 				<a-mixin id="parent-to-head"
 					position="0 0.05 0.03"
 					n-skeleton-parent="part: head; side: right"
-					sync sync-n-skeleton-parent></a-mixin>
+                    sync sync-n-skeleton-parent></a-mixin>
+
+                <a-mixin id="floating" direction="alternate" fill="forwards"
+                    repeat="indefinite"></a-mixin>
 
                 <a-mixin id="left-box"
                     geometry="primitive: box"
@@ -85,11 +98,15 @@
             id="initial-synced-box"
             one-per-user="mixin: voxel-axe parent-to-left-hand">
         </a-entity>
+
+        <!-- BooHoo Instantiator -->
         <a-entity
             id="boohoo-instantiator"
             mixin="boohoo"
-            instantiator="on: click; mixin: boohoo; parent-to-head"
-            position="0.8 2 0">
+            mixin="floating"
+            random-position
+            instantiator="on: connected; mixin: boohoo floating; removeLast: true"
+            n-capsule-collider>
         </a-entity>
 
             <a-entity one-per-user="mixin: left-box"></a-entity>
