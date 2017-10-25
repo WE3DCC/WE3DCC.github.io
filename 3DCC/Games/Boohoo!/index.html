@@ -30,12 +30,7 @@
 					rotation="0 0 0"
 					n-skeleton-parent="part: hand; side: left;"
                     sync sync-n-skeleton-parent></a-mixin>
-                
-                <a-mixin
-                id="BoomoveSpot"
-                randomposition
-                ></a-mixin>
-                <!-- -->
+            
                     
                 <a-mixin id="boohoo"
                 obj-model="obj: #boohooObj; mtl: #boohooMtl"
@@ -115,9 +110,7 @@
             id="initial-synced-box"
             one-per-user="mixin: voxel-axe parent-to-left-hand">
         </a-entity>
-        <a-entity
-        cursor
-        ></a-entity>
+    
         <!-- BooHoo Instantiator -->
         <a-entity
             id="boohoo-instantiator"
@@ -128,6 +121,8 @@
             instantiator="on: connected; mixin: boohoo; removeLast: true"
             altspace-cursor-collider>
         </a-entity>
+        <a-entity n-object="boohoo"
+        randomposition></a-entity>
 
             <a-entity one-per-user="mixin: left-box"></a-entity>
         
