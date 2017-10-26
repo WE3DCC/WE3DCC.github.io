@@ -14,6 +14,34 @@
                     }
                   });
             </script>
+            <script>
+                    AFRAME.registerComponent('sun-position-setter', {
+                      init: function () {
+                        var skyEl = this.el;
+                        var orbitEl = this.el.sceneEl.querySelector('#orbit');
+              
+                        orbitEl.addEventListener('componentchanged', function changeSun (evt) {
+                          var sunPosition;
+                          var phi;
+                          var theta;
+              
+                          if (evt.detail.name !== 'rotation') { return; }
+              
+                          sunPosition = orbitEl.getComputedAttribute('rotation');
+              
+                          if(sunPosition === null) { return; }
+              
+                          theta = Math.PI * (- 0.5);
+                          phi = 2 * Math.PI * (sunPosition.y / 360 - 0.5);
+                          skyEl.setAttribute('material', 'sunPosition', {
+                            x: Math.cos(phi),
+                            y: Math.sin(phi) * Math.sin(theta),
+                            z: -1
+                          });
+                        });
+                      }
+                    });
+                  </script>
         </head>
         <body>
         <a-scene altspace="fullspace: true" sync-system="author: 3dcc; app: boohootheghost">
@@ -39,6 +67,27 @@
                 roation="0 45 0"
                 animation="attribute: rotation; to: 45 2 0; ease: cubic; direction: alternate fill: forwards; repeat: indefinite begin: mouseenter"
                 ></a-mixin>
+                <!--  Environment    -->
+                        <a-mixin id="flap" attribute="rotation" direction="alternate" repeat="indefinite"></a-mixin>
+                        <a-mixin id="rotate" attribute="rotation" repeat="indefinite"></a-mixin>
+                        <a-mixin id="wing" geometry="primitive: box; depth: .005; height: 1; width: 0.5" material="color: #9D0B28" rotation="0 0 0" pivot="0.25 0 0" scale="1 1.25 1"></a-mixin>
+                 
+                      <!-- Bat with pivoting wings. -->
+                      <a-entity position="0 2.5 -5" rotation="" scale="" visible="">
+                        <a-animation mixin="rotate" to="0 360 0" dur="3000" easing="linear"></a-animation>
+                        <a-entity rotation="0 90 0" position="2.5 0 0" scale="" visible="">
+                          <a-entity rotation="-45 0 90" position="" scale="" visible="">
+                            <a-entity mixin="wing" position="" rotation="" scale="" visible="" geometry="" material="" pivot="">
+                              <a-animation mixin="flap" to="0 120 0"></a-animation>
+                            </a-entity>
+                          </a-entity>
+                          <a-entity rotation="-45 0 90" position="" scale="" visible="">
+                            <a-entity mixin="wing" position="" rotation="" scale="" visible="" geometry="" material="" pivot="">
+                              <a-animation mixin="flap" to="0 -120 0"></a-animation>
+                            </a-entity>
+                          </a-entity>
+                        </a-entity>
+                      </a-entity>
                     
 				<a-mixin id="parent-to-head"
 					position="0 0.05 0.03"
@@ -122,6 +171,12 @@
             cursor-listener
             instantiator="on: connected; mixin: boohoo; removeLast: true"
             sync="own-on"sync-transform sync-color></a-entity>
+
+            <a-entity id="sky" geometry="primitive: sphere; radius: 100;" material="shader: sky; side: back" sun-position-setter="" position="" rotation="" scale="" visible="">
+                    <a-entity id="orbit" position="" rotation="" scale="" visible="">
+                      <a-animation attribute="rotation" from="0 0 0" to="0 360 0" dur="5000" repeat="indefinite" easing="linear"></a-animation>
+                    </a-entity>
+                  </a-entity>
 
             <a-entity one-per-user="mixin: left-box"></a-entity>
         

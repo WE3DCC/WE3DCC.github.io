@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+        <meta charset="utf-8" />
+        <title>Pivot Component</title>
+        <meta name="description" content="Pivot Component- A-Frame" />
+        <script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="../../../dist/aframe.js"></script>
+        <script src="../../../dist/aframe-altspace-component.js"></script>
+      <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+    .en-markup-crop-options {
+        top: 18px !important;
+        left: 50% !important;
+        margin-left: -100px !important;
+        width: 200px !important;
+        border: 2px rgba(255,255,255,.38) solid !important;
+        border-radius: 4px !important;
+    }
+    
+    .en-markup-crop-options div div:first-of-type {
+        margin-left: 0px !important;
+    }
+    </style><script src="https://aframe.io/releases/0.3.0/aframe-inspector.min.js"></script></head>
+      <body class="a-body aframe-inspector-opened">
+        <a-scene class="fullscreen" canvas="" inspector="" keyboard-shortcuts="" vr-mode-ui="">
+        <a-scene altspace="" scale="0.2 0.2 0.2" class="fullscreen" canvas="" inspector="" keyboard-shortcuts="" vr-mode-ui="">
+          <a-assets>
+            <a-mixin id="flap" attribute="rotation" direction="alternate" repeat="indefinite"></a-mixin>
+            <a-mixin id="rotate" attribute="rotation" repeat="indefinite"></a-mixin>
+            <a-mixin id="wing" geometry="primitive: box; depth: .005; height: 1; width: 0.5" material="color: #9D0B28" rotation="0 0 0" pivot="0.25 0 0" scale="1 1.25 1"></a-mixin>
+          </a-assets>
+    
+          <!-- Skysphere. -->
+          <a-entity geometry="primitive: sphere; radius: 100" material="color: #335; shader: flat" scale="1 1 -1" position="" rotation="" visible="">
+          </a-entity>
+    
+          <!-- Butterfly with pivoting wings. -->
+          <a-entity position="0 2.5 -5" rotation="" scale="" visible="">
+            <a-animation mixin="rotate" to="0 360 0" dur="3000" easing="linear"></a-animation>
+            <a-entity rotation="0 90 0" position="2.5 0 0" scale="" visible="">
+              <a-entity rotation="-45 0 90" position="" scale="" visible="">
+                <a-entity mixin="wing" position="" rotation="" scale="" visible="" geometry="" material="" pivot="">
+                  <a-animation mixin="flap" to="0 120 0"></a-animation>
+                </a-entity>
+              </a-entity>
+              <a-entity rotation="-45 0 90" position="" scale="" visible="">
+                <a-entity mixin="wing" position="" rotation="" scale="" visible="" geometry="" material="" pivot="">
+                  <a-animation mixin="flap" to="0 -120 0"></a-animation>
+                </a-entity>
+              </a-entity>
+            </a-entity>
+          </a-entity>
+        <canvas class="a-canvas a-grab-cursor" data-aframe-canvas="true" width="5120" height="2732" style="width: 2560px; height: 1366px;"></canvas></a-scene>
+      
+    
+    <canvas class="a-canvas a-grab-cursor" data-aframe-canvas="true" width="600" height="300"></canvas><a-entity camera="" position="" rotation="" scale="" visible=""></a-entity></a-scene></body></html>
