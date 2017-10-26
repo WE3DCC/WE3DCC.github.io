@@ -6,8 +6,8 @@
             <script> AFRAME.registerComponent('BooHider', function (){
                     init: function () {
                         var ArraySpots = [];
+                        var HideIndex = 0
                         for (var i = 0; i <= 20; i++ ) {
-                            var HideIndex = 0
                             var min = -20;
                             var max = 20;
                             var ymin = 0;
@@ -21,7 +21,7 @@
                         };
                     update: function () {
                         this.el.addEventListener('click', function () {
-                            var HideIndex = HideIndex +1
+                            HideIndex += 1
                             this.setAttribute("visible", false)
                             this.setAttribute("position", ArraySpots(HideIndex));
                         });
