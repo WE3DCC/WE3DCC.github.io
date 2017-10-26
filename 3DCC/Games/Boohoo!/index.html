@@ -1,210 +1,78 @@
-<html>
-        <head>
-            <script src="//aframe.io/releases/0.3.0/aframe.js"></script>
-            <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
-            <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-            <script> AFRAME.registerComponent('cursor-listener', {
-                    init: function () {
-                      var COLORS = ['red', 'green', 'blue'];
-                      this.el.addEventListener('click', function () {
-                        var randomIndex = Math.floor(Math.random() * COLORS.length);
-                        this.setAttribute('material', 'color', COLORS[randomIndex]);
-                        console.log('I was clicked!');
-                      });
-                    }
-                  });
-            </script>
-            <script>
-                    AFRAME.registerComponent('sun-position-setter', {
-                      init: function () {
-                        var skyEl = this.el;
-                        var orbitEl = this.el.sceneEl.querySelector('#orbit');
-              
-                        orbitEl.addEventListener('componentchanged', function changeSun (evt) {
-                          var sunPosition;
-                          var phi;
-                          var theta;
-              
-                          if (evt.detail.name !== 'rotation') { return; }
-              
-                          sunPosition = orbitEl.getComputedAttribute('rotation');
-              
-                          if(sunPosition === null) { return; }
-              
-                          theta = Math.PI * (- 0.5);
-                          phi = 2 * Math.PI * (sunPosition.y / 360 - 0.5);
-                          skyEl.setAttribute('material', 'sunPosition', {
-                            x: Math.cos(phi),
-                            y: Math.sin(phi) * Math.sin(theta),
-                            z: -1
-                          });
-                        });
-                      }
-                    });
-                  </script>
-        </head>
-        <body>
-        <a-scene altspace="fullspace: true" sync-system="author: 3dcc; app: boohootheghost">
-            <a-assets timeout="5000">
-                	<a-asset-item id="boohooObj" src="BooHootheGhost.obj"></a-asset-item>
-                    <img id="boohooMtl" src="BooHootheGhost.mtl">
-                    
-                    <a-mixin id="voxel-axe"
-					geometry='primitive: box; width: .9; depth: .1; height: .03' material='shader: flat; color: #606060'
-					position='.5 0 0' scale="1 1 1"
-                    animation="property: rotation; from: 0 0 0; to: 360 0 0; dir: reverse; startEvents: spin"></a-mixin>
-                
-				<a-mixin id="parent-to-left-hand"
-					rotation="0 0 0"
-					n-skeleton-parent="part: hand; side: left;"
-                    sync sync-n-skeleton-parent></a-mixin> 
-            
-                    
-                <a-mixin id="boohoo"
-                obj-model="obj: #boohooObj; mtl: #boohooMtl"
-                altspace-cursor-collider
-                scale="0.52 0.52 0.52"
-                roation="0 45 0"
-                animation="attribute: rotation; to: 45 2 0; ease: cubic; direction: alternate fill: forwards; repeat: indefinite begin: mouseenter"
-                ></a-mixin>
-                <!--  Environment    -->
-                        <a-mixin id="flap" attribute="rotation" direction="alternate" repeat="indefinite"></a-mixin>
-                        <a-mixin id="rotate" attribute="rotation" repeat="indefinite"></a-mixin>
-                        <a-mixin id="wing" geometry="primitive: box; depth: .005; height: 1; width: 0.5" material="color: #9D0B28" rotation="0 0 0" pivot="0.25 0 0" scale="1 1.25 1"></a-mixin>
-                 
-                      <!-- Bat with pivoting wings. -->
-                      <a-entity position="0 2.5 -5" rotation="" scale="" visible="">
-                        <a-animation mixin="rotate" to="0 360 0" dur="3000" easing="linear"></a-animation>
-                        <a-entity rotation="0 90 0" position="2.5 0 0" scale="" visible="">
-                          <a-entity rotation="-45 0 90" position="" scale="" visible="">
-                            <a-entity mixin="wing" position="" rotation="" scale="" visible="" geometry="" material="" pivot="">
-                              <a-animation mixin="flap" to="0 120 0"></a-animation>
-                            </a-entity>
-                          </a-entity>
-                          <a-entity rotation="-45 0 90" position="" scale="" visible="">
-                            <a-entity mixin="wing" position="" rotation="" scale="" visible="" geometry="" material="" pivot="">
-                              <a-animation mixin="flap" to="0 -120 0"></a-animation>
-                            </a-entity>
-                          </a-entity>
-                        </a-entity>
-                      </a-entity>
-                    
-				<a-mixin id="parent-to-head"
-					position="0 0.05 0.03"
-					n-skeleton-parent="part: head; side: right"
-                    sync sync-n-skeleton-parent></a-mixin>
-
-                <a-mixin id="left-box"
-                    geometry="primitive: box"
-                    material="color: red"
-                    n-skeleton-parent="part: hand; side: left; index: 0;"
-                    sync sync-n-skeleton-parent
-                    position="0 0.1 0"
-                    rotation="0 45 0"
-                    scale="0.1 0.1 0.1">
-                </a-mixin>
-        
-                <a-mixin id="body-ball"
-                    position="0 0.25 -0.25"
-                    n-spawner="res:interactables/basketball"
-                    n-skeleton-parent="part: spine;"
-                    sync sync-n-skeleton-parent>
-                </a-mixin>
-        
-                <a-mixin id="spinal-tap"
-                    n-sound="res: ui/error; volume: 0.5; loop: true; autoplay: true;"
-                    n-skeleton-parent="part: spine;"
-                    sync sync-n-skeleton-parent>
-                </a-mixin>
-        
-                <a-mixin id="other-text"
-                    position="0 1.5 0"
-                    rotation="0 180 0"
-                    scale="0.5 0.5 0.5"
-                    n-text="fontSize: 2; text: text other people can read"
-                    n-skeleton-parent="part: hips;"
-                    sync sync-n-skeleton-parent>
-                </a-mixin>
-                
-        
-                <a-mixin id="head-text"
-                    position="0.2 0.2 -0.5"
-                    scale="0.1 0.1 0.1"
-                    n-text="fontSize: 2; text: avoid text on the head \n annoying isn't it :-)"
-                    n-skeleton-parent="part: head;"
-                    sync sync-n-skeleton-parent>
-                </a-mixin>
-        
-                <a-mixin id="headache"
-                    n-object="res:effects/fire"
-                    n-skeleton-parent="part: head;"
-                    sync sync-n-skeleton-parent>
-                </a-mixin>
-        
-                <a-mixin id="fire-fist"
-                    n-object="res:effects/fire-trail"
-                    n-skeleton-parent="part: hand; side: right"
-                    sync sync-n-skeleton-parent>
-                </a-mixin>
-            </a-assets>
-            <!-- End Assets -->
-            <!-- NEED: Flashlight Raycaster model -->
-                <!-- Cursor -->
-            <a-entity
-                cursor="fuse: true; fuseTimeout: 500"
-                raycaster="far: 30; interval:1000; objects: .clickable"
-                position="0 0 -1"
-                rotation="45 0 90"
-                geometry="primitive: cone; height: 5; color: #EAE112; radius-top: 0.5; radius-bottom: 3"
-                material="color: #54EA12; shader: flat; opacity"></a-entity>
-			<a-entity
-            id="initial-synced-box"
-            one-per-user="mixin: voxel-axe parent-to-left-hand">
-        </a-entity>
+<html><head>
+    <script src="https://aframe.io/releases/0.3.0/aframe-inspector.min.js"></script></head>
+    <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+      <body class="a-body aframe-inspector-opened">
+        <a-scene stats="" altspace="" scale="0.5 0.5 0.5" class="fullscreen" canvas="" inspector="" keyboard-shortcuts="" vr-mode-ui="">
+          <a-assets>
+            <audio id="blip1" src="../../showcase/anime-UI/audio/321103__nsstudios__blip1.wav"></audio>
+            <audio id="blip2" src="../../showcase/anime-UI/audio/321104__nsstudios__blip2.wav"></audio>
+            <a-mixin id="cube" geometry="primitive: box"></a-mixin>
+            <a-mixin id="cube-hovered" material="color: #CC435F"></a-mixin>
+            <a-mixin id="cube-selected" material="color: #876A96"></a-mixin>
+            <a-mixin id="red" material="color: #F35F5F"></a-mixin>
+            <a-mixin id="green" material="color: #9DE0AD"></a-mixin>
+            <a-mixin id="blue" material="color: #36A3EB"></a-mixin>
+            <a-mixin id="yellow" material="color: #F1EA65"></a-mixin>
+            <a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
+          </a-assets>
     
-        <!-- BooHoo Instantiator -->
-        <a-entity
-            id="boohoo-instantiator"
-            class="clickable"
-            mixin="boohoo"
-            randoompositon
-            cursor-listener
-            instantiator="on: connected; mixin: boohoo; removeLast: true"
-            sync="own-on"sync-transform sync-color></a-entity>
-
-            <a-entity id="sky" geometry="primitive: sphere; radius: 100;" material="shader: sky; side: back" sun-position-setter="" position="" rotation="" scale="" visible="">
-                    <a-entity id="orbit" position="" rotation="" scale="" visible="">
-                      <a-animation attribute="rotation" from="0 0 0" to="0 360 0" dur="5000" repeat="indefinite" easing="linear"></a-animation>
-                    </a-entity>
-                  </a-entity>
-
-            <a-entity one-per-user="mixin: left-box"></a-entity>
-        
-            <a-entity one-per-user="mixin: body-ball"></a-entity>
-        
-            <a-entity one-per-user="mixin: spinal-tap"></a-entity>
-        
-            <a-entity
-                position="0 1 -1"
-                scale="0.5 0.5 0.5"
-                n-text="fontSize: 2; text: text in the world">
+          <a-sky color="#FBE0D8" material="" geometry="" scale="" position="" rotation="" visible=""></a-sky>
+    
+          <a-entity position="0 .6 4" rotation="" scale="" visible="">
+            <a-camera camera="" position="" rotation="" look-controls="" wasd-controls="" scale="" visible="">
+              <a-entity cursor="" geometry="primitive: ring; radiusOuter: 0.015;&#10;                              radiusInner: 0.01; segmentsTheta: 32" material="color: #283644; shader: flat" raycaster="far: 30" position="0 0 -0.75" rotation="" scale="" visible=""></a-entity>
+            </a-camera>
+          </a-entity>
+    
+          <a-entity position="-3.5 1 0" rotation="" scale="" visible="">
+            <a-entity mixin="red cube" position="" rotation="" scale="" visible="" material="" geometry="">
+              <a-animation begin="click" attribute="position" from="0 0 0" to="0 0 -10" dur="2000" fill="both"></a-animation>
             </a-entity>
-        
-            <a-entity one-per-user="mixin: other-text"></a-entity>
-        
-            <a-entity
-                position="0 0 -0.7"
-                scale="0.2 0.2 0.2"
-                rotation="-30 0 0"
-                n-text="fontSize: 2; text: text you can read comfortably"
-                n-cockpit-parent>
+          </a-entity>
+    
+          <a-entity position="0 1 0" rotation="" scale="" visible="">
+            <a-entity mixin="green cube" sound__1="on: click; src: #blip1;" sound__2="on: mouseenter; src: #blip2;" position="" rotation="" scale="" visible="" material="" geometry="">
+              <a-animation begin="click" attribute="rotation" to="0 360 0" easing="linear" dur="2000" fill="backwards"></a-animation>
             </a-entity>
-        
-            <a-entity one-per-user="mixin: head-text"></a-entity>
-        
-            <a-entity one-per-user="mixin: headache"></a-entity>
-        
-            <a-entity one-per-user="mixin: fire-fist"></a-entity>
-        </a-scene>
-    </body>
-</html>
+          </a-entity>
+    
+          <a-entity position="3.5 1 0" rotation="0 45 0" scale="" visible="">
+            <a-entity mixin="blue cube" position="" rotation="" scale="" visible="" material="" geometry="">
+              <a-animation begin="click" fill="forwards" repeat="1" direction="alternate" attribute="position" from="0 0 0" to="15 0 0" dur="2000"></a-animation>
+            </a-entity>
+          </a-entity>
+    
+          <a-entity mixin="yellow cube" position="0 3 0" class="clickable" rotation="0 45 0" scale=".5 .5 .5" visible="" material="" geometry=""></a-entity>
+        <canvas class="a-canvas a-grab-cursor" data-aframe-canvas="true" width="5120" height="2732" style="width: 2560px; height: 1366px;"></canvas><a-entity camera="" position="" rotation="" scale="" visible=""></a-entity></a-scene>
+    
+        <script>
+          (function () {
+            // Custom states.
+            var clickedEl = null;
+            var els = document.querySelectorAll('a-entity');
+            Array.prototype.forEach.call(els, function (el) {
+              el.addEventListener('click', function () {
+                if (clickedEl &amp;&amp; clickedEl !== el) {
+                  clickedEl.removeState('selected');
+                }
+                if (!el.classList.contains('clickable')) { return; }
+                clickedEl = el;
+                clickedEl.addState('selected');
+              });
+            });
+    
+            // Responding to mouse events.
+            var cubes = document.querySelectorAll('a-entity[mixin*=cube]');
+            var i;
+            for (i = 0; i &lt; cubes.length; ++i) {
+              cubes[i].addEventListener('click', function () {
+                var href = this.getAttribute('href');
+                if (!href) { return; }
+                window.top.postMessage({type: 'navigate', data: {url: href}}, '*');
+              })
+            }
+          })();
+        </script>
+      
+    
+    </body></html>
