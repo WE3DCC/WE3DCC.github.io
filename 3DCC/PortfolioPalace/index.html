@@ -21,6 +21,14 @@
 	<body>
 		<a-scene altspace="fullspace: true" sync-system="author: 3dcc; app: portfoliopalace">
 			<a-assets>
+                 <!--                        -->  
+                <!-- Vegas Vibes assets -->
+                <!--                        --> 
+                <a-asset-item id="710" src="models/710_Setup.obj"></a-asset-item>
+				<a-asset-item id="710mtl" src="models/710_Setup.mtl"></a-asset-item>
+				<a-asset-item id="VegasVibesTheater" src="models/VegasVibes_Desert_Theater.obj"></a-asset-item>
+				<a-asset-item id="VegasVibesTheatermtl" src="models/VegasVibes_Desert_Theater.mtl"></a-asset-item>
+			
                 <!--                        -->  
                 <!-- Aromory warfare assets -->
                 <!--                        --> 
@@ -34,7 +42,7 @@
 				<a-asset-item id="voxel-armor-mtl" src="models/varmor.mtl"></a-asset-item>
 				<a-asset-item id="voxel-axe-obj" src="models/vaxe.obj"></a-asset-item>
 				<a-asset-item id="voxel-axe-mtl" src="models/vaxe.mtl"></a-asset-item>
-
+               
 				<a-mixin id="helmet"
 					obj-model="obj: #helmet-obj; mtl: #helmet-mtl" collapse-model
 					scale="0.52 0.52 0.52"></a-mixin>
@@ -162,7 +170,7 @@
             <!--                        --> 
             <!--                        --> 
             <a-entity n-layout-browser="isEnclosure: true" position="3 0 1" rotation="0 280 0"></a-entity>  
-            <a-entity position="0 0 0">
+            <a-entity id="GeoGal" position="0 0 0">
                 <!-- Lights. -->
                 <a-entity light="type: ambient; color: #444" position="" rotation="" scale="" visible=""></a-entity>
                 <a-entity light="type: directional; color: #EEE" position="0 1 1" rotation="" scale="" visible="">
@@ -273,6 +281,15 @@
                     </a-entity>
                     <a-entity mixin="column-bottom" position="" rotation="" scale="" visible="" geometry="" material=""></a-entity>
                 </a-entity>
+            <!--                        -->  
+            <!--                        --> 
+            <!--                        -->   
+            <!-- Vegas Vibes Entities     -->
+            <!--                        --> 
+            <!--                        --> 
+            <!--                        --> 
+            <a-entity position="10 0 10" obj-model="obj: #VegasVibesTheater; mtl: #VegasVibesTheatermtl"></a-entity>
+            <a-entity position="5 0 5" obj-model="obj: #710; mtl: #710mtl"></a-entity>
             </a-entity>    
 		</a-scene>
 	</body>
