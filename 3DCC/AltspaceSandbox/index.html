@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="//aframe.io/releases/0.3.0/aframe.js"></script>
+		<script src="https://unpkg.com/aframe-animation-component@^3.2.0/dist/aframe-animation-component.min.js"></script>
+		<script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
+	
+	</head>
+	<body>
+		<a-scene altspace="fullspace: true" sync-system="author: 3dcc; app: portfoliopalace">
+			<a-assets>
+                 <!--            "            -->  
+                <!-- Vegas Vibes assets -->
+                <!--                        -->
+                <a-asset-item id="710" src="models/710_Setup.obj"></a-asset-item>
+                <a-asset-item id="710mtl" src="models/710_Setup.mtl"></a-asset-item>
+            </a-assets>
+
+            <a-entity obj-model="obj-model="obj: #710; mtl: #710mtl""></a-entity>
+            <a-box position="1 0 5"></a-box>
+        </a-scene>
+    </body>
+</html>

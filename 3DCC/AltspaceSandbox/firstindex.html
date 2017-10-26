@@ -1,0 +1,44 @@
+<html>
+        <head>
+        <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+        <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
+        </head>
+        <body>
+        <!-- set up the scene -->
+        <a-scene altspace='vertical-align: bottom;'>
+        
+            <!-- preload all our textures -->
+            <a-assets>
+                <img id='moon' src='WE3DCC_Branding_Logo01.png'/>
+                <img id='stars' src='resources/stars.png'/>
+            </a-assets>
+        
+            <!-- add the moon to the scene -->
+            <a-sphere position='0 1.5 0' material='src: #moon;'>
+                <!-- add an animation to make it rotate -->
+                <a-animation to='0 360 0' easing='linear' dur='20000' repeat='indefinite'/>
+            </a-sphere>
+        
+            <!-- add the backdrop of stars -->
+            <a-sky src='#stars' radius='2500'></a-sky>
+        
+            <!-- The Mobile 0D Camera with reticle -->
+            <a-entity position="0 2.2 4">
+                    <a-entity camera wasd-controls>
+                        <a-entity cursor="maxDistance: 30; fuse: true; fuseTimeout: 1600" position="0 0 -3"
+                                geometry="primitive: ring; radiusOuter: 0.30;
+                                            radiusInner: 0.20;"
+                                material="color: cyan; shader: flat">
+                        <a-animation begin="mouseenter" easing="linear" attribute="scale"
+                                fill="forwards" from="4 4 4" to="0.1 0.1 0.1" dur="1500" end="mouseleave"></a-animation>
+            <a-animation begin="mouseleave" dur="50" easing="ease-out-bounce" attribute="scale"
+                                fill="forwards" from="1 1 1" to="1 1 1" ></a-animation> 
+            <a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="scale"
+                                fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" ></a-animation>
+                        </a-entity>
+                    </a-entity>
+                    </a-entity>
+        
+        </a-scene>åç
+        
+        </body></html>

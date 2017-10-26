@@ -23,12 +23,14 @@
 			<a-assets>
                  <!--            "            -->  
                 <!-- Vegas Vibes assets -->
-                <!--                        --> 
+                <!--                        -->
                 <a-asset-item id="710" src="models/710_Setup.obj"></a-asset-item>
 				<a-asset-item id="710mtl" src="models/710_Setup.mtl"></a-asset-item>
 				<a-asset-item id="VegasVibesTheater" src="models/VegasVibes_Desert_Theater.obj"></a-asset-item>
 				<a-asset-item id="VegasVibesTheatermtl" src="models/VegasVibes_Desert_Theater.mtl"></a-asset-item>
-			
+                <a-mixin id="Bongset"
+                obj-model="obj: #710; mtl: #710mtl" collapse-model
+                scale="0.52 0.52 0.52"></a-mixin>
                 <!--                        -->  
                 <!-- Aromory warfare assets -->
                 <!--                        --> 
@@ -116,7 +118,7 @@
             <!--                        --> 
             <!--                        --> 
             <!--                        -->   
-            <!-- The Mobile 0D Camera with reticle-->
+            <!-- The Mobile 0D Camera with reticle
             <a-entity position="0 2.2 4" sync>
                     <a-entity camera wasd-controls>
                         <a-entity cursor="maxDistance: 30; fuse: true; fuseTimeout: 1600" position="0 0 -3"
@@ -201,9 +203,9 @@
                 <a-entity light="type: directional; color: #EEE" position="0 1 1" rotation="" scale="" visible="">
                 </a-entity>
 
-                <!-- Skysphere. -->
+                <!-- Skysphere. 
                 <a-entity geometry="primitive: sphere; radius: 80" material="color: #112; shader: flat" scale="1 1 -1" position="" rotation="" visible="">
-                </a-entity>
+                </a-entity> -->
 
                 <!-- Floor. -->
                 <a-entity geometry="primitive: cylinder; height: .2; radius: 12;" material="color: #BABABA;                          metalness: .2; repeat: 50 20; roughness: .1" position="0 0 0" rotation="" scale="" visible=""></a-entity>
@@ -312,9 +314,8 @@
             <!-- Vegas Vibes Entities     -->
             <!--                        --> 
             <!--                        --> 
-            <!--                        --> 
-            <a-entity position="10 0 10" obj-model="obj: #VegasVibesTheater; mtl: #VegasVibesTheatermtl"></a-entity>
-            <a-entity position="5 0 5" obj-model="obj: #710; mtl: #710mtl"></a-entity>
+            <!--                        -->
+            <a-entity position="0 1 5" mixin="Bongset"></a-entity>
             </a-entity>    
 		</a-scene>
 	</body>
