@@ -1,22 +1,53 @@
-<html>
-        <head>
-          <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-        </head>
-        <body>
-          <a-scene inspector>
-            <a-assets>
-                <a-asset-item id="710" src="models/710_Setup.obj"></a-asset-item>
-                <a-asset-item id="710mtl" src="models/710_Setup.mtl"></a-asset-item>
-                <a-asset-item id="aaa" src="models/EmbarcaderoBasePath.obj"></a-asset-item>
-                <a-asset-item id="aaamtl" src="models/EmbarcaderoBasePath.mtl"></a-asset-item>
-            </a-assets>
-            <a-entity position="-3 0 -3" scale="0.05 0.05 0.05" obj-model="obj: #710; mtl: #710mtl"></a-entity>
-            <a-entity position="-3 0 3" scale="0.05 0.05 0.05" obj-model="obj: #aaa; mtl: #aaamtl"></a-entity>           
-            <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-            <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-            <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-            <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-            <a-sky color="#ECECEC"></a-sky>
-          </a-scene>
-        </body>
-</html>
+<html ><head>
+        <meta charset="utf-8" />
+        <title>360° Image Gallery</title>
+        <meta name="description" content="360° Image Gallery - A-Frame" />
+        <script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+        <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+        <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+        <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+        <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
+        <script src="components/set-image.js"></script>
+    </head>
+      <body class="a-body aframe-inspector-opened">
+        <a-scene class="fullscreen" canvas="" inspector="url:https://unpkg.com/aframe-inspector@0.5.x/dist/aframe-inspector.min.js" keyboard-shortcuts="enterVR:true;exitVR:true;resetSensor:true" screenshot="width:4096;height:2048" vr-mode-ui="enabled:true" auto-enter-vr="display:GearVR;enabled:true">
+          <a-assets>
+            <img id="city" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg" />
+            <img id="city-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg" />
+            <img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg" />
+            <img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg" />
+            <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+            <img id="cubes" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg" />
+            <img id="sechelt" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg" />
+    
+            <!-- Image link template to be reused. -->
+            <script id="link" type="text/html">
+              <a-entity class="link"
+                geometry="primitive: plane; height: 1; width: 1"
+                material="shader: flat; src: ${thumb}"
+                event-set__1="_event: mousedown; scale: 1 1 1"
+                event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+                event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+                event-set__4="_event: mouseleave; scale: 1 1 1"
+                set-image="on: click; target: #image-360; src: ${src}"
+                sound="on: click; src: #click-sound">
+            </script>
+          </a-assets>
+    
+          <!-- 360-degree image. -->
+          <a-sky id="image-360" radius="10" src="#city" position="0 0 0" rotation="0 0 0" scale="-1 1 1" visible="true" material="color:#FFF;shader:flat;src:#city" geometry="primitive:sphere;radius:10;segmentsWidth:64;segmentsHeight:20" data-set-image-fade-setup="true" animation__fade="property:material.color;startEvents:set-image-fade;dir:alternate;dur:300;from:#FFF;to:#000"></a-sky>
+    
+          <!-- Image links. -->
+          <a-entity id="links" layout="type:line;margin:1.5" position="0 -1 -4" rotation="0 0 0" scale="1 1 1" visible="true">
+            <a-entity template="src:#link" data-src="#cubes" data-thumb="#cubes-thumb" position="0 0 0" rotation="0 0 0" scale="1 1 1" visible="true"><a-entity class="link" geometry="primitive:plane;height:1;width:1" material="shader:flat;src:#cubes-thumb" event-set__1="[object Object]" event-set__2="[object Object]" event-set__3="[object Object]" event-set__4="[object Object]" set-image="on:click;target:#image-360;src:#cubes" sound="on:click;src:#click-sound" position="0 0 0" rotation="0 0 0" scale="1 1 1" visible="true"></a-entity></a-entity>
+            <a-entity template="src:#link" data-src="#city" data-thumb="#city-thumb" position="1.5 0 0" rotation="0 0 0" scale="1 1 1" visible="true"><a-entity class="link" geometry="primitive:plane;height:1;width:1" material="shader:flat;src:#city-thumb" event-set__1="[object Object]" event-set__2="[object Object]" event-set__3="[object Object]" event-set__4="[object Object]" set-image="on:click;target:#image-360;src:#city" sound="on:click;src:#click-sound" position="0 0 0" rotation="0 0 0" scale="1 1 1" visible="true"></a-entity></a-entity>
+            <a-entity template="src:#link" data-src="#sechelt" data-thumb="#sechelt-thumb" position="3 0 0" rotation="0 0 0" scale="1 1 1" visible="true"><a-entity class="link" geometry="primitive:plane;height:1;width:1" material="shader:flat;src:#sechelt-thumb" event-set__1="[object Object]" event-set__2="[object Object]" event-set__3="[object Object]" event-set__4="[object Object]" set-image="on:click;target:#image-360;src:#sechelt" sound="on:click;src:#click-sound" position="0 0 0" rotation="0 0 0" scale="1 1 1" visible="true"></a-entity></a-entity>
+          </a-entity>
+    
+          <!-- Camera + cursor. -->
+          <a-entity camera="active:false" look-controls="" position="0 0 0" rotation="6.760901982543712 8.823550045014677 0" scale="1 1 1" visible="true">
+            <a-cursor id="cursor" animation__click="property:scale;startEvents:click;from:0.1 0.1 0.1;to:1 1 1;dur:150" animation__fusing="property:fusing;startEvents:fusing;from:1 1 1;to:0.1 0.1 0.1;dur:1500" event-set__1="[object Object]" event-set__2="[object Object]" fuse="true" raycaster="far:1000;objects:.link" position="0 0 -1" rotation="0 0 0" scale="1 1 1" visible="true" material="color:black;shader:flat;opacity:0.8" cursor="fuse:true" geometry="primitive:ring;radiusOuter:0.016;radiusInner:0.01;segmentsTheta:64" color="black" fusing="0.09999999999999998 0.09999999999999998 0.09999999999999998 "></a-cursor>
+          </a-entity>
+        <canvas class="a-canvas a-grab-cursor" data-aframe-canvas="true" width="2532" height="2732" style="width: 1266px; height: 1366px;"></canvas><a-entity camera="far:10000;fov:50;near:0.05;active:true" position="0 0 0" rotation="0 0 0" scale="1 1 1" visible="true"></a-entity></a-scene>
+      
+ </body></html>
