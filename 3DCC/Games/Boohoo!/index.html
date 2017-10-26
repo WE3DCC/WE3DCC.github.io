@@ -55,7 +55,6 @@
                             altspace-cursor-collider
                             scale="0.52 0.52 0.52"
                             roation="0 45 0"
-                            animation="attribute: rotation; to: 45 2 0; ease: cubic; direction: alternate fill: forwards; repeat: indefinite begin: mouseenter"
                             ></a-mixin>
                             <!--  Environment    -->
                                     <a-mixin id="flap" attribute="rotation" direction="alternate" repeat="indefinite"></a-mixin>
@@ -154,8 +153,8 @@
                     </a-entity>
                     </a-entity>
                         <!-- End Assets -->
-                        <!-- NEED: Flashlight Raycaster model -->
-                            <!-- Cursor -->
+                        <!-- NEED: Flashlight Raycaster model
+                            <!-- Cursor 
                         <a-entity
                             raycaster="far: 30; interval:1000; objects: .clickable"
                             position="0 0 -1"
@@ -173,6 +172,7 @@
                         class="clickable"
                         mixin="boohoo"
                         BooHider
+                        animation="attribute: rotation; to: 45 2 0; ease: cubic; direction: alternate fill: forwards; repeat: indefinite begin: mouseenter"
                         sync="own-on: click" sync-transform sync-color></a-entity>
             
                         <a-entity id="sky" geometry="primitive: sphere; radius: 100;" material="shader: sky; side: back" sun-position-setter="" position="" rotation="" scale="" visible="">

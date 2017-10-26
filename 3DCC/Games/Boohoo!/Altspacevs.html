@@ -169,8 +169,8 @@
                 </a-mixin>
             </a-assets>
             <!-- End Assets -->
-            <!-- NEED: Flashlight Raycaster model -->
-                <!-- Cursor -->
+            <!-- NEED: Flashlight Raycaster model 
+                <!-- Cursor 
             <a-entity
                 cursor="fuse: true; fuseTimeout: 500"
                 raycaster="far: 30; interval:1000; objects: .clickable"
@@ -189,8 +189,7 @@
             class="clickable"
             mixin="boohoo"
             BooHider
-            cursor-listener
-            instantiator="on: connected; mixin: boohoo; removeLast: true"
+            instantiator="on: click; mixin: boohoo; removeLast: true"
             sync="own-on"sync-transform sync-color></a-entity>
 
             <a-entity id="sky" geometry="primitive: sphere; radius: 100;" material="shader: sky; side: back" sun-position-setter="" position="" rotation="" scale="" visible="">
