@@ -6,7 +6,7 @@
             <script> AFRAME.registerComponent('BooHider', function (){
                     init: function () {
                         var ArraySpots = [];
-                        var HideIndex = 0
+                        var HideIndex = 0;
                         for (var i = 0; i <= 20; i++ ) {
                             var min = -20;
                             var max = 20;
@@ -16,18 +16,18 @@
                             var zspot = Math.floor((Math.random() * (max-min)) + min);
                             var nextrandomspotposition = AFRAME.utils.coordinates.parse("xspot yspot zspot");
                             ArraySpots.push(nextrandomspotposition);
-                            console.log(ArraySpots)
+                            console.log(ArraySpots);
                             });
                         };
                     update: function () {
                         this.el.addEventListener('click', function () {
-                            HideIndex += 1
-                            this.setAttribute("visible", false)
+                            HideIndex += 1;
+                            this.setAttribute("visible", false);
                             this.setAttribute("position", ArraySpots(HideIndex));
                         });
                         entity.addEventListener('componentchanged', function (evt) {
                         if (evt.detail.name === 'position') {
-                            this.setAttribute("visible", true)
+                            this.setAttribute("visible", true);
                             console.log('Entity has moved from', evt.detail.oldData, 'to', evt.detail.newData, '!');
                             };
                         });
