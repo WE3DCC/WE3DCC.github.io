@@ -39,17 +39,15 @@
                                 <a-asset-item id="boohooObj" src="BooHootheGhost.obj"></a-asset-item>
                                 <img id="boohooMtl" src="BooHootheGhost.mtl">
                                 
-                                
                             <a-mixin id="boohoo"
                             obj-model="obj: #boohooObj; mtl: #boohooMtl"
                             scale="0.52 0.52 0.52"
                             roation="0 45 0"
                             ></a-mixin>
                             <!--  Environment    -->
-                                    <a-mixin id="flap" attribute="rotation" direction="alternate" repeat="indefinite"></a-mixin>
-                                    <a-mixin id="rotate" attribute="rotation" repeat="indefinite"></a-mixin>
-                                    <a-mixin id="wing" geometry="primitive: box; depth: .005; height: 1; width: 0.5" material="color: #9D0B28" rotation="0 0 0" pivot="0.25 0 0" scale="1 1.25 1"></a-mixin>
-                        
+                            <a-mixin id="flap" attribute="rotation" direction="alternate" repeat="indefinite"></a-mixin>
+                            <a-mixin id="rotate" attribute="rotation" repeat="indefinite"></a-mixin>
+                            <a-mixin id="wing" geometry="primitive: box; depth: .005; height: 1; width: 0.5" material="color: #9D0B28" rotation="0 0 0" pivot="0.25 0 0" scale="1 1.25 1"></a-mixin>
                             
                         </a-assets>
                         <!-- The Mobile 0D Camera with reticle -->
