@@ -2,70 +2,11 @@
         <head>
             <script src="//aframe.io/releases/0.3.0/aframe.js"></script>
             <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
-            <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-            <script> AFRAME.registerComponent('BooHider', function (){
-                    init: function () {
-                        var ArraySpots = [];
-                        var HideIndex = 0;
-                        for (var i = 0; i <= 20; i++ ) {
-                            var min = -20;
-                            var max = 20;
-                            var ymin = 0;
-                            var xspot = Math.floor((Math.random() * (max-min)) + min);
-                            var yspot = Math.floor((Math.random() * (max-ymin)) + ymin);
-                            var zspot = Math.floor((Math.random() * (max-min)) + min);
-                            var nextrandomspotposition = AFRAME.utils.coordinates.parse("xspot yspot zspot");
-                            ArraySpots.push(nextrandomspotposition);
-                            console.log(ArraySpots);
-                            });
-                        };
-                    update: function () {
-                        this.el.addEventListener('click', function () {
-                            HideIndex += 1;
-                            this.setAttribute("visible", false);
-                            this.setAttribute("position", ArraySpots(HideIndex));
-                        });
-                        entity.addEventListener('componentchanged', function (evt) {
-                        if (evt.detail.name === 'position') {
-                            this.setAttribute("visible", true);
-                            console.log('Entity has moved from', evt.detail.oldData, 'to', evt.detail.newData, '!');
-                            };
-                        });
-                    };
-                  });</script>
             
-            <script>
-                    AFRAME.registerComponent('sun-position-setter', {
-                      init: function () {
-                        var skyEl = this.el;
-                        var orbitEl = this.el.sceneEl.querySelector('#orbit');
-              
-                        orbitEl.addEventListener('componentchanged', function changeSun (evt) {
-                          var sunPosition;
-                          var phi;
-                          var theta;
-              
-                          if (evt.detail.name !== 'rotation') { return; }
-              
-                          sunPosition = orbitEl.getComputedAttribute('rotation');
-              
-                          if(sunPosition === null) { return; }
-              
-                          theta = Math.PI * (- 0.5);
-                          phi = 2 * Math.PI * (sunPosition.y / 360 - 0.5);
-                          skyEl.setAttribute('material', 'sunPosition', {
-                            x: Math.cos(phi),
-                            y: Math.sin(phi) * Math.sin(theta),
-                            z: -1
-                          });
-                        });
-                      }
-                    });
-                  </script>
             
         </head>
         <body>
-        <a-scene altspace="fullspace: true" sync-system="author: 3dcc; app: boohootheghost">
+        <a-scene altspace="fullspace: true" sync-system="author: 3dcc; app: boohoo">
             <a-assets timeout="5000">
                 	<a-asset-item id="boohooObj" src="BooHootheGhost.obj"></a-asset-item>
                     <img id="boohooMtl" src="BooHootheGhost.mtl">
@@ -151,7 +92,7 @@
                 <a-mixin id="head-text"
                     position="0.2 0.2 -0.5"
                     scale="0.1 0.1 0.1"
-                    n-text="fontSize: 2; text: avoid text on the head \n annoying isn't it :-)"
+                    n-text="fontSize: 2; text: avoid text on the head \n annoying isn't it :-) nah nah"
                     n-skeleton-parent="part: head;"
                     sync sync-n-skeleton-parent>
                 </a-mixin>

@@ -1,111 +1,65 @@
-<html><head>
-    <script src="https://aframe.io/releases/0.7.0/aframe-inspector.min.js"></script>
-    <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-    <script> AFRAME.registerComponent('BooHider', function (){
-            init: function () {
-                var ArraySpots = [];
-                var HideIndex = 0;
-                for (var i = 0; i <= 20; i++ ) {
-                    var min = -20;
-                    var max = 20;
-                    var ymin = 0;
-                    var xspot = Math.floor((Math.random() * (max-min)) + min);
-                    var yspot = Math.floor((Math.random() * (max-ymin)) + ymin);
-                    var zspot = Math.floor((Math.random() * (max-min)) + min);
-                    var nextrandomspotposition = AFRAME.utils.coordinates.parse("xspot yspot zspot");
-                    ArraySpots.push(nextrandomspotposition);
-                    console.log(ArraySpots);
-                    });
-                };
-            update: function () {
-                this.el.addEventListener('click', function () {
-                    HideIndex = HideIndex + 1;
-                    this.setAttribute("visible", false);
-                    this.setAttribute("position", ArraySpots[HideIndex]);
-                });
-                entity.addEventListener('componentchanged', function (evt) {
-                if (evt.detail.name === 'position') {
-                    this.setAttribute("visible", true);
-                    console.log('Entity has moved from', evt.detail.oldData, 'to', evt.detail.newData, '!');
-                    };
-                });
-            };
-          });</script>
-     </head>
-     <body>
-            <body>
-                    <a-scene>
-                        <a-assets timeout="5000">
-                                <a-asset-item id="boohooObj" src="BooHootheGhost.obj"></a-asset-item>
-                                <img id="boohooMtl" src="BooHootheGhost.mtl">
-                                
-                            <a-mixin id="boohoo"
-                            obj-model="obj: #boohooObj; mtl: #boohooMtl"
-                            scale="0.52 0.52 0.52"
-                            roation="0 45 0"
-                            ></a-mixin>
-                            <!--  Environment    -->
-                            <a-mixin id="flap" attribute="rotation" direction="alternate" repeat="indefinite"></a-mixin>
-                            <a-mixin id="rotate" attribute="rotation" repeat="indefinite"></a-mixin>
-                            <a-mixin id="wing" geometry="primitive: box; depth: .005; height: 1; width: 0.5" material="color: #9D0B28" rotation="0 0 0" pivot="0.25 0 0" scale="1 1.25 1"></a-mixin>
-                            
-                        </a-assets>
-                        <!-- The Mobile 0D Camera with reticle -->
-                        <a-entity position="0 2.2 4">
-                                <a-entity camera look-controls>
-                                    <a-entity cursor="maxDistance: 30; fuse: true; fuseTimeout: 1600" position="0 0 -3"
-                                            geometry="primitive: ring; radiusOuter: 0.30;
-                                                        radiusInner: 0.20;"
-                                            material="color: cyan; shader: flat">
-                                    <a-animation begin="mouseenter" easing="linear" attribute="scale"
-                                            fill="forwards" from="4 4 4" to="0.1 0.1 0.1" dur="1500" end="mouseleave"></a-animation>
-                            <a-animation begin="mouseleave" dur="50" easing="ease-out-bounce" attribute="scale"
-                                                fill="forwards" from="1 1 1" to="1 1 1" ></a-animation> 
-                            <a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="scale"
-                                                fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" ></a-animation>
-                                    </a-entity>
-                                </a-entity>
-                        </a-entity>
-
-                    <!-- Bat with pivoting wings. -->
-                    <a-entity position="0 2.5 -5" rotation="" scale="" visible="">
-                            <a-animation mixin="rotate" to="0 360 0" dur="3000" easing="linear"></a-animation>
-                            <a-entity rotation="0 90 0" position="2.5 0 0" scale="" visible="">
-                              <a-entity rotation="-45 0 90" position="" scale="" visible="">
-                                <a-entity mixin="wing" position="" rotation="" scale="" visible="" geometry="" material="" pivot="">
-                                  <a-animation mixin="flap" to="0 120 0"></a-animation>
-                                </a-entity>
-                              </a-entity>
-                              <a-entity rotation="-45 0 90" position="" scale="" visible="">
-                                <a-entity mixin="wing" position="" rotation="" scale="" visible="" geometry="" material="" pivot="">
-                                  <a-animation mixin="flap" to="0 -120 0"></a-animation>
-                                </a-entity>
-                              </a-entity>
-                            </a-entity>
-                          </a-entity>
-                        <!-- End Assets -->
-                        <!-- NEED: Flashlight Raycaster model
-                            <!-- Cursor 
-                        <a-entity
-                            raycaster="far: 30; interval:1000; objects: .clickable"
-                            position="0 0 -1"
-                            rotation="45 0 90"
-                            geometry="primitive: cone; height: 5; color: #EAE112; radius-top: 0.5; radius-bottom: 3"
-                            material="color: #54EA12; shader: flat; opacity"></a-entity>
-                        <a-entity
-                        id="initial-synced-box"
-                        one-per-user="mixin: voxel-axe parent-to-left-hand">
-                    </a-entity>
-                
-                    <!-- BooHoo Instantiator -->
-                    <a-entity
-                        id="boohoo-instantiator"
-                        class="clickable"
-                        mixin="boohoo"
-                        BooHider
-                        animation="attribute: rotation; to: 45 2 0; ease: cubic; direction: alternate fill: forwards; repeat: indefinite begin: mouseenter"></a-entity>
-                    </a-scene>
-                </body>
-            </html>    
-     </body>
-  
+<html>
+    <head>
+        <title>A-Frame Altspace Component - Test Sync</title>
+        <script src="https://aframe.io/releases/0.3.1/aframe.min.js"></script>
+        <script src="../../dist/altspace.js"></script>
+    </head>
+    <body>
+        <a-scene debug sync-system="author: altspacevr; app: sync-test" altspace>
+            <a-assets>
+                <a-mixin id="coneGeo" geometry="primitive: cone; radius-top: 0; radius-bottom: 0.5" material="color: grey"></a-mixin>
+                <a-mixin id="sphereGeo" geometry="primitive: sphere; radius: 0.5;" material="color: grey"></a-mixin>
+                <a-mixin id="yoyoAni" attribute="position" direction="alternate"
+                    dur="3000" fill="forwards" repeat="indefinite"></a-mixin>
+            </a-assets>
+    
+            <a-entity position="0 1.8 2">
+                <a-camera look-controls>
+                    <a-cursor position="0 0 -1.25"
+                              geometry="primitive: ring; radiusOuter: 0.075; radiusInner: 0.05;"
+                              material="color: cyan; shader: flat"
+                              maxDistance="30" fuse="false"></a-cursor>
+                </a-camera>
+            </a-entity>
+            <a-entity id="cone1" mixin="coneGeo" position="-1 0 0" sync="own-on: mousedown" sync-transform sync-color>
+                <a-animation mixin="yoyoAni" to="-1 1 0"></a-animation>
+            </a-entity>
+            <a-entity id="sphere" mixin="sphereGeo" position="0 0 0" sync="own-on: mouseenter mouseleave" sync-color>
+                <a-animation mixin="yoyoAni" to="0 1 0"></a-animation>
+            </a-entity>
+            <a-entity id="cone2" mixin="coneGeo" position="1 0 0" rotation="0 0 180">
+                <a-animation mixin="yoyoAni" to="1 1 0"></a-animation>
+            </a-entity>
+        </a-scene>
+        <script>
+            var changeColorRandom = function (el) {
+                var rand = function () { return Math.floor(Math.random() * 255) };
+                el.setAttribute('material', 'color', 'rgb(' + rand() + ',' + rand() + ',' + rand() + ')');
+            }
+            //TODO: Because we are attaching our event listeners here, we have to double check to
+            // Cone 1: Testing mousedown, listening on the entity.
+            var cone1El = document.querySelector('#cone1');
+            cone1El.addEventListener('mousedown', function (event) {
+                changeColorRandom(event.target);
+            });
+            // Cone 2: Testing click, listening on the cursor.
+            var cone2El = document.querySelector('#cone2');
+            var cursorEl = document.querySelector('a-cursor');
+            cursorEl.addEventListener('click', function (event) {
+                var el = event.detail.target;
+                if (el && el.object3D.uuid === cone2El.object3D.uuid) {
+                    changeColorRandom(el);
+                }
+            });
+            // Sphere: Testing mousedown/mouseup events.
+            var sphereEl = document.querySelector('#sphere');
+            sphereEl.addEventListener('mouseenter', function (event) {
+                changeColorRandom(event.target);
+            });
+            sphereEl.addEventListener('mouseleave', function (event) {
+                event.target.setAttribute('material', 'color', 'grey');
+            });
+        </script>
+    </body>
+    </html>
+    
