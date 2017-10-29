@@ -3,6 +3,24 @@
         <title>A-Frame Altspace Component - Test Sync</title>
         <script src="https://aframe.io/releases/0.3.1/aframe.min.js"></script>
         <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
+        <script src="js/three.js"></script>
+        <script> AFRAME.registerComponent('BooHider', function (){
+            init: function () {
+                var changePosition = function (el) {
+                    var xspot = Math.randInt(0, 10);
+                    var yspot = Math.randInt(0, 10);
+                    var zspot = Math.randInt(0, 10);
+                    var nextrandomspotposition = AFRAME.utils.coordinates.parse("xspot yspot zspot");
+                    el.setAttribute("position", nextrandomspotposition);
+                }
+            update: function () {
+                this.el.addEventlistener('click', function (el){
+                    changePosition(el)
+                });
+            };
+            };
+        });
+        </script>
     </head>
     <body>
         <a-scene debug sync-system="author: 3dcc; app: boohoo!" altspace>
@@ -12,16 +30,24 @@
                 <a-mixin id="yoyoAni" attribute="position" direction="alternate"
                     dur="3000" fill="forwards" repeat="indefinite"></a-mixin>
             </a-assets>
-    
-            <a-entity position="0 1.8 2">
-                <a-camera look-controls>
-                    <a-cursor position="0 0 -1.25"
-                              geometry="primitive: ring; radiusOuter: 0.075; radiusInner: 0.05;"
-                              material="color: cyan; shader: flat"
-                              maxDistance="30" fuse="false"></a-cursor>
-                </a-camera>
-            </a-entity>
-            <a-entity id="cone1" mixin="coneGeo" position="-1 0 0" sync="own-on: mousedown" sync-transform sync-color>
+            <!-- Cardboatd Camera -->
+            <a-entity position="0 2.2 4">
+                <a-entity camera look-controls>
+                    <a-entity cursor="maxDistance: 30; fuse: true; fuseTimeout: 1600" position="0 0 -3"
+                            geometry="primitive: ring; radiusOuter: 0.30;
+                                        radiusInner: 0.20;"
+                            material="color: cyan; shader: flat">
+                    <a-animation begin="mouseenter" easing="linear" attribute="scale"
+                            fill="forwards" from="4 4 4" to="0.1 0.1 0.1" dur="1500" end="mouseleave"></a-animation>
+            <a-animation begin="mouseleave" dur="50" easing="ease-out-bounce" attribute="scale"
+                                fill="forwards" from="1 1 1" to="1 1 1" ></a-animation> 
+            <a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="scale"
+                                fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" ></a-animation>
+                    </a-entity>
+                </a-entity>
+        </a-entity>
+
+            <a-entity id="cone1" mixin="coneGeo" BooHider altspace-cursor-collider sync="own-on: mousedown" sync-transform sync-color>
                 <a-animation mixin="yoyoAni" to="-1 1 0"></a-animation>
             </a-entity>
             <a-entity id="sphere" mixin="sphereGeo" position="0 0 0" sync="own-on: mouseenter mouseleave" sync-color>
@@ -31,6 +57,10 @@
                 <a-animation mixin="yoyoAni" to="1 1 0"></a-animation>
             </a-entity>
         </a-scene>
+        <script>
+                
+        </script>
+          <!--
         <script>
             var changeColorRandom = function (el) {
                 var rand = function () { return Math.floor(Math.random() * 255) };
@@ -59,7 +89,7 @@
             sphereEl.addEventListener('mouseleave', function (event) {
                 event.target.setAttribute('material', 'color', 'grey');
             });
-        </script>
+        </script> -->
     </body>
     </html>
     
