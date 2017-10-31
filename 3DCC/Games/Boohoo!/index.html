@@ -22,7 +22,7 @@
             update: function () {
                 // Listen for Player Finding Click
                 var self = this;
-                booHoo.addEventlistener('teamscored', function(){
+                booHoo.addEventlistener('click', function(){
                     //add team finding collective count
                     TimesShown += 1;
                     booHoo.components.sync.takeOwnership();
@@ -75,7 +75,6 @@
                 altspace-cursor-collider
                 wire="on: click; emit:teamscored"
                 sync="ownOn: mousedown" sync-transform sync-color>
-                <a-animation mixin="yoyoAni" to="-1 1 0"></a-animation>
                 <a-animation begin="click" mixin="FoundMe" to="0 0 360"></a-animation>
                 <a-animation begin="mouseenter" mixin="RevealMe" to="false" delay="6000"></a-animation>
             </a-entity>
