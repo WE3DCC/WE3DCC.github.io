@@ -11,7 +11,7 @@
                 <a-mixin id="coneGeo" geometry="primitive: cone; radius-top: 0; radius-bottom: 0.5" material="color: grey"></a-mixin>
                 <a-mixin id="sphereGeo" geometry="primitive: sphere; radius: 0.5;" material="color: grey"></a-mixin>
                 <a-mixin id="yoyoAni" attribute="position" direction="alternate"
-                    dur="3000" fill="forwards" repeat="indefinite"></a-mixin>
+                    dur="3000" fill="forwards" to="1 1 1"repeat="indefinite"></a-mixin>
                 <a-mixin id="FoundMe" attribute="rotation" direction="reverse"
                     dur="1000" fill="forwards"></a-mixin>
                 <a-mixin id="RevealMe" attribute="visibility" direction="normal"
@@ -37,11 +37,12 @@
 
             <a-entity id="BooHoo"
                 mixin="coneGeo randomP" 
-                instantiator="mixin: yoyoAni coneGeo randomP; on:animationend"
+                instantiator="group:booHootimes mixin: BooHoo; on:animationend"
                 altspace-cursor-collider
                 sync="ownOn: mousedown" sync-transform sync-color>
                 <a-animation begin="click" mixin="FoundMe" to="0 0 360"></a-animation>
             </a-entity>
+            <a-entity mixin="sphereGeo" random-position></a-entity>
         </a-scene>
         <!-- 
             <script> AFRAME.registerComponent('HideandPlaceBoo', {
