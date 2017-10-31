@@ -17,6 +17,14 @@
                 <a-mixin id="RevealMe" attribute="visibility" direction="normal"
                     dur="3000" fill="forwards"></a-mixin>
                 <a-mixin id="randomP" random-position></a-mixin>
+                <a-mixin
+                    id="BooHooNew"
+                    geometry="primitive: sphere; radius: 0.5;" material="color: blue"
+                    instantiator="group:booHootimes; mixin: BooHooNew; on:animationend"
+                    altspace-cursor-collider
+                    sync="ownOn: mousedown" sync-transform sync-color>
+                    <a-animation begin="click" mixin="FoundMe" to="0 0 360"></a-animation>
+                </a-mixin>
             </a-assets>
             <!-- Cardboard Camera -->
             <a-entity position="0 2.2 4">
@@ -35,9 +43,9 @@
                 </a-entity>
         </a-entity>
 
-            <a-entity id="BooHoo"
+            <a-entity id="BooHooOne"
                 mixin="coneGeo randomP" 
-                instantiator="group:booHootimes mixin: BooHoo; on:animationend"
+                instantiator="group:booHootimes; mixin: BooHooNew; on:animationend"
                 altspace-cursor-collider
                 sync="ownOn: mousedown" sync-transform sync-color>
                 <a-animation begin="click" mixin="FoundMe" to="0 0 360"></a-animation>
