@@ -16,13 +16,6 @@
                     dur="1000" fill="forwards"></a-mixin>
                 <a-mixin id="RevealMe" attribute="visibility" direction="normal"
                     dur="3000" fill="forwards"></a-mixin>
-                <a-mixin
-                    id="BooHooNew"
-                    random-position
-                    geometry="primitive: sphere; radius: 0.5;" material="color: blue"
-                    altspace-cursor-collider
-                    sync="ownOn: click" sync-transform sync-color>
-                </a-mixin>
             </a-assets>
             <!-- Cardboard Camera -->
             <a-entity position="0 2.2 4">
@@ -44,7 +37,7 @@
             <a-entity id="BooHooOne"
                 mixin="coneGeo"
                 random-position="min:-10 1 -10"
-                instantiator="mixin: BooHooNew; on:click"
+                instantiator="on:click"
                 altspace-cursor-collider
                 sync="ownOn: click" sync-transform sync-color>
                 <a-animation begin="click" mixin="FoundMe" to="0 0 360"></a-animation>
