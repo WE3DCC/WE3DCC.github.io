@@ -22,21 +22,21 @@
                     geometry="primitive: sphere; radius: 0.5;" material="color: blue"
                     instantiator="group:booHootimes; mixin: BooHooNew; on:click"
                     altspace-cursor-collider
-                    sync="ownOn: mousedown" sync-transform sync-color>
+                    sync="ownOn: click" sync-transform sync-color>
                 </a-mixin>
             </a-assets>
             <!-- Cardboard Camera -->
             <a-entity position="0 2.2 4">
                 <a-entity camera look-controls>
                     <a-entity cursor="maxDistance: 30; fuse: true; fuseTimeout: 1600" position="0 0 -3"
-                            geometry="primitive: ring; radiusOuter: 0.30;
+                                geometry="primitive: ring; radiusOuter: 0.30;
                                         radiusInner: 0.20;"
-                            material="color: cyan; shader: flat">
-                    <a-animation begin="mouseenter" easing="linear" attribute="scale"
+                                material="color: cyan; shader: flat">
+                        <a-animation begin="mouseenter" easing="linear" attribute="scale"
                             fill="forwards" from="4 4 4" to="0.1 0.1 0.1" dur="1500" end="mouseleave"></a-animation>
-            <a-animation begin="mouseleave" dur="50" easing="ease-out-bounce" attribute="scale"
+                        <a-animation begin="mouseleave" dur="50" easing="ease-out-bounce" attribute="scale"
                                 fill="forwards" from="1 1 1" to="1 1 1" ></a-animation> 
-            <a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="scale"
+                        <a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="scale"
                                 fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" ></a-animation>
                     </a-entity>
                 </a-entity>
@@ -47,7 +47,7 @@
                 random-position="min:-10 1 -10"
                 instantiator="group:booHootimes; mixin: BooHooNew; on:click"
                 altspace-cursor-collider
-                sync="ownOn: mousedown" sync-transform sync-color>
+                sync="ownOn: click" sync-transform sync-color>
                 <a-animation begin="click" mixin="FoundMe" to="0 0 360"></a-animation>
             </a-entity>
             <a-entity mixin="sphereGeo" random-position></a-entity>
