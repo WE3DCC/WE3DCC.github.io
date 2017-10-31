@@ -5,10 +5,9 @@
         <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
         <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
         <script src="js/three.js"></script>
-        <script> AFRAME.registerComponent('HideandPlaceBoo', function (){
-
+        <script> AFRAME.registerComponent('HideandPlaceBoo', {
             init: function () {
-                var TimesShown = 0
+                var TimesShown = 0;
                 var booHoo = document.querySelector('#BooHoo');
                 var randomHidingPlace = function () {
                     var xspot = Math.randInt(0, 10);
@@ -18,7 +17,7 @@
                     booHoo.setAttribute("position", nextrandomspotposition);
                     };
                 //sync game to player who clicks on play button
-                }; 
+                }, 
                     
             update: function () {
                 // Listen for Player Finding Click
@@ -37,7 +36,7 @@
                     randomHidingPlace();
                     booHoo.setAttribute('visible', true);
                     });
-                }
+                },
             });
         </script>
     </head>
