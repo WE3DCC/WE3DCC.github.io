@@ -12,7 +12,7 @@
                 <a-mixin id="sphereGeo" geometry="primitive: sphere; radius: 0.5;" material="color: grey"></a-mixin>
                 <a-mixin id="yoyoAni" attribute="position" direction="alternate"
                     dur="3000" fill="forwards" to="1 1 1"repeat="indefinite"></a-mixin>
-                <a-mixin id="FoundMe" attribute="rotation" direction="reverse"
+                <a-mixin id="FoundMe" begin="click" attribute="rotation" direction="reverse"
                     dur="1000" fill="forwards"></a-mixin>
                 <a-mixin id="RevealMe" attribute="visibility" direction="normal"
                     dur="3000" fill="forwards"></a-mixin>
@@ -23,7 +23,6 @@
                     instantiator="group:booHootimes; mixin: BooHooNew; on:click"
                     altspace-cursor-collider
                     sync="ownOn: mousedown" sync-transform sync-color>
-                    <a-animation begin="click" mixin="FoundMe" to="0 0 360"></a-animation>
                 </a-mixin>
             </a-assets>
             <!-- Cardboard Camera -->
