@@ -4,6 +4,27 @@
         <script src="https://aframe.io/releases/0.3.1/aframe.min.js"></script>
         <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
         <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+        <script>
+            AFRAME.registerComponent('new-random-position', {
+                schema: {
+                    min: {default: {x: -10, y: 0, z: -10}, type: 'vec3'},
+                    max: {default: {x: 10, y: 10, z: 10}, type: 'vec3'}
+                },
+
+                update: function () {
+                    var data = this.data;
+                    var max = data.max;
+                    var min = data.min;
+                    this.el.addEventListener('click',function() {
+                        this.el.setAttribute('position', {
+                        x: Math.random() * (max.x - min.x) + min.x,
+                        y: Math.random() * (max.y - min.y) + min.y,
+                        z: Math.random() * (max.z - min.z) + min.z,
+                        });
+                    });
+                },
+                });
+        </script>
     </head>
     <body>
         <a-scene debug sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
@@ -17,7 +38,7 @@
                 <a-mixin id="RevealMe" attribute="visibility" direction="normal"
                     dur="3000" fill="forwards"></a-mixin>
             </a-assets>
-            <!-- Cardboard Camera -->
+            <!-- Cardboard Camera
             <a-entity position="0 2.2 4">
                 <a-entity camera look-controls>
                     <a-entity cursor="maxDistance: 30; fuse: false; fuseTimeout: 1600" position="0 0 -3"
@@ -29,14 +50,15 @@
                         <a-animation begin="mouseleave" dur="50" easing="ease-out-bounce" attribute="scale"
                                 fill="forwards" from="1 1 1" to="1 1 1" ></a-animation> 
                         <a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="scale"
-                                fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" ></a-animation> -->
+                                fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" ></a-animation> 
                     </a-entity>
                 </a-entity>
-        </a-entity>
+        </a-entity> -->
 
             <a-entity id="BooHooOne"
                 mixin="coneGeo"
                 random-position
+                new-random-position
                 altspace-cursor-collider
                 sync="ownOn: click" sync-transform sync-color>
             </a-entity>
