@@ -6,20 +6,41 @@
         <script src="js/three.js"></script>
         <script> AFRAME.registerComponent('BooHider', function (){
             init: function () {
-                var changePosition = function (el) {
+                var TimesShown = 0
+                var booHoo = document.querySelector('#BooHoo');
+                var randomHidingPlace = function () {
                     var xspot = Math.randInt(0, 10);
                     var yspot = Math.randInt(0, 10);
                     var zspot = Math.randInt(0, 10);
-                    var nextrandomspotposition = AFRAME.utils.coordinates.parse("xspot yspot zspot");
-                    el.setAttribute("position", nextrandomspotposition);
-                }
+                    var nextrandomspotposition = AFRAME.utils.coordinates.parse('xspot yspot zspot');
+                    this.el.setAttribute("position", nextrandomspotposition);
+                };
+                // Instantiate Boo on scene in a random position
+                randomHidingPlace();
+                //sync game to player who clicks on play button
+                }; 
+                    
             update: function () {
-                this.el.addEventlistener('click', function (el){
-                    changePosition(el)
-                });
-            };
-            };
-        });
+                // Listen for Player Finding Click
+                var self = this;
+                booHoo.addEventlistener('teamscored', function(){
+                    //add team finding collective count
+                    TimesShown += 1;
+                    booHoo.components.sync.takeOwnership();
+                    //Toggle visibility off
+                    booHoo.setAttribute('visible', false);
+                    self.emit('booisgone');
+                    console.log('TimeShown is ' + TimeShown);
+                    });
+                };
+            play: function (){
+                booHoo.addEventlistener('booisgone', function (){
+                    // repalce boo while hidden
+                    randomHidingPlace();
+                    el.emit('boomoved');
+                    });
+            }
+            });
         </script>
     </head>
     <body>
@@ -29,8 +50,10 @@
                 <a-mixin id="sphereGeo" geometry="primitive: sphere; radius: 0.5;" material="color: grey"></a-mixin>
                 <a-mixin id="yoyoAni" attribute="position" direction="alternate"
                     dur="3000" fill="forwards" repeat="indefinite"></a-mixin>
+                <a-mixin id="FoundMe" attribute="rotation" direction="reverse"
+                    dur="3000" fill="forwards"></a-mixin>
             </a-assets>
-            <!-- Cardboatd Camera -->
+            <!-- Cardboard Camera -->
             <a-entity position="0 2.2 4">
                 <a-entity camera look-controls>
                     <a-entity cursor="maxDistance: 30; fuse: true; fuseTimeout: 1600" position="0 0 -3"
@@ -47,8 +70,14 @@
                 </a-entity>
         </a-entity>
 
-            <a-entity id="cone1" mixin="coneGeo" BooHider altspace-cursor-collider sync="own-on: mousedown" sync-transform sync-color>
+            <a-entity id="BooHoo" 
+                mixin="coneGeo" 
+                BooHider 
+                altspace-cursor-collider
+                wire="on: click; emit:teamscored" 
+                sync="ownOn: mousedown" sync-transform sync-color>
                 <a-animation mixin="yoyoAni" to="-1 1 0"></a-animation>
+                <a-animation begin="click" mixin="FoundMe" to="0 0 360"></a-animation>
             </a-entity>
             <a-entity id="sphere" mixin="sphereGeo" position="0 0 0" sync="own-on: mouseenter mouseleave" sync-color>
                 <a-animation mixin="yoyoAni" to="0 1 0"></a-animation>
@@ -89,7 +118,103 @@
             sphereEl.addEventListener('mouseleave', function (event) {
                 event.target.setAttribute('material', 'color', 'grey');
             });
-        </script> -->
+        </script> 
+    
+    
+    
+    
+    
+    
+    
+    <html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="utf-8" />
+    <title>Visibility</title>
+    <meta name="description" content="Visibility - A-Frame" />
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="../../../dist/aframe.js"></script>
+    <script src="../../../dist/aframe-altspace-component.js"></script>
+  <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style><script src="https://aframe.io/releases/0.3.0/aframe-inspector.min.js"></script></head>
+  <body class="a-body aframe-inspector-opened">
+    <a-scene stats="" altspace="" scale="0.2 0.2 0.2" class="fullscreen" canvas="" inspector="" keyboard-shortcuts="" vr-mode-ui="">
+      <a-assets>
+        <a-mixin id="cube" geometry="primitive: box"></a-mixin>
+        <a-mixin id="cube-hovered" material="color: pink"></a-mixin>
+        <a-mixin id="cube-selected" material="color: cyan"></a-mixin>
+        <a-mixin id="red" material="color: red"></a-mixin>
+        <a-mixin id="green" material="color: green"></a-mixin>
+        <a-mixin id="blue" material="color: blue"></a-mixin>
+        <a-mixin id="yellow" material="color: yellow"></a-mixin>
+        <a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
+      </a-assets>
+
+      <a-entity position="0 0 4" rotation="" scale="" visible="">
+        <a-camera camera="" position="" rotation="" look-controls="" wasd-controls="" scale="" visible="">
+          <a-cursor material="" raycaster="" cursor="" geometry="" position="" rotation="" scale="" visible=""></a-cursor>
+        </a-camera>
+      </a-entity>
+
+      <a-entity id="shapes" position="0 0 -2" rotation="" scale="" visible="">
+        <a-entity id="blueCube" material="color: blue" geometry="primitive: box" rotation="25 25 0" position="" scale="" visible=""></a-entity>
+
+        <a-entity id="redSphere" material="color: red" geometry="primitive: sphere;" visible="false" position="" rotation="" scale=""></a-entity>
+
+        <a-entity id="greenCylinder" position="-3.5 0 0" rotation="25 25 0" material="color: green" geometry="primitive: cylinder;" scale="" visible=""></a-entity>
+
+        <a-entity id="pinkTorus" position="3.5 0 0" rotation="25 -25 0" material="color: hotpink" geometry="primitive: torus;" scale="" visible=""></a-entity>
+      </a-entity>
+    <canvas class="a-canvas a-grab-cursor" data-aframe-canvas="true" width="2802" height="2732" style="width: 1401px; height: 1366px;"></canvas><a-entity camera="" position="" rotation="" scale="" visible=""></a-entity></a-scene>
+
+    <script>
+      (function () {
+        var blueCube = document.querySelector('#blueCube');
+        var redSphere = document.querySelector('#redSphere');
+        var greenCylinder = document.querySelector('#greenCylinder');
+        document.addEventListener('click', function (e) {
+          switch (e.target) {
+            case blueCube: {
+              redSphere.setAttribute('visible', true);
+              break;
+            }
+            case redSphere: {
+              redSphere.setAttribute('visible', false);
+              break;
+            }
+            case greenCylinder: {
+              var oldVisible = greenCylinder.getComputedAttribute('visible');
+              // See issue: https://github.com/aframevr/aframe/issues/579
+              if (oldVisible === null) { oldVisible = true; }
+              greenCylinder.setAttribute('visible', !oldVisible);
+              break;
+            }
+            case pinkTorus: {
+              // Yes, this is gross. See https://github.com/aframevr/aframe/issues/531
+              var oldMaterial = pinkTorus.getComputedAttribute('material');
+              var oldOpacity = oldMaterial.opacity;
+              var newOpacity = oldOpacity === 1 ? 0 : 1;
+              var newMaterial = oldMaterial;
+              newMaterial.opacity = newOpacity;
+              pinkTorus.setAttribute('material', newMaterial);
+              break;
+            }
+          }
+        });
+      })();
+    </script>
+  
+
+</body></html>-->
     </body>
     </html>
     
