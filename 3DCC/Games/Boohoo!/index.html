@@ -16,9 +16,9 @@
                     dur="1000" fill="forwards"></a-mixin>
                 <a-mixin id="RevealMe" attribute="visibility" direction="normal"
                     dur="3000" fill="forwards"></a-mixin>
-                <a-mixin id="randomP" random-position></a-mixin>
                 <a-mixin
                     id="BooHooNew"
+                    random-position
                     geometry="primitive: sphere; radius: 0.5;" material="color: blue"
                     instantiator="group:booHootimes; mixin: BooHooNew; on:click"
                     altspace-cursor-collider
@@ -44,7 +44,8 @@
         </a-entity>
 
             <a-entity id="BooHooOne"
-                mixin="coneGeo randomP" 
+                mixin="coneGeo"
+                random-position="min:-10 1 -10"
                 instantiator="group:booHootimes; mixin: BooHooNew; on:animationend"
                 altspace-cursor-collider
                 sync="ownOn: mousedown" sync-transform sync-color>
