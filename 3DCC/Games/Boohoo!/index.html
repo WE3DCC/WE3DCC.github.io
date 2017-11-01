@@ -15,11 +15,16 @@
                     var data = this.data;
                     var max = data.max;
                     var min = data.min;
-                    this.el.addEventListener('click',function() {
-                        this.el.setAttribute('position', {
-                        x: Math.random() * (max.x - min.x) + min.x,
-                        y: Math.random() * (max.y - min.y) + min.y,
-                        z: Math.random() * (max.z - min.z) + min.z,
+                    entity.addEventListener('componentchanged',function(evt) {
+                        if (evt.detail.name === 'visible') {
+                        console.log('Entity has moved from', evt.detail.oldData, 'to', evt.detail.newData, '!');
+                        //entity.setAttribute()
+                        }
+                        //var self = this;
+                        //self.el.setAttribute('position', {
+                        //x: Math.random() * (max.x - min.x) + min.x,
+                       // y: Math.random() * (max.y - min.y) + min.y,
+                       // z: Math.random() * (max.z - min.z) + min.z,
                         });
                     });
                 },
