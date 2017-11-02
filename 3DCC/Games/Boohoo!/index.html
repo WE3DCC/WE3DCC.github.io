@@ -22,19 +22,19 @@
                 }, 
                     
             update: function () {
-                var max = 10
-                var min = -10
-                var ymin = 0
+                var max = 10;
+                var min = -10;
+                var ymin = 0;
                 // Listen for Player Finding Click
-                booHoo.addEventListener('componentchanged', function(evt){
-                    if (evt.detail.name === 'visible') {
+                booHoo.addEventListener('componentchanged', function(event){
+                    if (event.detail.name === 'visible') {
                      var randomHidingSpot = 
                     {x: (Math.floor(Math.random() * (max - min + 1) ) + min), 
                      y: (Math.floor(Math.random() * (max - ymin + 1) ) + ymin),
                      z: (Math.floor(Math.random() * (max - min + 1) ) + min)};
                     booHoo.setAttribute("position", randomHidingSpot);
                     booHoo.setAttribute('visible', true);    
-                        }
+                        };
                     });
                 },
             });
