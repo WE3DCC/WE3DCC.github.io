@@ -42,6 +42,7 @@
     </head>
     <body>
         <a-scene debug sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
+            
             <a-assets>
                 <a-mixin id="coneGeo" geometry="primitive: cone; radius-top: 0; radius-bottom: 0.5" material="color: grey"></a-mixin>
                 <a-mixin id="sphereGeo" geometry="primitive: sphere; radius: 0.5;" material="color: grey"></a-mixin>
@@ -52,6 +53,7 @@
                 <a-mixin id="RevealMe" attribute="visibility" direction="normal"
                     dur="3000" fill="forwards"></a-mixin>
             </a-assets>
+            
             <!-- Cardboard Camera
             <a-entity position="0 2.2 4">
                 <a-entity camera look-controls>
@@ -73,13 +75,15 @@
                 mixin="coneGeo"
                 HideandPlaceBoo
                 random-position
-                      <a-animation mixin="yoyoAni" from="0 -5 0" to="0 5 0" ></a-animation> 
-                      <a-animation begin="booisgone" mixin="FoundMe" to="0 360 0" ></a-animation>
                 sync sync-transform sync-color>
+                <a-animation mixin="yoyoAni" from="0 -5 0" to="0 5 0" ></a-animation> 
+                <a-animation begin="booisgone" mixin="FoundMe" to="0 360 0" ></a-animation>
             </a-entity>
+            
             <a-entity random-position>
                 <a-entity mixin="sphereGeo yoyoAni"></a-entity>
             </a-entity>
+            
         </a-scene>
         <!-- 
            
