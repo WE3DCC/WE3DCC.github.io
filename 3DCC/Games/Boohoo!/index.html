@@ -4,31 +4,40 @@
         <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
         <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
         <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-        <script>
-            AFRAME.registerComponent('new-random-position', {
-                schema: {
-                    min: {default: {x: -10, y: 0, z: -10}, type: 'vec3'},
-                    max: {default: {x: 10, y: 10, z: 10}, type: 'vec3'}
-                },
-
-                update: function () {
-                    var data = this.data;
-                    var max = data.max;
-                    var min = data.min;
-                    entity.addEventListener('componentchanged',function(evt) {
-                        if (evt.detail.name === 'visible') {
-                        console.log('Entity has moved from', evt.detail.oldData, 'to', evt.detail.newData, '!');
-                        //entity.setAttribute()
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js">
+         <script> AFRAME.registerComponent('HideandPlaceBoo', function() {
+            var booHoo = document.querySelector('#BooHoo1');
+            init: function () {
+                var TimesShown = 0;
+                booHoo.el.addEventListener('click', function(){
+                    //Toggle visibility off
+                    booHoo.setAttribute('visible', false);
+                    booHoo.emit('booisgone');
+                    //sync game to player who clicks on boo first
+                    TimesShown += 1;
+                    console.log('TimeShown is ' + TimeShown);
+                    booHoo.components.sync.takeOwnership();
+                });
+                
+                }, 
+                    
+            update: function () {
+                var max = 10
+                var min = -10
+                var ymin = 0
+                // Listen for Player Finding Click
+                booHoo.addEventListener('componentchanged', function(evt){
+                    if (evt.detail.name === 'visible') {
+                     var randomHidingSpot = 
+                    {x: (Math.floor(Math.random() * (max - min + 1) ) + min), 
+                     y: (Math.floor(Math.random() * (max - ymin + 1) ) + ymin),
+                     z: (Math.floor(Math.random() * (max - min + 1) ) + min)};
+                    booHoo.setAttribute("position", randomHidingSpot);
+                    booHoo.setAttribute('visible', true);    
                         }
-                        //var self = this;
-                        //self.el.setAttribute('position', {
-                        //x: Math.random() * (max.x - min.x) + min.x,
-                       // y: Math.random() * (max.y - min.y) + min.y,
-                       // z: Math.random() * (max.z - min.z) + min.z,
-                        });
                     });
                 },
-                });
+            });
         </script>
     </head>
     <body>
@@ -38,8 +47,8 @@
                 <a-mixin id="sphereGeo" geometry="primitive: sphere; radius: 0.5;" material="color: grey"></a-mixin>
                 <a-mixin id="yoyoAni" attribute="position" direction="alternate"
                     dur="3000" fill="forwards" to="1 1 1"repeat="indefinite"></a-mixin>
-                <a-mixin id="FoundMe" begin="click" attribute="rotation" direction="reverse"
-                    dur="1000" fill="forwards"></a-mixin>
+                <a-mixin id="FoundMe" attribute="rotation" direction="reverse"
+                    dur="2000" fill="forwards"></a-mixin>
                 <a-mixin id="RevealMe" attribute="visibility" direction="normal"
                     dur="3000" fill="forwards"></a-mixin>
             </a-assets>
@@ -60,50 +69,20 @@
                 </a-entity>
         </a-entity> -->
 
-            <a-entity id="BooHooOne"
+            <a-entity id="BooHoo1"
                 mixin="coneGeo"
+                HideandPlaceBoo
                 random-position
-                new-random-position
-                altspace-cursor-collider
-                sync="ownOn: click" sync-transform sync-color>
+                      <a-animation mixin="yoyoAni" from="0 -5 0" to="0 5 0" ></a-animation> 
+                      <a-animation begin="booisgone" mixin="FoundMe" to="0 360 0" ></a-animation>
+                sync sync-transform sync-color>
             </a-entity>
-            <a-entity mixin="sphereGeo" random-position></a-entity>
+            <a-entity random-position>
+                <a-entity mixin="sphereGeo yoyoAni"></a-entity>
+            </a-entity>
         </a-scene>
         <!-- 
-            <script> AFRAME.registerComponent('HideandPlaceBoo', {
-            init: function () {
-                var TimesShown = 0;
-                var booHoo = document.querySelector('#BooHoo');
-                var randomHidingPlace = function () {
-                    var xspot = Math.randInt(0, 10);
-                    var yspot = Math.randInt(0, 10);
-                    var zspot = Math.randInt(0, 10);
-                    var nextrandomspotposition = AFRAME.utils.coordinates.parse('xspot yspot zspot');
-                    booHoo.setAttribute("position", nextrandomspotposition);
-                    };
-                //sync game to player who clicks on play button
-                }, 
-                    
-            update: function () {
-                // Listen for Player Finding Click
-                var self = this;
-                booHoo.addEventlistener('click', function(){
-                    //add team finding collective count
-                    TimesShown += 1;
-                    booHoo.components.sync.takeOwnership();
-                    //Toggle visibility off
-                    booHoo.setAttribute('visible', false);
-                    self.emit('booisgone');
-                    console.log('TimeShown is ' + TimeShown);
-                    });
-                booHoo.addEventlistener('booisgone', function (){
-                    // repalce boo in random position while hidden
-                    randomHidingPlace();
-                    booHoo.setAttribute('visible', true);
-                    });
-                },
-            });
-        </script>
+           
         -->
     </body>
 </html>
