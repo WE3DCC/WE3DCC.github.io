@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="utf-8" />
+    <title>Merge Geometries Test</title>
+    <meta name="description" content="Merge Geometry - A-Frame" />
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="../../../dist/aframe.js"></script>
+    <script src="../../../dist/aframe-altspace-component.js"></script>
+  <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style><script src="https://aframe.io/releases/0.3.0/aframe-inspector.min.js"></script></head>
+  <body class="a-body aframe-inspector-opened">
+    <div class="stats"></div>
+    <a-scene stats="" altspace="" scale="0.01 0.01 0.01" position="0 -100 0" class="fullscreen" canvas="" inspector="" keyboard-shortcuts="" vr-mode-ui="">
+      <a-assets>
+        <a-mixin id="cube" geometry="primitive: box; height: 16; width: 16; depth: 16; mergeTo: #boxes; skipCache: true; buffer: false;" material="color: #167341; roughness: 1.0; metalness: 0.2;"></a-mixin>
+      </a-assets>
+      <a-entity position="0 20 0" rotation="" scale="" visible="">
+        <a-camera user-height="0" camera="" position="" rotation="" look-controls="" wasd-controls="" scale="" visible=""></a-camera>
+      </a-entity>
+      <a-entity id="boxes" material="color: #167341; roughness: 1.0; metalness: 0.2;" position="" rotation="" scale="" visible=""></a-entity>
+    <canvas class="a-canvas a-grab-cursor" data-aframe-canvas="true" width="2124" height="2644" style="width: 1062px; height: 1322px;"></canvas><a-entity camera="" position="" rotation="" scale="" visible=""></a-entity></a-scene>
+    <script>
+      var cubeEl;
+      var sceneEl = document.querySelector('a-scene');
+      var xStartPos = -90
+      var zStartPos = -10;
+      var xPos;
+      var zPos;
+      var xMargin = 20;
+      var zMargin = -20;
+      var cubesNum = 200;
+      var rootEl;
+      var x;
+      zPos = zStartPos;
+      for (var i = 0; i &lt; cubesNum; i += 1) {
+        xPos = xStartPos;
+        for (var j = 0; j &lt; 5; j += 1) {
+          cubeEl = document.createElement('a-entity');
+          cubeEl.setAttribute('mixin', 'cube');
+          cubeEl.setAttribute('position', { x: xPos, y: 0, z: zPos});
+          xPos += xMargin;
+          sceneEl.appendChild(cubeEl);
+        }
+        zPos += zMargin;
+      }
+    </script>
+  
+
+<a style="display: none;"></a></body></html>

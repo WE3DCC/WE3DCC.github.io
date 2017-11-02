@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="utf-8" />
+    <title>Animation: Unfold</title>
+    <meta name="description" content="Animation: Unfold - A-Frame" />
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="../../../dist/aframe.js"></script>
+    <script src="../../../dist/aframe-altspace-component.js"></script>
+  <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style><script src="https://aframe.io/releases/0.3.0/aframe-inspector.min.js"></script></head>
+  <body class="a-body aframe-inspector-opened">
+    <a-scene altspace="" scale="0.2 0.2 0.2" class="fullscreen" canvas="" inspector="" keyboard-shortcuts="" vr-mode-ui="">
+      <a-assets>
+        <a-mixin id="board" geometry="depth: .05; height: 1; width: 6" material="shader: flat" pivot="0 0.5 0" position="0 -1 0"></a-mixin>
+        <a-mixin id="unhinge" attribute="rotation" to="0 0 0" dur="1000" fill="both"></a-mixin>
+        <img id="shadow" src="../../assets/img/radial-shadow-2.png" />
+      </a-assets>
+
+      <!-- Series of nested boards that unfold one by one. -->
+      <a-entity position="0 0 -8" scale="1 1 1" rotation="" visible="">
+        <!-- Animate rotation and position of group for extra visual flair. -->
+        <a-animation attribute="position" to="0 5 -8" dur="2000"></a-animation>
+        <a-animation attribute="rotation" from="0 60 0" to="0 30 0" dur="2500"></a-animation>
+
+        <!-- Pivot and position are used to set the "hinge" of each board to it's top edge. -->
+        <a-box mixin="board" color="#F16745" material="" geometry="" position="" rotation="" scale="" visible="" pivot="">
+          <a-animation mixin="unhinge" from="-20 0 0" delay="1000"></a-animation>
+
+          <a-box mixin="board" color="#FFC65D" material="" geometry="" position="" rotation="" scale="" visible="" pivot="">
+            <a-animation mixin="unhinge" from="-175 0 0" delay="250"></a-animation>
+
+            <a-box mixin="board" color="#7BC8A4" material="" geometry="" position="" rotation="" scale="" visible="" pivot="">
+              <a-animation mixin="unhinge" from="-180 0 0" delay="500"></a-animation>
+
+              <a-box mixin="board" color="#4CC3D9" material="" geometry="" position="" rotation="" scale="" visible="" pivot="">
+                <a-animation mixin="unhinge" from="-180 0 0" delay="750"></a-animation>
+
+                <a-box mixin="board" color="#93648D" material="" geometry="" position="" rotation="" scale="" visible="" pivot="">
+                  <a-animation mixin="unhinge" from="-180 0 0" delay="1000"></a-animation>
+                </a-box>
+              </a-box>
+            </a-box>
+          </a-box>
+        </a-box>
+      </a-entity>
+
+      <a-image position="0 -1 0" src="#shadow" rotation="-90 0 0" scale="6 6 6" material="" geometry="" visible=""></a-image>
+      <a-sky color="#ECECEC" material="" geometry="" scale="" position="" rotation="" visible=""></a-sky>
+      <a-light type="directional" color="#fff" intensity="0.2" position="-1 2 1" light="" rotation="" scale="" visible=""></a-light>
+      <a-light type="ambient" color="#fff" light="" position="" rotation="" scale="" visible=""></a-light>
+    <canvas class="a-canvas a-grab-cursor" data-aframe-canvas="true" width="2124" height="2644" style="width: 1062px; height: 1322px;"></canvas><a-entity camera="" position="" rotation="" scale="" visible=""></a-entity></a-scene>
+  
+
+<a style="display: none;"></a></body></html>
