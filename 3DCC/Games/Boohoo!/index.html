@@ -8,7 +8,7 @@
             var booHoo = document.querySelector('#BooHoo1');
             init: function () {
                 var TimesShown = 0;
-                booHoo.el.addEventListener('click', function(){
+                booHoo.addEventListener('click', function(){
                     //Toggle visibility off
                     booHoo.setAttribute('visible', false);
                     booHoo.emit('booisgone');
