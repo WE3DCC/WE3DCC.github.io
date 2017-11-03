@@ -10,7 +10,7 @@
                 var TimesShown = 0;
                 booHoo.addEventListener('click', function(){
                     //Toggle visibility off
-                    booHoo.setAttribute('visible', false);
+                    this.el.object3D.setAttribute('visible', false);
                     booHoo.emit('booisgone');
                     //sync game to player who clicks on boo first
                     TimesShown += 1;
