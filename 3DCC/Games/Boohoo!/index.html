@@ -9,7 +9,7 @@
             var booHoo = document.querySelector('#BooHoo1');
             init: function () {
                 var TimesShown = 0;
-                booHoo.el.addEventListener('click', function(){
+                booHoo.el.addEventListener('boofound', function(){
                     //Toggle visibility off
                     booHoo.setAttribute('visible', false);
                     booHoo.emit('booisgone');
@@ -22,18 +22,18 @@
                 }, 
                     
             update: function () {
-                var max = 10;
-                var min = -10;
-                var ymin = 0;
                 // Listen for Player Finding Click
                 booHoo.addEventListener('componentchanged', function(event){
                     if (event.detail.name === 'visible') {
-                     var randomHidingSpot = 
-                    {x: (Math.floor(Math.random() * (max - min + 1) ) + min), 
-                     y: (Math.floor(Math.random() * (max - ymin + 1) ) + ymin),
-                     z: (Math.floor(Math.random() * (max - min + 1) ) + min)};
-                    booHoo.setAttribute("position", randomHidingSpot);
-                    booHoo.setAttribute('visible', true);    
+                        var max = 10;
+                        var min = -10;
+                        var ymin = 0;
+                        var randomHidingSpot = 
+                        {x: (Math.floor(Math.random() * (max - min + 1) ) + min), 
+                         y: (Math.floor(Math.random() * (max - ymin + 1) ) + ymin),
+                         z: (Math.floor(Math.random() * (max - min + 1) ) + min)};
+                        booHoo.setAttribute("position", randomHidingSpot);
+                        booHoo.setAttribute('visible', true);    
                         };
                     });
                 },
@@ -75,8 +75,10 @@
                 mixin="coneGeo"
                 HideandPlaceBoo
                 random-position
+                altspace-cursor-collider
+                wire="on:click; emit: boofound"
                 sync sync-transform sync-color>
-                <a-animation mixin="yoyoAni" from="0 -5 0" to="0 5 0" ></a-animation> 
+                <a-entity> <a-animation mixin="yoyoAni" from="0 -2 0" to="0 5 0" ></a-animation> </a-entity>
                 <a-animation begin="booisgone" mixin="FoundMe" to="0 360 0" ></a-animation>
             </a-entity>
             
