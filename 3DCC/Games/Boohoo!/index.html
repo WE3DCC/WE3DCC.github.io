@@ -32,7 +32,7 @@
                          y: (Math.floor(Math.random() * (max - ymin + 1) ) + ymin),
                          z: (Math.floor(Math.random() * (max - min + 1) ) + min)};
                         booHoo.setAttribute("position", randomHidingSpot);
-                        booHoo.setAttribute('visible', true);    
+                        this.el.object3D.position.set('visible', true);    
                         };
                     });
                 },
