@@ -44,6 +44,8 @@
         <a-scene debug sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
             
             <a-assets>
+                <a-asset-item id="boohooObj" src="models/BooHootheGhost.obj"></a-asset-item>
+                <img id="boohooMtl" src="models/BooHootheGhost.mtl">
                 <a-mixin id="coneGeo" geometry="primitive: cone; radius-top: 0; radius-bottom: 0.5" material="color: grey"></a-mixin>
                 <a-mixin id="sphereGeo" geometry="primitive: sphere; radius: 0.5;" material="color: grey"></a-mixin>
                 <a-mixin id="yoyoAni" attribute="position" direction="alternate"
@@ -72,7 +74,7 @@
         </a-entity> -->
 
             <a-entity id="BooHoo1"
-                mixin="coneGeo"
+                obj-model="obj: #boohooObj; mtl:#boohooMtl"
                 HideandPlaceBoo
                 random-position
                 altspace-cursor-collider
