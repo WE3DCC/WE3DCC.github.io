@@ -30,7 +30,7 @@
             update: function () {
                 // var randpos = AFRAME.utils.coordinates.stringify(this.data.randomposition);
                 // Listen for Player click and set new random position
-                booHoo.object3D.addEventListener("componentchanged",function(){
+                booHoo.addEventListener("componentchanged",function(){
                     if (event.detail.name === 'visible') {
                         var max = 10;
                         var min = -10;
@@ -46,9 +46,9 @@
                             animation.setAttribute("dur","2000");
                             animation.setAttribute("repeat","0");
                             this.appendChild(animation);
-                        }
-                    booHoo.addState('moved');
-                    console.log('Entity moved to', newHidingSpot);
+                        };
+                booHoo.addState('moved');
+                console.log('Entity moved to ' + newHidingSpot);
                 });  
                 },
             });
