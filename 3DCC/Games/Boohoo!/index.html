@@ -10,7 +10,6 @@
                 var booHoo = document.querySelector('#BooHoo1');
                 var sceneEl = document.querySelector('a-scene');
                 var booHoo3D = booHoo.object3D;
-                this.entities = [];
                 sceneEl.emit('spin');
                 console.log('Gamestart');
                 },
@@ -49,17 +48,21 @@
                     default:{x: 10, y: 0, z: -10}
                 }
             },
-            init: function (){
-                var HideBooSystem = document.querySelector('a-scene').systems[HideandPlaceBoo];
-            },
             update: function () {
+                var randpos = AFRAME.utils.coordinates.stringify(this.data.randomposition);
                 //Toggle visibility off
-                entity = this.el.object3D;
+                var entity = this.el.object3D;
                 entity.addEventListener('mousedown', function(){
                     entity.setAttribute('visible', false);
                     entity.addState('selected');
                     console.log('Boo clicked');
                 });
+                entity.addEventListener('componentchanged', function(evt){
+                    if (evt.detail.name === 'Hider') {
+                        entity.setAttribute('position', randpos);
+                        console.log('Entity moved from', evt.detail.oldData, 'to', evt.detail.newData, '!');
+                      }
+                    });
                 },
             });
         </script>
@@ -92,37 +95,37 @@
                 <a-mixin id="sphereGeo" geometry="primitive: sphere; radius: 0.5;" material="color: grey"></a-mixin>
                 <a-mixin id="yoyoAni" attribute="position" direction="alternate"
                     dur="3000" fill="forwards" to="1 1 1"repeat="indefinite"></a-mixin>
-                <a-mixin id="Spinning" begin="spin" attribute="rotation" direction="reverse"
+                <a-mixin id="Spinning" attribute="rotation" direction="reverse"
                     dur="2000" fill="forwards" to="0 360 0" repeat="indefinite"></a-mixin>
-                <a-mixin id="RevealMe" attribute="visibility" direction="normal"
-                    dur="3000" fill="forwards"></a-mixin>
             </a-assets>
             
             <!-- Cardboard Camera -->
             <a-entity position="0 2.2 2">
                 <a-entity camera look-controls>
-                    <a-entity cursor="maxDistance: 30; fuse: false; fuseTimeout: 1600" position="0 0 -3"
-                                geometry="primitive: ring; radiusOuter: 0.30;
-                                        radiusInner: 0.20;"
-                                material="color: cyan; shader: flat">
-                         <a-animation begin="mouseenter" easing="linear" attribute="scale"
+                    <a-entity
+                        raycaster="objects: .clickable"
+                        cursor="maxDistance: 30; fuse: false; fuseTimeout: 1600" position="0 0 -3"
+                        geometry="primitive: ring; radiusOuter: 0.30; radiusInner: 0.20"
+                        material="color: cyan; shader: flat">
+                        <a-animation begin="mouseenter" easing="linear" attribute="scale"
                             fill="forwards" from="4 4 4" to="0.1 0.1 0.1" dur="1500" end="mouseleave"></a-animation>
                         <a-animation begin="mouseleave" dur="50" easing="ease-out-bounce" attribute="scale"
                             fill="forwards" from="1 1 1" to="1 1 1" ></a-animation> 
                         <a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="scale"
                             fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" ></a-animation> 
-                     </a-entity>
+                    </a-entity>
                 </a-entity>
             </a-entity>
 
             <a-entity id="BooHoo1"
+                class="clickable"
                 Hider
-                mixin="Spinning"
                 obj-model="obj: #boohooObj; mtl:#boohooMtl"
                 n-capsule-collider="height: 2; radius: 2; type: 'object'"
                 altspace-cursor-collider
                 wire="on:mousedown; emit: boofound; target: #scene"
                 sync sync-transform sync-color>
+                <a-animation mixin="Spinning" begin="spin"></a-animation>
             </a-entity>
             
             <a-entity random-position>
