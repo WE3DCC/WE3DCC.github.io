@@ -11,7 +11,7 @@
                 var sceneEl = document.querySelector('a-scene');
                 var booHoo3D = booHoo.object3D;
                 this.entities = [];
-                this.emit('spin');
+                this.sceneEl.emit('spin');
                 },
             update: function () {
                 //sync game to player who clicks on boo 
@@ -62,8 +62,8 @@
             update: function () {
                 //Toggle visibility off
                 this.el.object3D.addEventListener('mousedown', function(){
-                    entity.setAttribute('visible', false);
-                    entity.addState('selected');
+                    this.el.setAttribute('visible', false);
+                    this.el.addState('selected');
                     this.system.hideMe();
                 });
                 },
