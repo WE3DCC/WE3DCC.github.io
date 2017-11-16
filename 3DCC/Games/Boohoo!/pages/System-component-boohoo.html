@@ -4,53 +4,72 @@
         <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
         <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
         <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-        <script> AFRAME.registerComponent('Hider', {
+        <script> AFRAME.registerSystem('HideandPlaceBoo', {
             init: function () {
                 var TimesShown = 0;
                 var booHoo = document.querySelector('#BooHoo1');
                 var sceneEl = document.querySelector('a-scene');
                 var booHoo3D = booHoo.object3D;
-                //turn off Boo visibility and sync game to player who clicks on boo 
-                sceneEl.addEventListener('mousedown', function(){
-                    booHoo3D.setAttribute('visible', false);
-                    booHoo.components.sync.takeOwnership();
-                    TimesShown += 1;
-                    booHoo.emit('boogone');
-                    console.log('TimeShown is ' + TimesShown);
-                    }.bind(this));
                 sceneEl.emit('spin');
                 console.log('Gamestart');
                 },
             update: function () {
-                // var randpos = AFRAME.utils.coordinates.stringify(this.data.randomposition);
-                // Listen for Player click and set new random position
-                booHoo.addEventListener("componentchanged",function(){
-                    if (event.detail.name === 'visible') {
+                //sync game to player who clicks on boo 
+                sceneEl.addEventListener('boofound', function(){
+                    booHoo.components.sync.takeOwnership();
+                    TimesShown += 1;
+                    console.log('TimeShown is ' + TimesShown);
+                    });
+                // Listen for Player Found State and set new random position
+                booHoo.addEventListener('stateadded', function(event){
+                    if (event.detail.state === 'selected') {
                         var max = 10;
                         var min = -10;
                         var ymin = 0;
-                        var newHidingSpot = AFRAME.utils.coordinates.stringify({
+                        var newHidingSpot ={
                             x: (Math.floor(Math.random() * (max - min)) + min), 
                             y: (Math.floor(Math.random() * (max - ymin)) + ymin),
-                            z: (Math.floor(Math.random() * (max - min)) + min)});
-                        var animation = document.createElement("a-animation");
-                            animation.setAttribute("attribute","position");
-                            animation.setAttribute("begin","hideMe");
-                            animation.setAttribute("to", newHidingSpot);
-                            animation.setAttribute("dur","2000");
-                            animation.setAttribute("repeat","0");
-                            this.appendChild(animation);
-                        }
-                    booHoo.addState('moved');
-                    console.log('Entity moved to', newHidingSpot);
-                });  
-                // Spin Boo {play sound} and turn on visiblity
-                booHoo.addEventListener('stateadded', function(event){
-                    if (event.detail.state === 'moved') {
-                        entity.setAttribute('visible', true);
-                        entity.emit('spin'); 
-                        console.log('Find me!');
+                            z: (Math.floor(Math.random() * (max - min)) + min)};
+                        booHoo.setAttribute("Hider","randomposition", newHidingSpot);
+                        console.log('Boo replaced');
                         };
+                    });
+                // Spin Boo {play sound} and turn on visiblity
+                booHoo3D.setAttribute('visible', true);
+                booHoo.emit('spin'); 
+                console.log('Find me!');
+                },
+            });
+        </script>
+        <script> AFRAME.registerComponent('Hider', {
+            schema: {
+                randomposition: {
+                    type:'vec3', 
+                    default:{x: 10, y: 0, z: -10}
+                }
+            },
+            update: function () {
+                var randpos = AFRAME.utils.coordinates.stringify(this.data.randomposition);
+                //Toggle visibility off
+                var entity = this.el.object3D;
+                this.el.addEventListener("click",function(){
+                var animation = document.createElement("a-animation");
+                    animation.setAttribute("attribute","position");
+                    animation.setAttribute("to",this.data.position);
+                    animation.setAttribute("dur","1000");
+                    animation.setAttribute("repeat","0");
+                    this.data.target.appendChild(animation);
+                    }.bind(this));  
+                entity.addEventListener('mousedown', function(){
+                    entity.setAttribute('visible', false);
+                    entity.addState('selected');
+                    console.log('Boo clicked');
+                });
+                entity.addEventListener('componentchanged', function(evt){
+                    if (evt.detail.name === 'Hider') {
+                        entity.setAttribute('position', randpos);
+                        console.log('Entity moved from', evt.detail.oldData, 'to', evt.detail.newData, '!');
+                      }
                     });
                 },
             });
@@ -76,7 +95,7 @@
         </script> -->
     </head>
     <body>
-        <a-scene debug sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
+        <a-scene id="scene" debug HideandPlaceBoo sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
             <a-assets>
                 <a-asset-item id="boohooObj" src="models/BooHootheGhost.obj"></a-asset-item>
                 <a-asset-item id="boohooMtl" src="models/BooHootheGhost.mtl"></a-assset-item>
@@ -112,7 +131,7 @@
                 obj-model="obj: #boohooObj; mtl:#boohooMtl"
                 n-capsule-collider="height: 2; radius: 2; type: 'object'"
                 altspace-cursor-collider
-                wire="on:boogone; emit: hideMe"
+                wire="on:mousedown; emit: boofound; target: #scene"
                 sync sync-transform sync-color>
                 <a-animation mixin="Spinning" begin="spin"></a-animation>
             </a-entity>
