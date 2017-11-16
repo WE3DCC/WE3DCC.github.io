@@ -26,10 +26,10 @@
                         var max = 10;
                         var min = -10;
                         var ymin = 0;
-                        var newHidingSpot = AFRAME.utils.coordinates.stringify(
-                            {x: (Math.floor(Math.random() * (max - min + 1) ) + min), 
-                            y: (Math.floor(Math.random() * (max - ymin + 1) ) + ymin),
-                            z: (Math.floor(Math.random() * (max - min + 1) ) + min)});
+                        var newHidingSpot ={
+                            x: (Math.floor(Math.random() * (max - min)) + min), 
+                            y: (Math.floor(Math.random() * (max - ymin)) + ymin),
+                            z: (Math.floor(Math.random() * (max - min)) + min)};
                         return newHidingSpot;
                         };
                     });
