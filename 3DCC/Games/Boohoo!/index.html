@@ -12,6 +12,7 @@
                 var booHoo3D = booHoo.object3D;
                 this.entities = [];
                 this.sceneEl.emit('spin');
+                console.log('Gamestart');
                 },
             update: function () {
                 //sync game to player who clicks on boo 
@@ -31,6 +32,7 @@
                             y: (Math.floor(Math.random() * (max - ymin)) + ymin),
                             z: (Math.floor(Math.random() * (max - min)) + min)};
                         return newHidingSpot;
+                        console.log('randomrun');
                         };
                     });
                 },
@@ -46,6 +48,7 @@
                 booHoo.object3D.setAttribute(HideandPlaceBoo,"randomposition", newHidingSpot);
                 booHoo.setAttribute('visible', true);
                 booHoo.emit('spin'); 
+                console.log('Boo replaced');
                 },
             });
         </script>
@@ -65,13 +68,14 @@
                     this.el.setAttribute('visible', false);
                     this.el.addState('selected');
                     this.system.hideMe();
+                    console.log('Boo clicked');
                 });
                 },
             });
         </script>
     </head>
     <body>
-        <a-scene HideandPlaceBoo sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
+        <a-scene debug HideandPlaceBoo sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
             <a-assets>
                 <a-asset-item id="boohooObj" src="models/BooHootheGhost.obj"></a-asset-item>
                 <a-asset-item id="boohooMtl" src="models/BooHootheGhost.mtl"></a-assset-item>
