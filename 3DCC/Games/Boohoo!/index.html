@@ -4,7 +4,7 @@
         <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
         <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
         <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-         <script> AFRAME.registerSystem('HideandPlaceBoo', {
+        <script> AFRAME.registerSystem('HideandPlaceBoo', {
             init: function () {
                 var TimesShown = 0;
                 var booHoo = document.querySelector('#BooHoo1');
@@ -36,38 +36,32 @@
                         };
                     });
                 },
-            registerMe: function (el) {
-                this.entities.push(el);
-                },
-            unregisterMe: function (el) {
-                var index = this.entities.indexOf(el);
-                this.entities.splice(index, 1);
-                }, 
             hideMe: function() {
                 // Hide Boo in new Hiding Spot and turn on visiblity
-                booHoo.object3D.setAttribute(HideandPlaceBoo,"randomposition", newHidingSpot);
-                booHoo.setAttribute('visible', true);
+                booHoo3D.setAttribute(HideandPlaceBoo,"randomposition", newHidingSpot);
+                booHoo3D.setAttribute('visible', true);
                 booHoo.emit('spin'); 
                 console.log('Boo replaced');
                 },
             });
         </script>
-        <script> AFRAME.registerComponent('HideandPlaceBoo', {
+        <script> AFRAME.registerComponent('Hider', {
             schema: {
                 randomposition: {
                     type:'vec3', 
-                    default:{x: 0, y: 0, z: 0}
-                },
+                    default:{x: 10, y: 0, z: -10}
+                }
             },
-            init: function () {
-                this.system.registerMe(this.el);
-                }, 
+            init: function (){
+                var HideBooSystem = document.querySelector('a-scene').systems[HideandPlaceBoo];
+            },
             update: function () {
                 //Toggle visibility off
-                this.el.object3D.addEventListener('mousedown', function(){
-                    this.el.setAttribute('visible', false);
-                    this.el.addState('selected');
-                    this.system.hideMe();
+                entity = this.el.object3D;
+                entity.addEventListener('mousedown', function(){
+                    entity.setAttribute('visible', false);
+                    entity.el.addState('selected');
+                    HideBooSystem.hideMe();
                     console.log('Boo clicked');
                 });
                 },
@@ -75,7 +69,7 @@
         </script>
     </head>
     <body>
-        <a-scene debug HideandPlaceBoo sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
+        <a-scene id="scene" debug HideandPlaceBoo sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
             <a-assets>
                 <a-asset-item id="boohooObj" src="models/BooHootheGhost.obj"></a-asset-item>
                 <a-asset-item id="boohooMtl" src="models/BooHootheGhost.mtl"></a-assset-item>
@@ -107,12 +101,12 @@
             </a-entity>
 
             <a-entity id="BooHoo1"
-                HideandPlaceBoo
+                Hider
                 mixin="Spinning"
                 obj-model="obj: #boohooObj; mtl:#boohooMtl"
                 n-capsule-collider="height: 2; radius: 2; type: 'object'"
                 altspace-cursor-collider
-                wire="on:click; emit: boofound"
+                wire="on:click; emit: boofound; target: #scene"
                 sync sync-transform sync-color>
             </a-entity>
             
