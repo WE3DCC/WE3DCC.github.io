@@ -89,11 +89,10 @@
                 class="clickable"
                 Hider
                 wire="on:boogone; emit: hideMe"
+                n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'"
+                altspace-cursor-collider
                 sync sync-transform sync-color>
-                <a-entity
-                    obj-model="obj: #boohooObj; mtl:#boohooMtl"
-                    n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'"
-                    altspace-cursor-collider></a-entity>
+                <a-entity obj-model="obj: #boohooObj; mtl:#boohooMtl"></a-entity>
                 <a-animation mixin="Spinning" begin="spin"></a-animation>
             </a-entity>
             
