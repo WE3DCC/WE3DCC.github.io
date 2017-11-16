@@ -1,47 +1,77 @@
 <html>
     <head>
-        <title>A-Frame Altspace Component - Test Sync</title>
+        <title>We3D.CC:BooHoo!.Altspace</title>
+        <title>we.3DCC:BooHoo!.Altspace</title>
+        <title>WE3DCC.WE3D:BooHoo!.Altspace</title>
+        <title>WE3DyCC:Cannacorner.Altspace</title>
         <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
         <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
         <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-         <script> AFRAME.registerComponent('HideandPlaceBoo', function() {
-            var booHoo = document.querySelector('#BooHoo1');
+         <script> AFRAME.registerSystem('HideandPlaceBoo', function() {
             init: function () {
                 var TimesShown = 0;
-                booHoo.addEventListener('mousedown', function(){
-                    //Toggle visibility off
-                    this.el.object3D.setAttribute('visible', false);
-                    booHoo.emit('booisgone');
-                    //sync game to player who clicks on boo first
-                    TimesShown += 1;
-                    console.log('TimeShown is ' + TimeShown);
-                    booHoo.components.sync.takeOwnership();
-                });
-                
+                var booHoo = document.querySelector('#BooHoo1');
+                var sceneEl = document.querySelector('a-scene');
+                var booHoo3D = booHoo.object3D;
+                this.entities = [];
+                entity.emit('spin')};
+                },
+            registerMe: function (el) {
+                this.entities.push(el);
+                },
+            unregisterMe: function (el) {
+                var index = this.entities.indexOf(el);
+                this.entities.splice(index, 1);
                 }, 
-                    
             update: function () {
-                // Listen for Player Finding Click
-                booHoo.addEventListener('componentchanged', function(event){
-                    if (event.detail.name === 'visible') {
+                //sync game to player who clicks on boo
+                sceneEl.addEventListener('boofound', function(){
+                    booHoo.components.sync.takeOwnership();
+                    TimesShown += 1;
+                    console.log('TimeShown is ' + TimesShown);
+                    });
+                },
+                // Listen for Player Found State and set new random position
+                booHoo.addEventListener('stateadded', function(event){
+                    if (event.detail.state === 'selected') {
                         var max = 10;
                         var min = -10;
                         var ymin = 0;
-                        var randomHidingSpot = 
-                        {x: (Math.floor(Math.random() * (max - min + 1) ) + min), 
-                         y: (Math.floor(Math.random() * (max - ymin + 1) ) + ymin),
-                         z: (Math.floor(Math.random() * (max - min + 1) ) + min)};
-                        booHoo.setAttribute("position", randomHidingSpot);
-                        this.el.object3D.position.set('visible', true);    
-                        };
-                    });
+                        var newHidingSpot = AFRAME.utils.coordinates.stringify(
+                            {x: (Math.floor(Math.random() * (max - min + 1) ) + min), 
+                            y: (Math.floor(Math.random() * (max - ymin + 1) ) + ymin),
+                            z: (Math.floor(Math.random() * (max - min + 1) ) + min)});
+                        return newHidingSpot;
+                    },
+                });
+            hideMe: function() {
+                // Hide Boo in new Hiding Spot and turn on visiblity
+                booHoo.object3D.setAttribute(HideandPlaceBoo,"randomposition", newHidingSpot);
+                booHoo.setAttribute('visible', true);
+                booHoo.emit('spin'); 
+                },
+            });
+        </script>
+        <script> AFRAME.registerComponent('HideandPlaceBoo', function() {
+            schema: {
+                randomposition: {type:vec3, default:{x: 0, y: 0, z: 0}};
+            },
+            init: function () {
+                this.system.registerMe(this.el);
+                }, 
+            update: function () {
+                //Toggle visibility off
+                this.el.object3D.addEventListener('mousedown', function(){
+                    entity.setAttribute('visible', false);
+                    entity.addState('selected');
+                    this.system.hideMe();
+                });
                 },
             });
         </script>
     </head>
     <body>
-        <a-scene sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
-            
+        <a-scene HideandPlaceBoo sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
             <a-assets>
                 <a-asset-item id="boohooObj" src="models/BooHootheGhost.obj"></a-asset-item>
                 <a-asset-item id="boohooMtl" src="models/BooHootheGhost.mtl"></a-assset-item>
@@ -49,8 +79,8 @@
                 <a-mixin id="sphereGeo" geometry="primitive: sphere; radius: 0.5;" material="color: grey"></a-mixin>
                 <a-mixin id="yoyoAni" attribute="position" direction="alternate"
                     dur="3000" fill="forwards" to="1 1 1"repeat="indefinite"></a-mixin>
-                <a-mixin id="FoundMe" attribute="rotation" direction="reverse"
-                    dur="2000" fill="forwards"></a-mixin>
+                <a-mixin id="Spinning" begin="spin" attribute="rotation" direction="reverse"
+                    dur="2000" fill="forwards" to="0 360 0"></a-mixin>
                 <a-mixin id="RevealMe" attribute="visibility" direction="normal"
                     dur="3000" fill="forwards"></a-mixin>
             </a-assets>
@@ -73,13 +103,13 @@
             </a-entity>
 
             <a-entity id="BooHoo1"
-                obj-model="obj: #boohooObj; mtl:#boohooMtl"
                 HideandPlaceBoo
-                random-position
+                obj-model="obj: #boohooObj; mtl:#boohooMtl"
+                n-capsule-collider="height: 2; radius: 2; type: 'object'"
                 altspace-cursor-collider
                 wire="on:click; emit: boofound"
                 sync sync-transform sync-color>
-                <a-animation mixin="FoundMe" to="0 360 0" ></a-animation>
+                <a-animation mixin="Spinning"></a-animation>
             </a-entity>
             
             <a-entity random-position>
