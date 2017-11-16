@@ -31,17 +31,14 @@
                             x: (Math.floor(Math.random() * (max - min)) + min), 
                             y: (Math.floor(Math.random() * (max - ymin)) + ymin),
                             z: (Math.floor(Math.random() * (max - min)) + min)};
-                        return newHidingSpot;
-                        console.log('randomrun');
+                        booHoo.setAttribute("Hider","randomposition", newHidingSpot);
+                        console.log('Boo replaced');
                         };
                     });
-                },
-            hideMe: function() {
-                // Hide Boo in new Hiding Spot and turn on visiblity
-                booHoo3D.setAttribute(HideandPlaceBoo,"randomposition", newHidingSpot);
+                // Spin Boo {play sound} and turn on visiblity
                 booHoo3D.setAttribute('visible', true);
                 booHoo.emit('spin'); 
-                console.log('Boo replaced');
+                console.log('Find me!');
                 },
             });
         </script>
@@ -60,13 +57,31 @@
                 entity = this.el.object3D;
                 entity.addEventListener('mousedown', function(){
                     entity.setAttribute('visible', false);
-                    entity.el.addState('selected');
-                    HideBooSystem.hideMe();
+                    entity.addState('selected');
                     console.log('Boo clicked');
                 });
                 },
             });
         </script>
+    <!-- <script>
+            AFRAME.registerComponent("move",{
+            schema : {
+              target : { type : "selector"},
+              position : {type : "string"}
+            },
+            init : function(){
+                this.el.addEventListener("click",function(){
+                        var animation = document.createElement("a-animation");
+                        animation.setAttribute("attribute","position");
+                        animation.setAttribute("to",this.data.position);
+                        animation.setAttribute("dur","1000");
+                        animation.setAttribute("repeat","0");
+                        this.data.target.appendChild(animation);
+                }.bind(this));
+            }
+            
+            });
+        </script> -->
     </head>
     <body>
         <a-scene id="scene" debug HideandPlaceBoo sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
