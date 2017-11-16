@@ -16,14 +16,6 @@
                     booHoo.emit('boogone');
                     console.log('TimeShown is ' + TimesShown);
                     }.bind(this));
-                // Spin Boo {play sound} and turn on visiblity
-                booHoo.addEventListener('stateadded', function(event){
-                    if (event.detail.state === 'moved') {
-                        booHoo.setAttribute('visible', true);
-                        booHoo.emit('spin'); 
-                        console.log('Find me!');
-                        };
-                    }.bind(this));
                 booHoo.emit('spin');
                 console.log('Gamestart');
                 },
@@ -47,9 +39,17 @@
                             animation.setAttribute("repeat","0");
                             this.appendChild(animation);
                         };
-                booHoo.addState('moved');
-                console.log('Entity moved to ' + newHidingSpot);
-                });  
+                    booHoo.addState('moved');
+                    console.log('Entity moved to ' + newHidingSpot);
+                    });
+                // Spin Boo {play sound} and turn on visiblity
+                booHoo.addEventListener('stateadded', function(event){
+                    if (event.detail.state === 'moved') {
+                        booHoo.setAttribute('visible', true);
+                        booHoo.emit('spin'); 
+                        console.log('Find me!');
+                        };
+                    }.bind(this));
                 },
             });
         </script>
