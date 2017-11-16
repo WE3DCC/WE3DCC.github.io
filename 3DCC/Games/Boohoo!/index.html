@@ -11,7 +11,7 @@
                 var sceneEl = document.querySelector('a-scene');
                 var booHoo3D = booHoo.object3D;
                 this.entities = [];
-                this.sceneEl.emit('spin');
+                sceneEl.emit('spin');
                 console.log('Gamestart');
                 },
             update: function () {
@@ -106,7 +106,7 @@
                 obj-model="obj: #boohooObj; mtl:#boohooMtl"
                 n-capsule-collider="height: 2; radius: 2; type: 'object'"
                 altspace-cursor-collider
-                wire="on:click; emit: boofound; target: #scene"
+                wire="on:mousedown; emit: boofound; target: #scene"
                 sync sync-transform sync-color>
             </a-entity>
             
