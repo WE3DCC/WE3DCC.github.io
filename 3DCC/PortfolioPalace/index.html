@@ -11,14 +11,25 @@
                 thehider.addEventListener('click', function(){
                     this.el.setAttribute('visible', false);
                     TimesShown += 1;
-                    thehider.emit('boogone');
                     console.log('TimeShown is ' + TimesShown);
                     });
-                thehider.emit('spin');
                 console.log('Gamestart');
                 },
 			});
-        </script>
+		</script>
+		<script>
+				AFRAME.registerComponent('change-color', {
+					init: function () {
+						var self = this;
+						this.el.object3D.addEventListener('cursorup', function(){
+							var randomColor = Math.floor(Math.random() * 0x1000000);
+							randomColor = '#' + ('000000'+(randomColor).toString(16)).slice(-6);
+							self.el.components.sync.takeOwnership();
+							self.el.setAttribute('material', 'color', randomColor);
+						});
+					}
+				});
+		</script>
 	</head>
 	<body>
 	<a-scene inspector altspace="fullspace: true">
@@ -38,7 +49,7 @@
 		<a-entity position="5.35 0 -10.27" rotation="0 0 0" geometry="primitive:sphere;radius:10" n-mesh-collider="type:hologram" id="greensphere" material="fog:false;color:#8dff6e;transparent:true;opacity:0.38"></a-entity>
 	<!--testing -->
 
-		<a-sphere hider altspace-cursor-collider position="-10.34 -0.36 0.98" radius="5" id="bluesphere">
+		<a-sphere change-color altspace-cursor-collider position="-10.34 -0.36 0.98" radius="5" id="bluesphere">
 			<a-animation mixin="spinning"></a-animation>
 		</a-sphere>
 
