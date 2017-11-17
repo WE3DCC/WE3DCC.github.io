@@ -9,12 +9,12 @@
                 var TimesShown = 0;
                 var thehider = this.el.object3D;
                 //turn off Boo visibility and sync game to player who clicks on boo 
-                thehider.addEventListener('mousedown', function(){
+                this.el.addEventListener('mousedown', function(){
                     thehider.setAttribute('visible', false);
                     thehider.components.sync.takeOwnership();
                     TimesShown += 1;
                     thehider.emit('boogone');
-                    }.bind(this));
+                    });
                     thehider.emit('spin');
                 console.log('TimeShown is ' + TimesShown);
                 console.log('Gamestart');
@@ -22,7 +22,7 @@
             update: function () {
                 // var randpos = AFRAME.utils.coordinates.stringify(this.data.randomposition);
                 // Listen for Player click and set new random position
-                thehider.addEventListener("componentchanged",function(){
+                this.el.addEventListener("componentchanged",function(){
                     if (event.detail.name === 'visible') {
                         var max = 10;
                         var min = -10;
@@ -44,13 +44,13 @@
                     console.log('Entity moved to ' + newHidingSpot);
                     });
                 // Spin Boo {play sound} and turn on visiblity
-                thehider.addEventListener('stateadded', function(event){
+                this.el.addEventListener('stateadded', function(event){
                     if (event.detail.state === 'moved') {
                         thehider.setAttribute('visible', true);
                         thehider.emit('spin'); 
                         console.log('Find me!');
                         };
-                    }.bind(this));
+                    });
                 },
             });
         </script>
@@ -84,6 +84,7 @@
                     </a-entity>
                 </a-entity>
             </a-entity>
+
             <!--n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'" -->
             <a-entity id="BooHoo1"
                 hider
