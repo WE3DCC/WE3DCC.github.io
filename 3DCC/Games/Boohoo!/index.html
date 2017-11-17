@@ -71,7 +71,6 @@
             <a-entity position="0 2.2 2">
                 <a-entity camera look-controls>
                     <a-entity
-                        raycaster="objects: .clickable"
                         cursor="maxDistance: 30; fuse: false; fuseTimeout: 1600" position="0 0 -3"
                         geometry="primitive: ring; radiusOuter: 0.30; radiusInner: 0.20"
                         material="color: cyan; shader: flat">
@@ -86,7 +85,6 @@
             </a-entity>
             <!--n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'" -->
             <a-entity id="BooHoo1"
-                class="clickable"
                 hider
                 wire="on:boogone; emit: hideMe"
                 altspace-cursor-collider
