@@ -8,7 +8,7 @@
                 var TimesShown = 0;
                 var thehider = this.el.object3D;
                 //turn off Boo visibility and sync game to player who clicks on boo 
-                thehider.addEventListener('mousedown', function(){
+                thehider.addEventListener('click', function(){
                     thehider.setAttribute('visible', false);
                     TimesShown += 1;
                     thehider.emit('boogone');
