@@ -10,7 +10,6 @@
                 //turn off Boo visibility and sync game to player who clicks on boo 
                 thehider.addEventListener('mousedown', function(){
                     thehider.setAttribute('visible', false);
-                    thehider.components.sync.takeOwnership();
                     TimesShown += 1;
                     thehider.emit('boogone');
                     console.log('TimeShown is ' + TimesShown);
@@ -39,7 +38,7 @@
 		<a-entity position="5.35 0 -10.27" rotation="0 0 0" geometry="primitive:sphere;radius:10" n-mesh-collider="type:hologram" id="greensphere" material="fog:false;color:#8dff6e;transparent:true;opacity:0.38"></a-entity>
 	<!--testing -->
 
-		<a-sphere hider position="-10.34 -0.36 0.98" radius="5" id="bluesphere">
+		<a-sphere hider altspace-cursor-collider position="-10.34 -0.36 0.98" radius="5" id="bluesphere">
 			<a-animation mixin="spinning"></a-animation>
 		</a-sphere>
 
