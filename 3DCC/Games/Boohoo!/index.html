@@ -4,7 +4,7 @@
         <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
         <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
         <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-        <script> AFRAME.registerComponent('Hider', {
+        <script> AFRAME.registerComponent('hider', {
             init: function () {
                 var TimesShown = 0;
                 var booHoo = document.querySelector('#BooHoo1');
@@ -87,7 +87,7 @@
             <!--n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'" -->
             <a-entity id="BooHoo1"
                 class="clickable"
-                Hider
+                hider
                 wire="on:boogone; emit: hideMe"
                 altspace-cursor-collider
                 sync sync-transform sync-color>
