@@ -7,9 +7,9 @@
         <script> AFRAME.registerComponent('hider', {
             init: function () {
                 var TimesShown = 0;
-                var thehider = this.el.object3D;
+                var thehider = this.el;
                 //turn off Boo visibility and sync game to player who clicks on boo 
-                thehider.addEventListener('mousedown', function(){
+                thehider..addEventListener('mousedown', function(){
                     thehider.setAttribute('visible', false);
                     thehider.components.sync.takeOwnership();
                     TimesShown += 1;

@@ -3,7 +3,7 @@
 		<title>we.3DCC</title>
 		<script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
 		<script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
-		<!--<script> AFRAME.registerComponent('hider', {
+		<script> AFRAME.registerComponent('hider', {
             init: function () {
                 var TimesShown = 0;
                 var thehider = this.el.object3D;
@@ -16,7 +16,7 @@
                 console.log('Gamestart');
                 },
 			});
-		</script> -->
+		</script> 
 		<script>
 				AFRAME.registerComponent('change-color', {
 					init: function () {
@@ -29,6 +29,66 @@
 					}
 				});
 		</script>
+		<script>AFRAME.registerComponent('cursor-listener', {
+				init: function () {
+				  	var COLORS = ['red', 'green', 'blue'];
+					this.el.addEventListener('mousedown', function () {
+						var max = 10;
+                   		var min = -10;
+                    var ymin = 0;	
+                        var boohoo3d = this.el.object3D;
+                        var newHidingSpot = new THREE.Vector3(
+							(Math.floor(Math.random() * (max - min)) + min), 
+							(Math.floor(Math.random() * (max - ymin)) + ymin),
+							(Math.floor(Math.random() * (max - min)) + min)
+							);
+						var randomIndex = Math.floor(Math.random() * COLORS.length);
+						this.setAttribute('material', 'color', COLORS[randomIndex]);
+						boohoo3d.position.copy(newHidingSpot);
+						console.log('I was clicked AND moved AND changed color!');
+				  	}.bind(this));
+				}
+			  });
+		</script>
+		<script>AFRAME.registerComponent('hidertwo', {
+			init: function () {
+		
+				var TimesShown = 0;
+		
+				//turn off Boo visibility and sync game to player who clicks on boo 
+				this.el.addEventListener('mousedown', function() {
+		
+					this.el.object3DMap['mesh'].visible = true;
+		
+					this.el.components.sync.takeOwnership();
+					TimesShown += 1;
+					console.log('TimeShown is ' + TimesShown);
+		
+					var max = 10;
+					var min = -10;
+					var ymin = 0;
+					var newHidingSpot = new THREE.Vector3(
+						(Math.floor(Math.random() * (max - min)) + min), 
+						(Math.floor(Math.random() * (max - ymin)) + ymin),
+						(Math.floor(Math.random() * (max - min)) + min)
+					);
+		
+					this.position.copy(newHidingSpot);
+		
+					setTimeout(function() { 
+		
+						console.log('Entity moved to:')
+						console.log(newHidingSpot);
+						this.el.object3DMap['mesh'].visible = true;
+						this.el.emit('spin'); 
+						console.log('Find me!');
+		
+					}.bind(this), 2000);
+		
+				}.bind(this));
+				}
+			});
+		</script>
 	</head>
 	<body>
 	<a-scene inspector altspace="fullspace: true">
@@ -40,15 +100,13 @@
         <a-entity position="5 2 3" rotation="0 0 0" scale="2 2 2" n-layout-browser="url: http://xkcd.com"></a-entity>
         <a-entity position="9 2 3" rotation="0 0 0" scale="2 2 2" n-layout-browser="url: http://xkcd.com"></a-entity>
 		<a-entity position="0 1 -5" rotation="0 45 0" scale="5 5 5"
-			n-layout-browser="url:https://poly.google.com/view/b5GEHNGE1RO; isEnclosure:true">
+			n-layout-browser="isEnclosure:true">
         </a-entity>
-        <a-entity obj-model="obj: url(https://poly.google.com/view/b5GEHNGE1RO)"position="10 0 10"></a-entity>
 		
 		<a-tetrahedron color="#FF926B" radius="5" position="0 -5.83 0" opacity="0.5" scale="2.57 2.57 2.57" rotation="-34.95 95.11 130.63" material="color:#FF926B;opacity:1" geometry="primitive:tetrahedron;radius:5" n-mesh-collider="type:enironment"></a-tetrahedron>
 		<a-entity position="5.35 0 -10.27" rotation="0 0 0" geometry="primitive:sphere;radius:10" n-mesh-collider="type:hologram" id="greensphere" material="fog:false;color:#8dff6e;transparent:true;opacity:0.38"></a-entity>
 	<!--testing -->
-
-		<a-sphere change-color altspace-cursor-collider position="-10.34 -0.36 0.98" radius="5" id="bluesphere">
+	<a-sphere hidertwo altspace-cursor-collider position="-10.34 -0.36 0.98" radius="7" id="bluesphere">
 			<a-animation mixin="spinning"></a-animation>
 		</a-sphere>
 
