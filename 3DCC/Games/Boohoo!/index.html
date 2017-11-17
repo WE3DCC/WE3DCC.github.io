@@ -14,9 +14,9 @@
                     thehider.components.sync.takeOwnership();
                     TimesShown += 1;
                     thehider.emit('boogone');
+                    console.log('TimeShown is ' + TimesShown);
                     });
-                    thehider.emit('spin');
-                console.log('TimeShown is ' + TimesShown);
+                thehider.emit('spin');
                 console.log('Gamestart');
                 },
             update: function () {
