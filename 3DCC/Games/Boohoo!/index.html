@@ -7,27 +7,27 @@
         <script> AFRAME.registerComponent('hider', {
             init: function () {
                 var TimesShown = 0;
-                var booHoo = document.querySelector('#BooHoo1');
+                var thehider = this.el.object3D;
                 //turn off Boo visibility and sync game to player who clicks on boo 
-                booHoo.addEventListener('mousedown', function(){
-                    booHoo.setAttribute('visible', false);
-                    booHoo.components.sync.takeOwnership();
+                thehider.addEventListener('mousedown', function(){
+                    thehider.setAttribute('visible', false);
+                    thehider.components.sync.takeOwnership();
                     TimesShown += 1;
-                    booHoo.emit('boogone');
+                    thehider.emit('boogone');
                     }.bind(this));
-                booHoo.emit('spin');
+                    thehider.emit('spin');
                 console.log('TimeShown is ' + TimesShown);
                 console.log('Gamestart');
                 },
             update: function () {
                 // var randpos = AFRAME.utils.coordinates.stringify(this.data.randomposition);
                 // Listen for Player click and set new random position
-                booHoo.addEventListener("componentchanged",function(){
+                thehider.addEventListener("componentchanged",function(){
                     if (event.detail.name === 'visible') {
                         var max = 10;
                         var min = -10;
                         var ymin = 0;
-                        var boohoo3d = this.el.object3D;
+                        // var boohoo3d = this.el.object3D;
                         var hidex = Math.floor(Math.random() * (max - min)) + min;
                         var hidey = Math.floor(Math.random() * (max - ymin)) + ymin;
                         var hidez = Math.floor(Math.random() * (max - min)) + min;
@@ -38,16 +38,16 @@
                         //    animation.setAttribute("dur","2000");
                         //    animation.setAttribute("repeat","0");
                         //    booHoo.appendChild(animation);
-                        boohoo3d.position.set(hidex, hidey, hidez);
+                        thehider.position.set(hidex, hidey, hidez);
                         };
-                    booHoo.addState('moved');
+                        thehider.addState('moved');
                     console.log('Entity moved to ' + newHidingSpot);
                     });
                 // Spin Boo {play sound} and turn on visiblity
-                booHoo.addEventListener('stateadded', function(event){
+                thehider.addEventListener('stateadded', function(event){
                     if (event.detail.state === 'moved') {
-                        booHoo.setAttribute('visible', true);
-                        booHoo.emit('spin'); 
+                        thehider.setAttribute('visible', true);
+                        thehider.emit('spin'); 
                         console.log('Find me!');
                         };
                     }.bind(this));
@@ -64,7 +64,7 @@
                 <a-mixin id="sphereGeo" geometry="primitive: sphere; radius: 0.5;" material="color: grey"></a-mixin>
                 <a-mixin id="yoyoAni" attribute="position" direction="alternate"
                     dur="3000" fill="forwards" to="1 1 1"repeat="indefinite"></a-mixin>
-                <a-mixin id="Spinning" attribute="rotation" direction="reverse"
+                <a-mixin id="spinning" attribute="rotation" direction="reverse"
                     dur="2000" fill="forwards" to="0 360 0" repeat="indefinite"></a-mixin>
             </a-assets>
             
@@ -87,11 +87,10 @@
             <!--n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'" -->
             <a-entity id="BooHoo1"
                 hider
-                wire="on:boogone; emit: hideMe"
                 altspace-cursor-collider
                 sync sync-transform sync-color>
                 <a-entity obj-model="obj: #boohooObj; mtl:#boohooMtl"></a-entity>
-                <a-animation mixin="Spinning" begin="spin"></a-animation>
+                <a-animation mixin="spinning" begin="spin"></a-animation>
             </a-entity>
             
             <a-entity random-position>
