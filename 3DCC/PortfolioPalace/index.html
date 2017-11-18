@@ -37,7 +37,7 @@
                    		var min = -10;
                     var ymin = 0;	
                         var boohoo3d = this.el.object3D;
-                        var newHidingSpot = new THREE.Vector3(
+                        var newHidingSpo = new THREE.Vector3(
 							(Math.floor(Math.random() * (max - min)) + min), 
 							(Math.floor(Math.random() * (max - ymin)) + ymin),
 							(Math.floor(Math.random() * (max - min)) + min)
@@ -54,65 +54,96 @@
 			init: function () {
 		
 				var TimesShown = 0;
-		
+				var cone1El = document.querySelector('#bluesphere');
 				//turn off Boo visibility and sync game to player who clicks on boo 
-				this.el.addEventListener('mousedown', function() {
+				cone1El.addEventListener('mousedown', function() {
 		
 					this.el.object3DMap['mesh'].visible = true;
 		
-					this.el.components.sync.takeOwnership();
 					TimesShown += 1;
 					console.log('TimeShown is ' + TimesShown);
 		
 					var max = 10;
 					var min = -10;
 					var ymin = 0;
-					var newHidingSpot = new THREE.Vector3(
-						(Math.floor(Math.random() * (max - min)) + min), 
-						(Math.floor(Math.random() * (max - ymin)) + ymin),
-						(Math.floor(Math.random() * (max - min)) + min)
-					);
+					var newHidingSpot = new Vector3(
+						Math.floor(Math.random() * (max - min)) + min,
+						Math.floor(Math.random() * (max - ymin)) + ymin,
+						Math.floor(Math.random() * (max - min)) + min);
 		
-					this.position.copy(newHidingSpot);
+					//cone1El.position.set(newHidingSpot.x, newHidingSpot.y, newHidingSpot.z);
+
+					cone1El.object3D.setAttribute('position', { x: 1, y: 2, z: 3 });
 		
 					setTimeout(function() { 
 		
-						console.log('Entity moved to:')
+						console.log('Entity moved to:');
 						console.log(newHidingSpot);
 						this.el.object3DMap['mesh'].visible = true;
 						this.el.emit('spin'); 
 						console.log('Find me!');
 		
 					}.bind(this), 2000);
-		
 				}.bind(this));
 				}
 			});
 		</script>
+		<script>AFRAME.registerComponent('hiderthree', {
+				update: function () {
+					var entity = this.el.object3D;
+					//turn off Boo visibility and sync game to player who clicks on boo 
+					entity.addEventListener('cursordown', function() {
+						entity.position.set(2, 10, 5);
+						console.log('work');
+						console.log(this.position);
+					});
+				}
+			});
+		</script>
+		<script>AFRAME.registerComponent('hiderfour', {
+				update: function () {
+					var entity = this.el.object3D;
+					var max = 30;
+					var min = -30;
+					var ymin = 0;
+					var newHidingSpotx = Math.floor(Math.random() * (max - min)) + min;
+					var newHidingSpoty = Math.floor(Math.random() * (max - ymin)) + ymin;
+					var newHidingSpotz = Math.floor(Math.random() * (max - min)) + min;
+					//turn off Boo visibility and sync game to player who clicks on boo 
+					entity.addEventListener('cursordown', function() {
+						entity.position.set(newHidingSpotx, newHidingSpoty, newHidingSpotz);
+						console.log('work');
+						console.log(this.position);
+					});
+				}
+			});
+		</script>
+		
 	</head>
 	<body>
 	<a-scene inspector altspace="fullspace: true">
 		<a-assets>
 			<a-mixin id="spinning" attribute="rotation" direction="reverse" dur="2000" fill="forwards" to="0 360 0" repeat="indefinite"></a-mixin>
 		</a-assets>
-        <a-entity position="0 14 5" rotation="0 45 0" scale="2 2 2" n-layout-browser="url: http://xkcd.com"></a-entity>
-        <a-entity position="1 2 3" rotation="0 0 0" scale="2 2 2" n-layout-browser="url: http://xkcd.com"></a-entity>
-        <a-entity position="5 2 3" rotation="0 0 0" scale="2 2 2" n-layout-browser="url: http://xkcd.com"></a-entity>
-        <a-entity position="9 2 3" rotation="0 0 0" scale="2 2 2" n-layout-browser="url: http://xkcd.com"></a-entity>
-		<a-entity position="0 1 -5" rotation="0 45 0" scale="5 5 5"
-			n-layout-browser="isEnclosure:true">
-        </a-entity>
 		
 		<a-tetrahedron color="#FF926B" radius="5" position="0 -5.83 0" opacity="0.5" scale="2.57 2.57 2.57" rotation="-34.95 95.11 130.63" material="color:#FF926B;opacity:1" geometry="primitive:tetrahedron;radius:5" n-mesh-collider="type:enironment"></a-tetrahedron>
 		<a-entity position="5.35 0 -10.27" rotation="0 0 0" geometry="primitive:sphere;radius:10" n-mesh-collider="type:hologram" id="greensphere" material="fog:false;color:#8dff6e;transparent:true;opacity:0.38"></a-entity>
 	<!--testing -->
-	<a-sphere hidertwo altspace-cursor-collider position="-10.34 -0.36 0.98" radius="7" id="bluesphere">
+		<a-box hiderfour altspace-cursor-collider position="-10.34 -0.36 0.98" scale="5 5 5" id="bluesphere">
 			<a-animation mixin="spinning"></a-animation>
-		</a-sphere>
+		</a-box>
 
+		<a-entity position="0 1.8 2">
+				<a-camera look-controls>
+				  <a-cursor position="0 0 -1.25"
+					geometry="primitive: ring; radiusOuter: 0.075;
+							  radiusInner: 0.05;"
+					material="color: cyan; shader: flat"
+					maxDistance="30" fuse="false"></a-cursor>
+				</a-camera>
+			  </a-entity>
 	<!-- -->
 		<a-sky color="#8129ae" geometry="primitive:sphere;radius:5;segmentsWidth:64;segmentsHeight:20" scale="-1 1 1" position="6.43 0 9.66" rotation="0 0 0" visible="true"></a-sky>
-		<a-sky color="#6EBAA7"></a-sky>
 	</a-scene>
 	</body>
 </html>
