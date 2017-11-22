@@ -3,7 +3,7 @@
 		<title>we.3DCC</title>
 		<script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
 		<script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
-		<script> AFRAME.registerComponent('hider', {
+		<!-- <script> AFRAME.registerComponent('hider', {
             init: function () {
                 var TimesShown = 0;
                 var thehider = this.el.object3D;
@@ -99,24 +99,32 @@
 					});
 				}
 			});
-		</script>
+		</script> -->
 		<script>AFRAME.registerComponent('hiderfour', {
-				update: function () {
+				init: function () {
 					var entity = this.el.object3D;
-					var max = 30;
-					var min = -30;
-					var ymin = 0;
-					var newHidingSpotx = Math.floor(Math.random() * (max - min)) + min;
-					var newHidingSpoty = Math.floor(Math.random() * (max - ymin)) + ymin;
-					var newHidingSpotz = Math.floor(Math.random() * (max - min)) + min;
+					var sel = this.el;
+					var el = document.querySelector('boxo');
+					var hideTimes = 0;
 					//turn off Boo visibility and sync game to player who clicks on boo 
+					
 					entity.addEventListener('cursordown', function() {
-						entity.position.set(newHidingSpotx, newHidingSpoty, newHidingSpotz);
-						console.log('work');
-						console.log(this.position);
-					});
-				}
-			});
+							var max = 30;
+							var min = -30;
+							var ymin = 0;
+							var newHidingSpotx = Math.floor(Math.random() * (max - min)) + min;
+							var newHidingSpoty = Math.floor(Math.random() * (max - ymin)) + ymin;
+							var newHidingSpotz = Math.floor(Math.random() * (max - min)) + min;
+							entity.position.set(newHidingSpotx, newHidingSpoty, newHidingSpotz);
+							hideTimes +=1;
+							console.log('Hidden: ' + hideTimes);
+							console.log(this.position);
+							if (hideTimes > 5){
+								this.el.object3DMap['mesh'].visible = false;
+							};
+							});
+					},
+				});
 		</script>
 		
 	</head>
@@ -129,7 +137,7 @@
 		<a-tetrahedron color="#FF926B" radius="5" position="0 -5.83 0" opacity="0.5" scale="2.57 2.57 2.57" rotation="-34.95 95.11 130.63" material="color:#FF926B;opacity:1" geometry="primitive:tetrahedron;radius:5" n-mesh-collider="type:enironment"></a-tetrahedron>
 		<a-entity position="5.35 0 -10.27" rotation="0 0 0" geometry="primitive:sphere;radius:10" n-mesh-collider="type:hologram" id="greensphere" material="fog:false;color:#8dff6e;transparent:true;opacity:0.38"></a-entity>
 	<!--testing -->
-		<a-box hiderfour altspace-cursor-collider position="-10.34 -0.36 0.98" scale="5 5 5" id="bluesphere">
+		<a-box id="boxo" hiderfour altspace-cursor-collider material="shader: flat; color: red" position="-10.34 -0.36 0.98" scale="5 5 5" id="bluesphere" visible="true">
 			<a-animation mixin="spinning"></a-animation>
 		</a-box>
 
