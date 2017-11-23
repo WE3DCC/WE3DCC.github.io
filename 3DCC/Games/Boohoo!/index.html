@@ -54,6 +54,42 @@
                 },
             });
         </script>
+        <script>AFRAME.registerComponent('hidertwo', {
+            init: function () {
+                var entity = this.el.object3D;
+                var sel = this.el;
+                var el = document.querySelector('boxo');
+                var hideTimes = 0;
+                //turn off Boo visibility and sync game to player who clicks on boo 
+                
+                entity.addEventListener('cursordown', function() {
+                        var max = 30;
+                        var min = -30;
+                        var ymin = 0;
+                        var newHidingSpotx = Math.floor(Math.random() * (max - min)) + min;
+                        var newHidingSpoty = Math.floor(Math.random() * (max - ymin)) + ymin;
+                        var newHidingSpotz = Math.floor(Math.random() * (max - min)) + min;
+                        entity.position.set(newHidingSpotx, newHidingSpoty, newHidingSpotz);
+                        hideTimes +=1;
+                        console.log('Hidden: ' + hideTimes);
+                        console.log(this.position);
+                        if (hideTimes > 5){
+                            this.el.object3DMap['mesh'].visible = false;
+                        };
+                        });
+                },
+            });
+    </script>
+    <script>
+		AFRAME.registerComponent('random-pitch-click', {
+			init: function (time) {
+				this.el.addEventListener('click', function () {
+					this.setAttribute('n-sound', 'pitch', Math.random() * 3 + 1);
+					this.components['n-sound'].playSound();
+				});
+			}
+		});
+	</script>
     </head>
     <body>
         <a-scene debug sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
@@ -88,11 +124,11 @@
             <!--n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'" -->
             <a-entity id="BooHoo1"
                 random-position
-                hider
-                altspace-cursor-collider
-                sync sync-transform sync-color>
+                hidertwo
+                n-sound="src: resources/big-buck-bunny-intro.wav; on: click; rolloff: logarithmic; minDistance: 2; maxDistance: 5"
+                altspace-cursor-collider>
                 <a-entity obj-model="obj: #boohooObj; mtl:#boohooMtl"></a-entity>
-                <a-animation mixin="spinning" begin="spin"></a-animation>
+                <a-animation mixin="spinning"></a-animation>
             </a-entity>
             
             <a-entity random-position>
