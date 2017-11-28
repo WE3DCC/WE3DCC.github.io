@@ -2,69 +2,14 @@
     <head>
         <title>We3D.CC:BooHoo!.Altspacevs</title>
         <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
-        <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
-        <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-        <script> AFRAME.registerComponent('hider', {
-            init: function () {
-                var TimesShown = 0;
-                var thehider = this.el;
-                //turn off Boo visibility and sync game to player who clicks on boo 
-                thehider..addEventListener('mousedown', function(){
-                    thehider.setAttribute('visible', false);
-                    thehider.components.sync.takeOwnership();
-                    TimesShown += 1;
-                    thehider.emit('boogone');
-                    console.log('TimeShown is ' + TimesShown);
-                    });
-                thehider.emit('spin');
-                console.log('Gamestart');
-                },
-            update: function () {
-                // var randpos = AFRAME.utils.coordinates.stringify(this.data.randomposition);
-                // Listen for Player click and set new random position
-                this.el.addEventListener("componentchanged",function(){
-                    if (event.detail.name === 'visible') {
-                        var max = 10;
-                        var min = -10;
-                        var ymin = 0;
-                        // var boohoo3d = this.el.object3D;
-                        var hidex = Math.floor(Math.random() * (max - min)) + min;
-                        var hidey = Math.floor(Math.random() * (max - ymin)) + ymin;
-                        var hidez = Math.floor(Math.random() * (max - min)) + min;
-                        //var animation = document.createElement("a-animation");
-                        //    animation.setAttribute("attribute","position");
-                        //    animation.setAttribute("begin","hideMe");
-                        //   animation.setAttribute("to", newHidingSpot);
-                        //    animation.setAttribute("dur","2000");
-                        //    animation.setAttribute("repeat","0");
-                        //    booHoo.appendChild(animation);
-                        thehider.position.set(hidex, hidey, hidez);
-                        };
-                        thehider.addState('moved');
-                    console.log('Entity moved to ' + newHidingSpot);
-                    });
-                // Spin Boo {play sound} and turn on visiblity
-                this.el.addEventListener('stateadded', function(event){
-                    if (event.detail.state === 'moved') {
-                        thehider.setAttribute('visible', true);
-                        thehider.emit('spin'); 
-                        console.log('Find me!');
-                        };
-                    });
-                },
-            });
-        </script>
+        <script src="https://sdk.altvr.com/libs/altspace.js/2.6.2/altspace.min.js"></script>
         <script>AFRAME.registerComponent('hidertwo', {
             init: function () {
                 var entity = this.el.object3D;
-                var sel = this.el;
-                var el = document.querySelector('boxo');
                 var hideTimes = 0;
-                //turn off Boo visibility and sync game to player who clicks on boo 
-                
                 entity.addEventListener('cursordown', function() {
-                        var max = 30;
-                        var min = -30;
+                        var max = 60;
+                        var min = -60;
                         var ymin = 0;
                         var newHidingSpotx = Math.floor(Math.random() * (max - min)) + min;
                         var newHidingSpoty = Math.floor(Math.random() * (max - ymin)) + ymin;
@@ -73,26 +18,16 @@
                         hideTimes +=1;
                         console.log('Hidden: ' + hideTimes);
                         console.log(this.position);
-                        if (hideTimes > 5){
-                            this.el.object3DMap['mesh'].visible = false;
-                        };
                         });
+                    if (hideTimes > 5){
+                        this.el.object3DMap['mesh'].visible = false;
+                    };
                 },
             });
     </script>
-    <script>
-		AFRAME.registerComponent('random-pitch-click', {
-			init: function (time) {
-				this.el.addEventListener('click', function () {
-					this.setAttribute('n-sound', 'pitch', Math.random() * 3 + 1);
-					this.components['n-sound'].playSound();
-				});
-			}
-		});
-	</script>
     </head>
     <body>
-        <a-scene debug sync-system="author: 3dcc; app: boohoo!" altspace="fullspace: true">
+        <a-scene debug altspace="fullspace: true">
             <a-assets>
                 <a-asset-item id="boohooObj" src="models/BooHootheGhost.obj"></a-asset-item>
                 <a-asset-item id="boohooMtl" src="models/BooHootheGhost.mtl"></a-asset-item>
@@ -100,41 +35,38 @@
                 <a-mixin id="sphereGeo" geometry="primitive: sphere; radius: 0.5;" material="color: grey"></a-mixin>
                 <a-mixin id="yoyoAni" attribute="position" direction="alternate"
                     dur="3000" fill="forwards" to="1 1 1"repeat="indefinite"></a-mixin>
-                <a-mixin id="spinning" attribute="rotation" direction="reverse"
-                    dur="2000" fill="forwards" to="0 360 0" repeat="indefinite"></a-mixin>
             </a-assets>
             
             <!-- Cardboard Camera -->
-            <a-entity position="0 2.2 2">
-                <a-entity camera look-controls>
-                    <a-entity
-                        cursor="maxDistance: 30; fuse: false; fuseTimeout: 1600" position="0 0 -3"
-                        geometry="primitive: ring; radiusOuter: 0.30; radiusInner: 0.20"
-                        material="color: cyan; shader: flat">
-                        <a-animation begin="mouseenter" easing="linear" attribute="scale"
-                            fill="forwards" from="4 4 4" to="0.1 0.1 0.1" dur="1500" end="mouseleave"></a-animation>
+            <a-entity position="0 1.8 2">
+				<a-camera look-controls>
+				  <a-cursor position="0 0 -1.25"
+                        fill="forwards" from="4 4 4" to="0.1 0.1 0.1" dur="1500" end="mouseleave"></a-animation>
                         <a-animation begin="mouseleave" dur="50" easing="ease-out-bounce" attribute="scale"
                             fill="forwards" from="1 1 1" to="1 1 1" ></a-animation> 
                         <a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="scale"
                             fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" ></a-animation> 
-                    </a-entity>
-                </a-entity>
-            </a-entity>
+                    </a-cursor>
+				</a-camera>
+			  </a-entity>
+                <!-- Game logic script -->
+           
 
             <!--n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'" -->
-            <a-entity id="BooHoo1"
-                random-position
+            <a-entity>
+                <a-obj-model src="#boohooObj" mtl:"#boohooMtl"
+                position= "0 0 0"
+                id="BooHoo1"
                 hidertwo
-                n-sound="res: ui/select; volume: 0.7; autoplay: true; oneshot: true; on: click"
-                n-sound="src: resources/big-buck-bunny-intro.wav; on: click; rolloff: logarithmic; minDistance: 2; maxDistance: 5"
                 altspace-cursor-collider>
-                <a-entity obj-model="obj: #boohooObj; mtl:#boohooMtl"></a-entity>
-                <a-animation mixin="spinning"></a-animation>
-            </a-entity>
+                <a-animation to="0 360 0" easing="linear" dur="10000" repeat="indefinite"></a-animation>
+            </a-obj-model>
+            </a-entity>   
             
-            <a-entity random-position>
+            <a-entity>
                 <a-entity mixin="sphereGeo yoyoAni"></a-entity>
             </a-entity>
+        
         </a-scene>
     </body>
 </html>
