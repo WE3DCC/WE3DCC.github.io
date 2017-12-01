@@ -2,11 +2,11 @@
     <head>
         <title>We3D.CC:BooHoo!.Altspacevs</title>
         <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
-        <script src="https://sdk.altvr.com/libs/altspace.js/2.6.2/altspace.min.js"></script>
+        <script src="https://sdk.altvr.com/libs/altspace.js/2.7.1/altspace.min.js"></script>
         <script>AFRAME.registerComponent('hidertwo', {
             init: function () {
                 var entity = this.el.object3D;
-                var hideTimes = 0;
+                var hideTimes = 0;   
                 entity.addEventListener('cursordown', function() {
                         var max = 60;
                         var min = -60;
@@ -53,15 +53,7 @@
            
 
             <!--n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'" -->
-            <a-entity>
-                <a-obj-model src="#boohooObj" mtl:"#boohooMtl"
-                position= "0 0 0"
-                id="BooHoo1"
-                hidertwo
-                altspace-cursor-collider>
-                <a-animation to="0 360 0" easing="linear" dur="10000" repeat="indefinite"></a-animation>
-            </a-obj-model>
-            </a-entity>   
+            <a-obj-model src="#boohooObj" mtl:"#boohooMtl" id="BooHoo1" hidertwo></a-obj-model>
             
             <a-entity>
                 <a-entity mixin="sphereGeo yoyoAni"></a-entity>
