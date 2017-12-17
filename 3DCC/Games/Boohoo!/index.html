@@ -58,10 +58,11 @@
             <!--n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'" -->
             <a-obj-model src="#boohooObj" mtl:"#boohooMtl" id="BooHoo1" 
             position="-2 1 -2"
+            collapse-model
             hidertwo
-            n-sound="res: ui/select; volume: 1; on: cursordown"
+            n-sound="res: ui/select; volume: 7; on: cursordown"
             altspace-cursor-collider="enabled: true"
-            sync="own-on: cursordown" sync-transform sync-n-sound>
+            sync="own-on: cursordown" sync-transform>
             <a-animation attribute="rotation" dur="3000" easing="linear" to="0 360 0" direction="forwards" repeat="indefinite"></a-animation>
             </a-obj-model>
             
