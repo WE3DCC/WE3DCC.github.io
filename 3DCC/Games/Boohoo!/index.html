@@ -6,7 +6,7 @@
         <script>AFRAME.registerComponent('hidertwo', {
             init: function () {
                 var entity = this.el.object3D;
-                var hideTimes = 0;   
+                var hideTimes = 0;
                 entity.addEventListener('cursordown', function() {
                         var max = 70;
                         var min = -70;
@@ -34,29 +34,38 @@
                 <a-asset-item id="boohooMtl" src="models/BooHootheGhost.mtl"></a-asset-item>
                 <a-asset-item id="boohooObj" src="models/BooHootheGhost.obj"></a-asset-item>
                 <a-asset-item id="boohooMtl" src="models/BooHootheGhost.mtl"></a-asset-item>
+                <!-- Environment Model Setup-->
+                <a-asset-item id="Terrainobj" src="models/Terrain01.obj"></a-asset-item>
+                <a-asset-item id="Terrainmtl" src="models/Terrain01.mtl"><a-asset-item>
+                <a-asset-item id="CandyCaneobj" src="models/CandyCane01.obj"></a-asset-item>
+                <a-asset-item id="CandyCanemtl" src="models/CandyCane01.mtl"></a-asset-item>
+                <a-asset-item id="RockCandyTreeobj" src="models/RockCandyTree.obj"></a-asset-item>
+                <a-asset-item id="RockCandyTreemtl" src="models/RockCandyTree.mtl"></a-asset-item>
+
+                <!-- Scene Testers -->
                 <a-mixin id="coneGeo" geometry="primitive: cone; radius-top: 0; radius-bottom: 0.5" material="color: grey"></a-mixin>
                 <a-mixin id="sphereGeo" geometry="primitive: sphere; radius: 0.5;" material="color: grey"></a-mixin>
                 <a-mixin id="yoyoAni" attribute="position" direction="alternate"
                     dur="3000" fill="forwards" to="1 1 1"repeat="indefinite"></a-mixin>
             </a-assets>
-            
+
             <!-- Cardboard Camera -->
             <a-entity position="0 1.8 2">
 				<a-entity camera look-controls>
 				  <a-cursor position="0 0 -1.25"
                         fill="forwards" from="4 4 4" to="0.1 0.1 0.1" dur="1500" end="mouseleave"></a-animation>
                         <a-animation begin="mouseleave" dur="50" easing="ease-out-bounce" attribute="scale"
-                            fill="forwards" from="1 1 1" to="1 1 1" ></a-animation> 
+                            fill="forwards" from="1 1 1" to="1 1 1" ></a-animation>
                         <a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="scale"
-                            fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" ></a-animation> 
+                            fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" ></a-animation>
                     </a-cursor>
 				</a-entity>
 			  </a-entity>
                 <!-- Game logic script -->
-           
+
 
             <!--n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'" -->
-            <a-obj-model src="#boohooObj" mtl:"#boohooMtl" id="BooHoo1" 
+            <a-obj-model src="#boohooObj" mtl:"#boohooMtl" id="BooHoo1"
             position="-2 1 -2"
             collapse-model
             hidertwo
@@ -65,12 +74,11 @@
             sync="own-on: cursordown" sync-transform>
             <a-animation attribute="rotation" dur="3000" easing="linear" to="0 360 0" direction="forwards" repeat="indefinite"></a-animation>
             </a-obj-model>
-            
+
             <a-entity>
                 <a-entity mixin="sphereGeo yoyoAni"></a-entity>
             </a-entity>
-        
+
         </a-scene>
     </body>
 </html>
-    
