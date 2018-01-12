@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <title>We3D.CC:BooHoo.Altspacevs</title>
+        <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+        <script src="https://cdn.rawgit.com/mrdoob/three.js/r84/build/three.js"></script>
+        <script src="https://sdk.altvr.com/libs/altspace.js/2.7.1/altspace.min.js"></script>
+        <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+        <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+        <script src=""
+
+
+        <script>AFRAME.registerComponent('levelonemech', {
+            init: function () {
+                var entity = this.el.object3D;
+                var hideTimes = 0;
+                entity.addEventListener('cursordown', function() {
+                        var max = 70;
+                        var min = -70;
+                        var ymin = 0;
+                        var ymax = 6;
+                        var newHidingSpotx = Math.floor(Math.random() * (max - min)) + min;
+                        var newHidingSpoty = Math.floor(Math.random() * (ymax - ymin)) + ymin;
+                        var newHidingSpotz = Math.floor(Math.random() * (max - min)) + min;
+                        entity.position.set(newHidingSpotx, newHidingSpoty, newHidingSpotz);
+                        hideTimes +=1;
+                        console.log('Hidden: ' + hideTimes);
+                        console.log(this.position);
+
+                        });
+                },
+            });
+    </script>
+    <script>AFRAME.registerComponent('puzzlepiece', {
+      init: function (){
+          var sceneEl = this.el.object3D;
+          var length = 1, width = 1;
+
+          var shape = new THREE.Shape();
+          shape.moveTo( 0,0 );
+          shape.lineTo( 0, width );
+          shape.lineTo( length, width );
+          shape.lineTo( length, 0 );
+          shape.lineTo( 0, 0 );
+
+          var extrudeSettings = {
+          	steps: 2,
+          	amount: 1,
+          	bevelEnabled: true,
+          	bevelThickness: 1,
+          	bevelSize: 0.5,
+          	bevelSegments: 1
+          };
+          var texture = new THREE.TextureLoader().load( "images/candycanetexture.png" );
+          texture.wrapS = THREE.ClampToEdgeWrapping;
+          texture.wrapT = THREE.ClampToEdgeWrapping;
+          var material = new THREE.MeshBasicMaterial( { map: texture } );
+          var test =[material];
+          var geometrys = new THREE.ExtrudeGeometry( shape, extrudeSettings );
+          var mesh = new THREE.Mesh( geometrys, test[0]) ;
+          sceneEl.add( mesh );
+
+      },
+    });
+  </script>
+    <script> //Environment Placer Componenet
+            AFRAME.registerComponent('winterscene',{
+              init: function () {
+                for (var i = 0; i < sceneEl.components.pool.size.length; i++) {
+                  var cane = sceneEl.components.pool.requestEntity();
+                  pool.size[i];
+                };
+              },
+            });
+      </script>
+    </head>
+    <body>
+        <a-scene debug altspace="fullspace: true" sync-system="author: we3dcc; app: BooHoo">
+        <!--#Lights -->
+            <a-assets>
+              <a-asset-item id="CandyCaneobj" src="models/CandyCane08.obj"></a-asset-item>
+              <a-asset-item id="PuzzPiece1" src="models/PuzzleFourTestPiecesGroupTest.obj"></a-asset-item>
+              <img id="candycanetexture" src="images/candycanetexture.png">
+              <img id="weed" src="images/Weepuzz.jpg">
+            <!-- assets -->
+            </a-assets>
+
+          <!-- #Camera -->
+
+            <!-- Environment -->
+            <a-entity random-position scale="0.6 0.6 0.6">
+              <a-entity id="CandyCanes" collapse-model obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+            </a-entity>
+            <a-entity obj-model="obj: #puzzgrouptest" scale="1 1 1" material="src: #weed"></a-entity>
+            <a-entity puzzlepiece rotation="0 0 0" scale="1 1 1"></a-entity>
+            <!-- piece testing for puzzle game -->
+            <!-- BooHoo -->
+            <!--n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'" -->
+            <a-entity id="BooHoo"
+                geometry="primitive: sphere; radius: 0.5;"
+                material="color: red"
+                scale="2 2 2"
+                position="-2 1 -2"
+                levelonemech
+                n-sound="res: ui/select; volume: 7; on: cursordown"
+                altspace-cursor-collider="enabled: true"
+                sync sync-transform>
+              <a-animation attribute="rotation" dur="5000" easing="linear" to="0 360 0"></a-animation>
+            </a-entity>
+
+            <a-entity>
+                <a-entity random-position mixin="sphereGeo yoyoAni"></a-entity>
+            </a-entity>
+
+        </a-scene>
+    </body>
+</html>

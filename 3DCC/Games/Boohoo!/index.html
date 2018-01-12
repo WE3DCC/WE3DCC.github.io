@@ -1,19 +1,23 @@
 <html>
     <head>
-        <title>We3D.CC:BooHoo!.Altspacevs</title>
+        <title>We3D.CC:BooHoo.Altspacevs</title>
         <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-        <script src="https://sdk.altvr.com/libs/altspace.js/2.7.0/altspace.min.js"></script>
+        <script src="https://cdn.rawgit.com/mrdoob/three.js/r84/build/three.js"></script>
+        <script src="https://sdk.altvr.com/libs/altspace.js/2.7.1/altspace.min.js"></script>
         <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+        <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+        <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
 
         <script>AFRAME.registerComponent('levelonemech', {
             init: function () {
                 var entity = this.el.object3D;
                 var hideTimes = 0;
+                var sceneEl = document.querySelector('a-scene');
                 entity.addEventListener('cursordown', function() {
-                        var max = 70;
-                        var min = -70;
-                        var ymin = -2;
-                        var ymax = 30;
+                        var max = 130;
+                        var min = -130;
+                        var ymin = 0;
+                        var ymax = 50;
                         var newHidingSpotx = Math.floor(Math.random() * (max - min)) + min;
                         var newHidingSpoty = Math.floor(Math.random() * (ymax - ymin)) + ymin;
                         var newHidingSpotz = Math.floor(Math.random() * (max - min)) + min;
@@ -21,62 +25,288 @@
                         hideTimes +=1;
                         console.log('Hidden: ' + hideTimes);
                         console.log(this.position);
+
                         });
-                    if (hideTimes > 5){
-                        this.el.object3DMap['mesh'].visible = false;
-                    };
                 },
+
             });
     </script>
+
+      <script>AFRAME.registerComponent('randomf', {
+        init: function (){
+            var entity = this.el.object3D;
+            var sx = Math.floor(Math.random() * (max - min)) + min;
+            var sy = Math.floor(Math.random() * (ymax - ymin)) + ymin;
+            var sz = Math.floor(Math.random() * (max - min)) + min;
+          },
+        });
+      </script>
+
+    <script>AFRAME.registerComponent('puzzlepiece', {
+      init: function (){
+          var sceneEl = this.el.object3D;
+          var length = 1, width = 1;
+          var length2 = 6, width2 = 3;
+          var shapes = [];
+
+          var shape = new THREE.Shape();
+          shape.moveTo( 0,0 );
+          shape.lineTo( 0, 1 );
+          shape.lineTo( 1, 1 );
+          shape.lineTo( 1, 0 );
+          shape.lineTo( 0, 0 );
+
+          var extrudeSettings = {
+          	steps: 2,
+          	amount: 1,
+          	bevelEnabled: false,
+          	bevelThickness: 4,
+          	bevelSize: 4,
+          	bevelSegments: 1
+          };
+
+          shapes.push(shape);
+          var texture = new THREE.TextureLoader().load( "images/IMG_6214.jpg" );
+          texture.wrapS = THREE.ClampToEdgeWrapping;
+          texture.wrapT = THREE.ClampToEdgeWrapping;
+          var material = new THREE.MeshBasicMaterial( { map: texture } );
+          var test =[material];
+          var geometrys = new THREE.ExtrudeGeometry( shapes, extrudeSettings );
+          geometrys.sortFacesByMaterialIndex ( );
+          var mesh = new THREE.Mesh( geometrys, test[0]) ;
+          sceneEl.add( mesh );
+
+      },
+    });
+  </script>
+    <script> //Environment Placer Componenet
+            AFRAME.registerComponent('winterscene',{
+              init: function () {
+                var sceneEl = this.el.object3D;
+                for (var i = 0; i < sceneEl.components.pool.length; i++) {
+                  var cane = sceneEl.components.pool.requestEntity();
+                  sceneEl.add(cane);
+                };
+              },
+            });
+      </script>
     </head>
     <body>
-        <a-scene debug altspace="fullspace: true" sync-system="author: we3dcc; app: BooHoo!">
+        <a-scene debug altspace="fullspace: true;">
         <!--#Lights -->
             <a-assets>
-                <a-asset-item id="boohooObj" src="models/BooHootheGhost.obj"></a-asset-item>
-                <a-asset-item id="boohooMtl" src="models/BooHootheGhost.mtl"></a-asset-item>
-                <!-- Environment Model Setup
-                <a-asset-item id="Terrainobj" src="models/Terrain01.obj" collapse-model></a-asset-item>
-                <a-asset-item id="Terrainmtl" src="models/Terrain01.mtl"><a-asset-item>
-                <a-asset-item id="CandyCaneobj" src="models/CandyCane01.obj" collapse-model></a-asset-item>
-                <a-asset-item id="CandyCanemtl" src="models/CandyCane01.mtl"></a-asset-item>
-                <a-mixin id=randomcaneposition random-posiiton="min: -10 -2 -10; max: 10 0 10"></a-mixin>
-                <a-asset-item id="RockCandyTreeobj" src="models/RockCandyTree.obj"></a-asset-item>
-                <a-asset-item id="RockCandyTreemtl" src="models/RockCandyTree.mtl"></a-asset-item>
-
-                <!Scene Testers -->
-                <a-mixin id="coneGeo" geometry="primitive: cone; radius-top: 0; radius-bottom: 0.5" material="color: grey"></a-mixin>
-                <a-mixin id="sphereGeo" geometry="primitive: sphere; radius: 0.5;" material="color: grey"></a-mixin>
-                <a-mixin id="yoyoAni" attribute="position" direction="alternate"
-                    dur="3000" fill="forwards" to="1 1 1"repeat="indefinite"></a-mixin>
+              <a-asset-item id="CandyCaneobj" src="models/CandyCane08.obj"></a-asset-item>
+              <img id="candycanetexture" src="images/candycanetexture.png">
+              <a-asset-item id="rcobj" src="models/RockCandyTree.obj"></a-asset-item>
+              <a-asset-item id="rcmtl" src="models/RockCandyTree.mtl"></a-asset-item>
+              <a-asset-item id="boohooobj" src="models/BooHootheGhost.obj"></a-asset-item>
+              <a-asset-item id="boohoomtl" src="models/BooHootheGhost.mtl"></a-asset-item>
+              <img id="candycanetexture" src="images/candycanetexture.png">
+              <img id="weed" src="images/Weepuzz.jpg">
+              <img id="ground" src="images/icegrass.png">
+              <img id="planet01" src="images/planet.png">
+            <!-- assets -->
             </a-assets>
 
-          <!-- #Camera -->
-            <a-entity position="0 1.8 2">
-				          <a-entity camera look-controls>
-				                <a-cursor position="0 0 -1.25" fill="forwards" from="4 4 4" to="0.1 0.1 0.1" dur="1500" end="mouseleave"></a-animation>
-                            <a-animation begin="mouseleave" dur="50" easing="ease-out-bounce" attribute="scale"
-                            fill="forwards" from="1 1 1" to="1 1 1" ></a-animation>
-                            <a-animation begin="click" dur="20" easing="ease-out-bounce" attribute="scale"
-                            fill="forwards" direction="backwards" from="0.5 0.5 0.5" to="1 1 1" ></a-animation>
-                        </a-cursor>
-				           </a-entity>
-			      </a-entity>
-            <!-- Environment
-            <a-entity id="TheTerrain" obj-model="obj: #Terrainobj; mtl: #Terrainmtl" position="0 -1 0"></a-entity>
-            <a-entity id="CandyCanes" collapse-model obj-model="obj: #CandyCaneobj; mtl: #CandyCanemtl"></a-entity>
-            <a-entity id="RockCandyTree" obj-model="obj: #RockCandyTreeobj; mtl: #RockCandyTreemtl"></a-entity>
-            <a-entity id="HomeBase" obj-model="obj: #HomeBaseobj; mtl: #HomeBasemtl" position="0 0 0"></a-entity>
+            <!-- #Camera -->
 
-            <!BooHoo -->
-            <!--n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'" -->
-            <a-entity obj-model="obj: #boohooObj; mtl: #boohooMtl" id="BooHoo1"
+            <!-- Environment -->
+            <a-plane src="#ground" height="200" width="200" rotation="-90 0 0"></a-plane>
+            <!-- CandyCanes -->
+            <a-entity>
+              <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+            <a-entity>
+              <a-entity>
+                <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+              <a-entity>
+                <a-entity>
+                  <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                <a-entity>
+                  <a-entity>
+                    <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                  <a-entity>
+                    <a-entity>
+                      <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                    <a-entity>
+                      <a-entity>
+                        <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                      <a-entity>
+                        <a-entity>
+                          <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                        <a-entity>
+                          <a-entity>
+                            <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                          <a-entity>
+                            <a-entity>
+                              <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                            <a-entity>
+                              <a-entity>
+                                <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                              <a-entity>
+                                <a-entity>
+                                  <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                <a-entity>
+                                  <a-entity>
+                                    <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                  <a-entity>
+                                    <a-entity>
+                                      <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                    <a-entity>
+                                      <a-entity>
+                                        <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                      <a-entity>
+                                        <a-entity>
+                                          <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                        <a-entity>
+                                          <a-entity>
+                                            <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                          <a-entity>
+                                            <a-entity>
+                                              <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                            <a-entity>
+                                              <a-entity>
+                                                <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                              <a-entity>
+                                                <a-entity>
+                                                  <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                <a-entity>
+                                                  <a-entity>
+                                                    <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                  <a-entity>
+                                                    <a-entity>
+                                                      <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                    <a-entity>
+                                                      <a-entity>
+                                                        <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                      <a-entity>
+                                                        <a-entity>
+                                                          <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                        <a-entity>
+                                                          <a-entity>
+                                                            <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                          <a-entity>
+                                                            <a-entity>
+                                                              <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                            <a-entity>
+                                                              <a-entity>
+                                                                <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                              <a-entity>
+                                                                <a-entity>
+                                                                  <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                <a-entity>
+                                                                  <a-entity>
+                                                                    <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                  <a-entity>
+                                                                    <a-entity>
+                                                                      <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                    <a-entity>
+                                                                      <a-entity>
+                                                                        <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                      <a-entity>
+                                                                        <a-entity>
+                                                                          <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                        <a-entity>
+                                                                          <a-entity>
+                                                                            <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                          <a-entity>
+                                                                            <a-entity>
+                                                                              <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                            <a-entity>
+                                                                              <a-entity>
+                                                                                <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                              <a-entity>
+                                                                                <a-entity>
+                                                                                  <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                <a-entity>
+                                                                                  <a-entity>
+                                                                                    <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                  <a-entity>
+                                                                                    <a-entity>
+                                                                                      <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                    <a-entity>
+                                                                                      <a-entity>
+                                                                                        <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                      <a-entity>
+                                                                                        <a-entity>
+                                                                                          <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                        <a-entity>
+                                                                                          <a-entity>
+                                                                                            <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                          <a-entity>
+                                                                                            <a-entity>
+                                                                                              <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                            <a-entity>
+                                                                                              <a-entity>
+                                                                                                <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                              <a-entity>
+                                                                                                <a-entity>
+                                                                                                  <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                <a-entity>
+                                                                                                  <a-entity>
+                                                                                                    <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                  <a-entity>
+                                                                                                    <a-entity>
+                                                                                                      <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                    <a-entity>
+                                                                                                      <a-entity>
+                                                                                                        <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                      <a-entity>
+                                                                                                        <a-entity>
+                                                                                                          <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                        <a-entity>
+                                                                                                          <a-entity>
+                                                                                                            <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                          <a-entity>
+                                                                                                            <a-entity>
+                                                                                                              <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                            <a-entity>
+                                                                                                              <a-entity>
+                                                                                                                <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                              <a-entity>
+                                                                                                                <a-entity>
+                                                                                                                  <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                                <a-entity>
+                                                                                                                  <a-entity>
+                                                                                                                    <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                                  <a-entity>
+                                                                                                                    <a-entity>
+                                                                                                                      <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                                    <a-entity>
+                                                                                                                      <a-entity>
+                                                                                                                        <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                                      <a-entity>
+                                                                                                                        <a-entity>
+                                                                                                                          <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                                        <a-entity>
+                                                                                                                          <a-entity>
+                                                                                                                            <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                                          <a-entity>
+                                                                                                                            <a-entity>
+                                                                                                                              <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                                            <a-entity>
+                                                                                                                              <a-entity>
+                                                                                                                                <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                                              <a-entity>
+                                                                                                                                <a-entity>
+                                                                                                                                  <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                                                <a-entity>
+                                                                                                                                  <a-entity>
+                                                                                                                                    <a-entity random-position="min: -150 -2 -150; max: 150 0 150" obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
+                                                                                                                                  <a-entity>
+            <!-- piece testing for puzzle game -->
+            <!-- BooHoo -->
+            <!--n-mesh-collider="convex: false; height: 2; radius: 2; type: 'objesct'" -->
+            <a-sphere scale="10 10 10" position="25 90 55" rotation="0 0 180" radius="1.25" material="src: #planet01"></a-sphere>
+
+            <a-entity id="BooHoo"
+                obj-model="obj: #boohooobj; mtl: #boohoomtl"
+                material="color: red"
+                scale="2 2 2"
                 position="-2 1 -2"
                 levelonemech
                 n-sound="res: ui/select; volume: 7; on: cursordown"
-                altspace-cursor-collider="enabled: true"
-                sync="own-on: cursordown" sync-transform>
-              <a-animation attribute="rotation" dur="3000" easing="linear" to="0 360 0" direction="forwards" repeat="indefinite"></a-animation>
+                altspace-cursor-collider="enabled: true">
+              <a-animation attribute="rotation" easing="linear" to="0 360 0" dur="2000"repeat="indefinite"></a-animation>
             </a-entity>
 
             <a-entity>
