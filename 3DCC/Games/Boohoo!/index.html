@@ -92,7 +92,7 @@
       </script>
     </head>
     <body>
-        <a-scene debug altspace="fullspace: true;">
+        <a-scene altspace="fullspace: true;" sync-system="author: we3dcc; app: BooHoo">
         <!--#Lights -->
             <a-assets>
               <a-asset-item id="CandyCaneobj" src="models/CandyCane08.obj"></a-asset-item>
@@ -304,6 +304,7 @@
                 scale="2 2 2"
                 position="-2 1 -2"
                 levelonemech
+                sync sync-transform
                 n-sound="res: ui/select; volume: 7; on: cursordown"
                 altspace-cursor-collider="enabled: true">
               <a-animation attribute="rotation" easing="linear" to="0 360 0" dur="2000"repeat="indefinite"></a-animation>
