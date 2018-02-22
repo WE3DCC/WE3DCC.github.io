@@ -50,6 +50,7 @@
           	bevelSize: 0.5,
           	bevelSegments: 1
           };
+
           var texture = new THREE.TextureLoader().load( "images/candycanetexture.png" );
           texture.wrapS = THREE.ClampToEdgeWrapping;
           texture.wrapT = THREE.ClampToEdgeWrapping;
@@ -62,6 +63,30 @@
       },
     });
   </script>
+
+  <script>AFRAME.registerComponent('puzzlematerial', {
+    init: function (){
+        var elm = this.el;
+        var texture = new THREE.TextureLoader().load( "images/Weepuzz.jpg" );
+        texture.wrapS = THREE.ClampToEdgeWrapping;
+        texture.wrapT = THREE.ClampToEdgeWrapping;
+        var material = new THREE.MeshBasicMaterial( { map: texture } );
+        elm.add( material );
+    },
+  });
+</script>
+
+  var loader = new THREE.JSONLoader();
+
+  // load a resource
+  loader.load(
+  	// resource URL
+  	'models/animated/monster/monster.js',
+
+
+  .parse ( json, texturePath )
+
+
     <script> //Environment Placer Componenet
             AFRAME.registerComponent('winterscene',{
               init: function () {
@@ -77,6 +102,7 @@
         <a-scene debug altspace="fullspace: true" sync-system="author: we3dcc; app: BooHoo">
         <!--#Lights -->
             <a-assets>
+               <a-asset-item id="tree" src="models/scene.gltf"></a-asset-item>
               <a-asset-item id="CandyCaneobj" src="models/CandyCane08.obj"></a-asset-item>
               <a-asset-item id="PuzzPiece1" src="models/PuzzleFourTestPiecesGroupTest.obj"></a-asset-item>
               <img id="candycanetexture" src="images/candycanetexture.png">
@@ -85,13 +111,16 @@
             </a-assets>
 
           <!-- #Camera -->
+            <a-box puzzlematerial position="-2 0 0"></a-box>
+
 
             <!-- Environment -->
             <a-entity random-position scale="0.6 0.6 0.6">
               <a-entity id="CandyCanes" collapse-model obj-model="obj: #CandyCaneobj" material="src: #candycanetexture"></a-entity>
             </a-entity>
+
             <a-entity obj-model="obj: #puzzgrouptest" scale="1 1 1" material="src: #weed"></a-entity>
-            <a-entity puzzlepiece rotation="0 0 0" scale="1 1 1"></a-entity>
+            <a-entity gltf-model="#tree" position="9 0 0" scale="1 1 1"></a-entity>
             <!-- piece testing for puzzle game -->
             <!-- BooHoo -->
             <!--n-mesh-collider="convex: false; height: 2; radius: 2; type: 'object'" -->
@@ -105,10 +134,6 @@
                 altspace-cursor-collider="enabled: true"
                 sync sync-transform>
               <a-animation attribute="rotation" dur="5000" easing="linear" to="0 360 0"></a-animation>
-            </a-entity>
-
-            <a-entity>
-                <a-entity random-position mixin="sphereGeo yoyoAni"></a-entity>
             </a-entity>
 
         </a-scene>
