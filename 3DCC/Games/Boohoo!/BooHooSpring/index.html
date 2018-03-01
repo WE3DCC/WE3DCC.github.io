@@ -1,0 +1,174 @@
+<html>
+    <head>
+        <title>WE3DCC:BooHoo.Altspacevs</title>
+        <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+        <script src="https://cdn.rawgit.com/mrdoob/three.js/r84/build/three.js"></script>
+        <script src="https://sdk.altvr.com/libs/altspace.js/2.8.1/altspace.min.js"></script>
+    <!--  <script>AFRAME.registerComponent('loadme', {
+        init: function (){
+            var entity = this.el.object3D;
+            var loader = new THREE.GLTFLoader();
+            loader.load(
+        		// resource URL
+        		'models/hemp.glb')
+        		// called when the resource is loaded
+
+            //playb.setPath('models/tester.bin');
+            //var playgeo = new THREE.Geometry( playb );
+          //  var texture = new THREE.TextureLoader().load( "images/IMG_6214.jpg" );
+          //  var material = new THREE.MeshBasicMaterial( { map: texture } );
+          //  var playc = new THREE.Mesh( playgeo);
+          //  entity.add( playc );
+            },
+        });
+      </script>
+      <script>AFRAME.registerComponent('puzzlepiece', {
+        init: function (){
+            var sceneEl = this.el.object3D;
+            var length = 1, width = 1;
+
+            var shape = new THREE.Shape();
+            shape.moveTo( 0,0 );
+            shape.lineTo( 0, width );
+            shape.lineTo( length, width );
+            shape.lineTo( length, 0 );
+            shape.lineTo( 0, 0 );
+
+            var extrudeSettings = {
+              steps: 2,
+              amount: 1,
+              bevelEnabled: true,
+              bevelThickness: 1,
+              bevelSize: 0.5,
+              bevelSegments: 1
+            };
+
+            var texture = new THREE.TextureLoader().load( "images/candycanetexture.png" );
+            texture.wrapS = THREE.ClampToEdgeWrapping;
+            texture.wrapT = THREE.ClampToEdgeWrapping;
+            var material = new THREE.MeshBasicMaterial( { map: texture } );
+            var test =[material];
+            var geometrys = new THREE.ExtrudeGeometry( shape, extrudeSettings );
+            var mesh = new THREE.Mesh( geometrys, test[0]) ;
+            sceneEl.add( mesh );
+
+        },
+      });
+    </script>
+
+      <script>AFRAME.registerComponent('puzzlematerial', {
+        init: function (){
+          var el = this.el.object3D;
+          var texture = new THREE.TextureLoader().load( "images/Weepuzz.jpg" );
+          texture.wrapS = THREE.ClampToEdgeWrapping;
+          texture.wrapT = THREE.ClampToEdgeWrapping;
+        //  el.getOrCreateObject3D('mesh', THREE.Mesh);
+          var material = el.getOrCreateObject3D('mesh').material = new THREE.MeshBasicMaterial( { map: texture } );
+          el.add( material );
+        },
+      });
+    </script> -->
+    <script>
+    	AFRAME.registerComponent('draw-bounds', {
+    		dependencies: ['n-gltf'],
+    		init: function()
+    		{
+    			var gltf = this.el.components['n-gltf'];
+    			var generateBox = this.generateBox.bind(this);
+    			this.el.addEventListener('n-gltf-loaded', function(){
+    				gltf.getBoundingBox().then(generateBox);
+    			});
+    		},
+    		generateBox: function(bounds)
+    		{
+    			console.log(bounds);
+    			var size = bounds.getSize();
+    			var box = new AFRAME.THREE.Mesh(
+    				new AFRAME.THREE.BoxBufferGeometry(size.x, size.y, size.z),
+    				new AFRAME.THREE.MeshBasicMaterial({transparent: true, opacity: 0.3})
+    			);
+    			bounds.getCenter(box.position);
+    			this.el.object3D.add(box);
+    			this.el.setObject3D('bounds', box);
+    		}
+    	});
+    	</script>
+      <script>AFRAME.registerComponent('levelonemech', {
+          init: function () {
+              var entity = this.el.object3D;
+              var hideTimes = 0;
+              entity.addEventListener('cursordown', function() {
+                      var max = 70;
+                      var min = -70;
+                      var ymin = 0;
+                      var ymax = 6;
+                      var newHidingSpotx = Math.floor(Math.random() * (max - min)) + min;
+                      var newHidingSpoty = Math.floor(Math.random() * (ymax - ymin)) + ymin;
+                      var newHidingSpotz = Math.floor(Math.random() * (max - min)) + min;
+                      entity.position.set(newHidingSpotx, newHidingSpoty, newHidingSpotz);
+                      hideTimes +=1;
+                      console.log('Hidden: ' + hideTimes);
+                      console.log(this.position);
+
+                      });
+              },
+          });
+  </script>
+    </head>
+
+    <body>
+        <a-scene altspace="fullspace: true" sync-system="author: 3DCC; app: BooHoo!">
+        <!--#Lights -->
+            <a-assets>
+            <!-- assets -->
+            <a-asset-item id="BooHoo" src="models/BooHootheGhost.obj"></a-asset-item>
+            <a-asset-item id="BooHoomat" src="models/BooHootheGhost.mtl"></a-asset-item>
+            <img id="candycanetexture" src="images/candycanetexture.png">
+          </a-assets>
+
+          <a-entity n-gltf="url: https://WE3DCC.github.io/3DCC/Games/Boohoo!/models/TerrainTest.glb"
+          n-mesh-collider='type: environment' position="10 60 200" scale="600 600 600">></a-entity>
+
+         <a-entity n-gltf="url: https://WE3DCC.github.io/3DCC/Games/Boohoo!/models/BooHoo_PlayButton.glb"
+         position="20 2 0" rotation="0 -180 0" scale="9 9 9">
+         <a-animation attribute="rotation"
+                  dur="1100"
+                  from="0 0 -25"
+                  to="0 0 25"
+                  direction="alternate"
+                  repeat="infinite"></a-animation>
+        <a-animation attribute="position"
+                 dur="1000"
+                 to="22 2 1"
+                 direction="alternate"
+                 repeat="indefinite"><a-animation>
+        </a-entity>
+        <a-entity
+            obj-model="obj: #BooHoo; mtl: #BooHoomat"
+            scale="0.5 0.5 0.5"
+            position="0 0 0"
+            collapse-model
+            levelonemech
+            n-sound="res: ui/select; volume: 7; on: cursordown"
+            altspace-cursor-collider="enabled: true"
+            sync="own on: cursordown" sync-transform sync-color sync-n-sound>
+            <a-animation attribute="rotation" dur="5000" easing="linear" from="0 0 0" to="0 360 0" repeat="indefinite"></a-animation>
+        </a-entity>
+
+
+        <!-- <a-entity n-gltf="url: https://WE3DCC.github.io/3DCC/Games/Boohoo!/models/TerrainTest.glb"
+        draw-bounds position="10 60 100" scale="600 600 600"></a-entity>
+
+        <a-entity n-gltf="url: https://WE3DCC.github.io/3DCC/Games/Boohoo!/models/BooHoo_PlayButton.glb"
+        position="0 2 0" scale="3 3 3"></a-entity>
+
+        <a-entity geometry="primitive: box" position=" 0 0 0" material="color: red"></a-entity>
+
+        <a-entity geometry="primitive: box">
+              <a-entity  position=" 2 0 2" material="color: red"></a-entity>
+            <a-entity> -->
+
+        </a-scene>
+    </body>
+
+</html>

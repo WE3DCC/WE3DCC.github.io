@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="//aframe.io/releases/0.3.0/aframe.js"></script>
+		<script src="https://unpkg.com/aframe-animation-component@^3.2.0/dist/aframe-animation-component.min.js"></script>
+        <script src="https://sdk.altvr.com/libs/altspace.js/2.6.1/altspace.min.js"></script>
+        <script> AFRAME.registerComponent('BooHider', {
+            init: function () {
+                var ArraySpots = [];
+                var HideIndex = 0;
+                for (var i = 0; i <= 20; i++ ) {
+                    var min = -20;
+                    var max = 20;
+                    var ymin = 0;
+                    var xspot = Math.floor((Math.random() * (max-min)) + min);
+                    var yspot = Math.floor((Math.random() * (max-ymin)) + ymin);
+                    var zspot = Math.floor((Math.random() * (max-min)) + min);
+                    var nextrandomspotposition = AFRAME.utils.coordinates.parse("xspot yspot zspot");
+                    ArraySpots.push(nextrandomspotposition);
+                    console.log(ArraySpots);
+                    };
+                },
+    });
+            update: function () {
+                this.el.addEventListener('click', function () {
+                    HideIndex += 1;
+                    this.setAttribute("visible", false);
+                    this.setAttribute("position", ArraySpots[HideIndex]);
+                });
+            };
+                entity.addEventListener('componentchanged', function (evt) {
+                if (evt.detail.name === 'position') {
+                    this.setAttribute("visible", true);
+                    console.log('Entity has moved from', evt.detail.oldData, 'to', evt.detail.newData, '!');
+                    });
+                });
+            };
+          });</script>
+
+    <script>
+            AFRAME.registerComponent('sun-position-setter', {
+              init: function () {
+                var skyEl = this.el;
+                var orbitEl = this.el.sceneEl.querySelector('#orbit');
+
+                orbitEl.addEventListener('componentchanged', function changeSun (evt) {
+                  var sunPosition;
+                  var phi;
+                  var theta;
+
+                  if (evt.detail.name !== 'rotation') { return; }
+
+                  sunPosition = orbitEl.getComputedAttribute('rotation');
+
+                  if(sunPosition === null) { return; }
+
+                  theta = Math.PI * (- 0.5);
+                  phi = 2 * Math.PI * (sunPosition.y / 360 - 0.5);
+                  skyEl.setAttribute('material', 'sunPosition', {
+                    x: Math.cos(phi),
+                    y: Math.sin(phi) * Math.sin(theta),
+                    z: -1
+                  });
+                });
+              }
+            });
+          </script>
+
+	</head>
+	<body>
+		<a-scene altspace="fullspace: true" sync-system="author: 3dcc; app: portfoliopalace">
+			<a-assets timeout="5000">
+                 <!--            "            -->
+                <!-- Vegas Vibes assets -->
+                <!--                        -->
+                <a-asset-item id="710" src="Scene_Embarcadero.obj"></a-asset-item>
+                <a-asset-item id="710mtl" src="Scene_Embarcadero.mtl"></a-asset-item>
+            </a-assets>
+
+            <a-entity obj-model="obj: #710; mtl: #710mtl"></a-entity>
+            <a-box position="1 0 5"></a-box>
+        </a-scene>
+    </body>
+</html>
